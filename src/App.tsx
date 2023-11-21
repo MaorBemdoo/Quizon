@@ -1,8 +1,13 @@
+import GlobalStyles from "./styles/GlobalStyles"
+import Main from "./components/Main"
 
 function App() {
 
   return (
-    <div>Quiz App</div>
+    <>
+      <GlobalStyles/>
+      <Main/>
+    </>
   )
 }
 
