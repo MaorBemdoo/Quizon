@@ -11,19 +11,19 @@ const HomeStyle = styled(Home)`
         display: grid;
         place-items: center;
         text-align: center;
-        flex-basis: 50%;
+        flex-basis: 49%;
         padding: .4em;
     }
     & > div:nth-child(2){
         height: 80vh;
-        width: .1px;
+        max-width: .1px;
         background-color: #7c7c7c;
+        flex-basis: 2%;
     }
     & > div:last-child{
-        flex-basis: 50%;
+        flex-basis: 49%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        place-items: center;
         gap: 1em;
         padding: 1em;
         & > div{
