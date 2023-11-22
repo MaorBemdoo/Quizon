@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
+import axios from 'axios'
 
 const Home = ({className}: any) => {
     return (
@@ -10,6 +11,7 @@ const Home = ({className}: any) => {
             </div>
             <div></div>
             <div>
+                axios
                 <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
                     <Typography variant="body1">Lorem Ipson</Typography>
