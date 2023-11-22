@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import GlobalStyles from "./styles/GlobalStyles"
 import HomeStyle from "./styles/Home.style"
-import ErrorStyle from "./styles/ErrorStyle"
+import ErrorStyle from "./styles/Error.style"
 import CategoryStyle from "./styles/Category.style"
 import SharedLayout from "./components/SharedLayout"
 import SharedCategoryLayout from "./components/SharedCategoryLayout"
