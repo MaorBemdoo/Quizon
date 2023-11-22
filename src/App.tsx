@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import GlobalStyles from "./styles/GlobalStyles"
-import MainStyle from "./styles/Main.style"
+import HomeStyle from "./styles/Home.style"
 import ErrorStyle from "./styles/ErrorStyle"
+import SharedLayout from "./components/SharedLayout"
 
 function App() {
 
@@ -9,9 +10,9 @@ function App() {
     <BrowserRouter>
       <GlobalStyles/>
       <Routes>
-        <Route path="/">
-          <Route index element={<MainStyle/>}></Route>
-          <Route path="*" element={<ErrorStyle />}></Route>
+        <Route path="/" element={<SharedLayout/>}>
+          <Route index element={<HomeStyle/>}/>
+          <Route path="*" element={<ErrorStyle />}/>
         </Route>
       </Routes>
     </BrowserRouter>

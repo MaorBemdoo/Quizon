@@ -1,7 +1,7 @@
 
 const Error = ({className}: any) => {
     return (
-        <div className={className}>Error</div>
+        <main className={className}>Error</main>
     )
 }
 
