@@ -10,39 +10,38 @@ const Main = ({ className }: any) => {
             </div>
             <div></div>
             <div>
-                
-                <div>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
-                <div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
+                <Card variant='elevation' elevation={1}>
                     <img src="" alt="" />
-                    <Typography variant="body1" color="initial">Lorem Ipson</Typography>
-                </div>
+                    <Typography variant="body1">Lorem Ipson</Typography>
+                </Card>
             </div>
         </main>
     )
