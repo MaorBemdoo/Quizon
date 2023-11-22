@@ -28,8 +28,6 @@ const MainStyle = styled(Main)`
         padding: 1em;
         & > div{
             text-align: center;
-            border: 1px solid #d4d4d4;
-            border-radius: 4px;
             padding: .4em;
             cursor: pointer;
         }
