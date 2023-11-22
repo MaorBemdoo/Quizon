@@ -16,8 +16,8 @@ const HomeStyle = styled(Home)`
     }
     & > div:nth-child(2){
         height: 80vh;
-        width: 2px;
-        background-color: #d4d4d4;
+        width: .1px;
+        background-color: #7c7c7c;
     }
     & > div:last-child{
         flex-basis: 50%;
