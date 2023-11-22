@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
     }
     html{
-        background-color: #fff;
+        color-scheme: dark;
     }
     body{
         border: 0;
