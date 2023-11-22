@@ -1,8 +1,23 @@
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 const Home = ({className}: any) => {
+
+    const [categories, setCategories] = useState(null)
+
+    useEffect(() => {
+        axios.get('https://opentdb.com/api_category.php')
+        .then(res => {
+            console.log(res.data.trivia_categories);
+            setCategories(res.data.trivia_categories)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
     return (
         <main className={className}>
             <div>
@@ -11,39 +26,16 @@ const Home = ({className}: any) => {
             </div>
             <div></div>
             <div>
-                axios
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
-                <Card variant='elevation' elevation={1}>
-                    <img src="" alt="" />
-                    <Typography variant="body1">Lorem Ipson</Typography>
-                </Card>
+                {
+                    categories?.map(({ id, name }) => {
+                        return (
+                            <Card variant='elevation' elevation={1} key={id}>
+                                <img src="" alt={name} />
+                                <Typography variant="body1">{name}</Typography>
+                            </Card>
+                        )
+                    })
+                }
             </div>
         </main>
     )
