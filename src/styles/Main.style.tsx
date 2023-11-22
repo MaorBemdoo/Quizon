@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import Main from "../components/Main"
 
-const MainStyle = styled.main`
+const MainStyle = styled(Main)`
     display: flex;
 `
 

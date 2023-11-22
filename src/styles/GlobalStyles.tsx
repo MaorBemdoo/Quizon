@@ -6,14 +6,14 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+    html{
+        background-color: #fff;
+    }
     body{
         border: 0;
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        background-color: #ffffff;
-        display: grid;
-        place-items: center;
     }
 `
 

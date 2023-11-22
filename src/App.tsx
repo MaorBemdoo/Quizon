@@ -1,13 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import GlobalStyles from "./styles/GlobalStyles"
-import Main from "./components/Main"
+import MainStyle from "./styles/Main.style"
 
 function App() {
 
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyles/>
-      <Main/>
-    </>
+      <Routes>
+        <Route path="/" element={<MainStyle/>}>
+          
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
