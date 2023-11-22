@@ -16,7 +16,7 @@ function App() {
           <Route index element={<HomeStyle/>}/>
           <Route path="category" element={<SharedCategoryLayout/>}>
             <Route index element={<Navigate to='/'/>}/>
-            <Route path=":category" element={<CategoryStyle/>}></Route>
+            <Route path=":categoryId" element={<CategoryStyle/>}></Route>
           </Route>
           <Route path="*" element={<ErrorStyle />}/>
         </Route>

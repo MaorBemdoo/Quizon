@@ -1,7 +1,13 @@
+import { useParams } from "react-router-dom"
 
 const Category = ({className}: any) => {
+
+    const { categoryId }: any = useParams()
+
     return (
-        <main className={className}>Category</main>
+        <main className={className}>
+            {categoryId}
+        </main>
     )
 }
 
