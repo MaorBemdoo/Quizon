@@ -20,7 +20,7 @@ function App() {
         .catch(() => {
           setCategories("error")
         })
-  })
+  }, [])
   
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
           <Route index element={<HomeStyle categories={categories}/>}/>
           <Route path="category" element={<SharedCategoryLayout/>}>
             <Route index element={<Navigate to='/'/>}/>
-            <Route path=":categoryId" element={<CategoryStyle/>}></Route>
+            <Route path=":categoryId" element={<CategoryStyle categories={categories}/>}></Route>
           </Route>
           <Route path="*" element={<ErrorStyle />}/>
         </Route>

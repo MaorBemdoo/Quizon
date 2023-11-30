@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom"
 
-const Category = ({className}: any) => {
+const Category = ({className, categories}: any) => {
 
     const { categoryId }: any = useParams()
 
+    const category = categories?.find(({id}) => categoryId == id)
+
     return (
         <main className={className}>
-            {categoryId}
+            <h1>{category?.name}</h1>
         </main>
     )
 }
