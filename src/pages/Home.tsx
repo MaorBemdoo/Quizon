@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CategoriesFetchError from '../components/CategoriesFetchError'
+import { Link } from 'react-router-dom'
 
 const Home = ({className, categories}: any) => {
 
@@ -18,10 +19,12 @@ const Home = ({className, categories}: any) => {
                         <div className='categories'>
                             {categories?.map(({ id, name}: {id: number, name: string}) => {
                                 return (
-                                        <Card variant='elevation' elevation={1} key={id}>
-                                            <img src="" alt={name} />
-                                            <Typography variant="body1">{name}</Typography>
-                                        </Card>
+                                        <Link to={"/category/" + id} key={id}>
+                                            <Card variant='elevation' elevation={1}>
+                                                <img src="" alt={name} />
+                                                <Typography variant="body1">{name}</Typography>
+                                            </Card>
+                                        </Link>
                                 )
                             })}
                         </div>

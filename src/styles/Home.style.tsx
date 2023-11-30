@@ -28,10 +28,11 @@ const HomeStyle = styled(Home)`
         padding: 1em;
         max-height: 300px;
         overflow-y: scroll;
-        & > div{
+        & div{
             text-align: center;
             padding: .4em;
             cursor: pointer;
+            height: calc(100% - .8em);
         }
     }
 `
