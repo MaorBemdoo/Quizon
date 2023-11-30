@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Home from "../components/Home"
+import Home from "../pages/Home"
 
 const HomeStyle = styled(Home)`
     display: flex;
@@ -20,7 +20,7 @@ const HomeStyle = styled(Home)`
         background-color: #7c7c7c;
         flex-basis: 2%;
     }
-    & > div:last-child{
+    & > .categories{
         flex-basis: 49%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

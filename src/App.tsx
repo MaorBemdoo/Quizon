@@ -3,17 +3,31 @@ import GlobalStyles from "./styles/GlobalStyles"
 import HomeStyle from "./styles/Home.style"
 import ErrorStyle from "./styles/Error.style"
 import CategoryStyle from "./styles/Category.style"
-import SharedLayout from "./components/SharedLayout"
-import SharedCategoryLayout from "./components/SharedCategoryLayout"
+import SharedLayout from "./pages/SharedLayouts/SharedLayout"
+import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 function App() {
+
+  const [categories, setCategories] = useState<null | string | []>(null)
+
+  useEffect(() => {
+      axios.get("https://opentdb.com/api_category.php")
+        .then(res => {
+          setCategories(res.data.trivia_categories)
+        })
+        .catch(() => {
+          setCategories("error")
+        })
+  })
   
   return (
     <BrowserRouter>
       <GlobalStyles/>
       <Routes>
         <Route path="/" element={<SharedLayout/>}>
-          <Route index element={<HomeStyle/>}/>
+          <Route index element={<HomeStyle categories={categories}/>}/>
           <Route path="category" element={<SharedCategoryLayout/>}>
             <Route index element={<Navigate to='/'/>}/>
             <Route path=":categoryId" element={<CategoryStyle/>}></Route>

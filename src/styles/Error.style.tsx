@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Error from "../components/Error";
+import Error from "../pages/Error/Error";
 
 const ErrorStyle = styled(Error)`
     display: flex;
