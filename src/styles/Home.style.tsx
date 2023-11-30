@@ -23,9 +23,11 @@ const HomeStyle = styled(Home)`
     & > div:last-child{
         flex-basis: 49%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 1em;
         padding: 1em;
+        max-height: 300px;
+        overflow-y: scroll;
         & > div{
             text-align: center;
             padding: .4em;

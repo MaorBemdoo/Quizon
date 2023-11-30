@@ -7,7 +7,7 @@ import SharedLayout from "./components/SharedLayout"
 import SharedCategoryLayout from "./components/SharedCategoryLayout"
 
 function App() {
-
+  
   return (
     <BrowserRouter>
       <GlobalStyles/>

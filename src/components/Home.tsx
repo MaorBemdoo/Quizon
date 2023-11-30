@@ -1,22 +1,29 @@
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
+import { useSelector, useDispatch } from 'react-redux'
+import { categoriesActions, selectCategories } from '../store/categories-slice'
+import { useEffect } from 'react'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
 
 const Home = ({className}: any) => {
 
-    const [categories, setCategories] = useState(null)
+    let categories = useSelector(selectCategories)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.get('https://opentdb.com/api_category.php')
-        .then(res => {
-            console.log(res.data.trivia_categories);
-            setCategories(res.data.trivia_categories)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
+        const url: string = "https://quiz-app-6b66e-default-rtdb.firebaseio.com/users.json"
+        axios.put(url, [{name: "Bemdoo Maor"}])
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    } ,[])
+
+    // useEffect(() => {
+    //     dispatch(categoriesActions.fetchCats())
+    // }, [])
 
     return (
         <main className={className}>
@@ -27,7 +34,7 @@ const Home = ({className}: any) => {
             <div></div>
             <div>
                 {
-                    categories?.map(({ id, name }) => {
+                    categories.map(({ id, name}: {id: number, name: string}) => {
                         return (
                             <Card variant='elevation' elevation={1} key={id}>
                                 <img src="" alt={name} />
