@@ -5,13 +5,13 @@ const Category = ({className, categories}: any) => {
 
     const { categoryId }: any = useParams()
 
-    const category = categories == "error" ? null : categories?.find(({ id }) => categoryId == id)
+    const category = categories?.find(({ id }) => categoryId == id)
 
     return (
         <main className={className}>
-            {Boolean(category) ? (
+            {Boolean(category) && category !== "error" ? (
                 <h1>{category?.name}</h1>
-            ) : <CategoryError/>}
+            ) : <CategoryError error={category}/>}
         </main>
     )
 }

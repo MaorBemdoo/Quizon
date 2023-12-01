@@ -1,11 +1,11 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
-const CategoryError = () => {
+const CategoryError = ({className, error}: any) => {
     return (
-        <div>
-            <Typography variant="h4" color="initial">Looks like there's no quiz here</Typography>
-            <Button variant="contained" color="primary">See list of categories</Button>
+        <div className={className}>
+            <Typography variant="h4" color="initial">{error == "netError" ? "Looks like your're offline" : "Looks like there's no quiz here"}</Typography>
+            <Button variant="contained" color="primary">{error == "netError" ? "Retry" : "See list of categories"}</Button>
         </div>
     )
 }

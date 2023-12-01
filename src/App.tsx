@@ -10,17 +10,28 @@ import axios from "axios"
 
 function App() {
 
-  const [categories, setCategories] = useState<null | string | []>(null)
+  const [tempCategories, setTempCategories] = useState<null | string | any[]>(null)
 
   useEffect(() => {
-      axios.get("https://opentdb.com/api_category.php")
-        .then(res => {
-          setCategories(res.data.trivia_categories)
-        })
-        .catch(() => {
-          setCategories("error")
-        })
+    axios.get("https://opentdb.com/api_category.php")
+      .then(res => {
+        // setCategories(res.data.trivia_categories)
+        console.log(res.data.trivia_categories)
+        setTempCategories(res.data.trivia_categories)
+      })
+      .catch((err) => {
+        // setCategories("error")
+        console.log(err);
+        setTempCategories("error")
+      })
   }, [])
+
+  const categories = sessionStorage.getItem("categories") && !tempCategories ? JSON.parse(sessionStorage.getItem("categories")) : tempCategories
+
+  useEffect(() => {
+    sessionStorage.setItem("categories", JSON.stringify(categories))
+  , [categories]})
+
   
   return (
     <BrowserRouter>
