@@ -1,6 +1,5 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { useEffect } from 'react'
 import axios from 'axios'
 
 const CategoriesFetchError = ({ setTempCategories }: any) => {

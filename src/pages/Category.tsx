@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom"
 import CategoryError from "./Error/CategoryError"
 
-const Category = ({className, categories}: any) => {
+const Category = ({className, categories, setTempCategories}: any) => {
 
     const { categoryId }: any = useParams()
 
-    const category = categories?.find(({ id }) => categoryId == id)
+    const category = categories === "error" ? "netError" : categories?.find(({ id }) => categoryId == id)
 
     return (
         <main className={className}>
-            {Boolean(category) && category !== "error" ? (
+            {category !== null && category !== "netError" ? (
                 <h1>{category?.name}</h1>
-            ) : <CategoryError error={category}/>}
+            ) : <CategoryError error={category} setTempCategories={setTempCategories}/>}
         </main>
     )
 }
