@@ -38,7 +38,7 @@ function App() {
       <GlobalStyles/>
       <Routes>
         <Route path="/" element={<SharedLayout/>}>
-          <Route index element={<HomeStyle categories={categories}/>}/>
+          <Route index element={<HomeStyle categories={categories} setTempCategories={setTempCategories}/>}/>
           <Route path="category" element={<SharedCategoryLayout/>}>
             <Route index element={<Navigate to='/'/>}/>
             <Route path=":categoryId" element={<CategoryStyle categories={categories}/>}></Route>

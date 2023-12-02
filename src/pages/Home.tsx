@@ -3,7 +3,7 @@ import Card from '@mui/material/Card'
 import CategoriesFetchError from '../components/CategoriesFetchError'
 import { Link } from 'react-router-dom'
 
-const Home = ({className, categories}: any) => {
+const Home = ({className, categories, setTempCategories}: any) => {
 
     return (
         <main className={className}>
@@ -14,7 +14,7 @@ const Home = ({className, categories}: any) => {
             <div></div>
                 {
                     categories == "error" ? (
-                        <CategoriesFetchError/>
+                        <CategoriesFetchError setTempCategories={setTempCategories}/>
                     ) : (
                         <div className='categories'>
                             {categories?.map(({ id, name}: {id: number, name: string}) => {
