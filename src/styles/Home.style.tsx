@@ -30,9 +30,14 @@ const HomeStyle = styled(Home)`
         overflow-y: scroll;
         & div{
             text-align: center;
-            padding: .4em;
             cursor: pointer;
-            height: calc(100% - .8em);
+            border-radius: 7px;
+            height: 150px;
+            & img{
+                max-height: 100px;
+                width: 100%;
+                background-size: cover;
+            }
         }
     }
 `

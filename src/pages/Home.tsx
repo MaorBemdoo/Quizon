@@ -21,7 +21,7 @@ const Home = ({className, categories}: any) => {
                                 return (
                                         <Link to={"/category/" + id} key={id}>
                                             <Card variant='elevation' elevation={1}>
-                                                <img src="" alt={name} />
+                                                <img src={"src/assets/category" + id + ".jpeg"} alt={name} />
                                                 <Typography variant="body1">{name}</Typography>
                                             </Card>
                                         </Link>
