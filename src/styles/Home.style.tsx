@@ -26,7 +26,7 @@ const HomeStyle = styled(Home)`
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 1em;
         padding: 1em;
-        max-height: 300px;
+        max-height: calc(150px * 3);
         overflow-y: scroll;
         & div{
             text-align: center;
