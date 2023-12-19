@@ -6,9 +6,14 @@ import CategoryStyle from "./styles/Category.style"
 import SharedLayout from "./pages/SharedLayouts/SharedLayout"
 import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
 import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import axios from "axios"
 
 function App() {
+
+  const categories = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.loading);
+  const error = useSelector((state) => state.categories.error);
 
   const [tempCategories, setTempCategories] = useState<null | string | any[]>(null)
 
@@ -26,11 +31,11 @@ function App() {
       })
   }, [])
 
-  const categories = sessionStorage.getItem("categories") && !tempCategories ? JSON.parse(sessionStorage.getItem("categories")) : tempCategories
+  // const categories = sessionStorage.getItem("categories") && !tempCategories ? JSON.parse(sessionStorage.getItem("categories")) : tempCategories
 
-  useEffect(() => {
-    sessionStorage.setItem("categories", JSON.stringify(categories))
-  , [categories]})
+  // useEffect(() => {
+  //   sessionStorage.setItem("categories", JSON.stringify(categories))
+  // , [categories]})
 
   
   return (
