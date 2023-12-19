@@ -23,19 +23,20 @@ const categoriesSlice = createSlice({
   reducers: {
     // Other synchronous reducers can be defined here if needed
   },
-  extraReducers: {
-    [fetchCategories.pending]: (state) => {
-      state.loading = true;
-    },
-    [fetchCategories.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.categories = action.payload.trivia_categories;
-    },
-    [fetchCategories.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-      state.categories = "error"
-    },
+  extraReducers: (builder) => {
+    builder
+        .addCase(fetchCategories.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(fetchCategories.fulfilled, (state, action) => {
+            state.loading = false;
+            state.categories = action.payload.trivia_categories;
+        })
+        .addCase(fetchCategories.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+            state.categories = "error"
+        })
   },
 });
 
