@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import { fetchCategories } from '../features/categories/categoriesSlice'
 import { useDispatch } from 'react-redux'
 
-const CategoriesFetchError = ({ setTempCategories }: any) => {
+const CategoriesFetchError = () => {
 
     const dispatch = useDispatch()
 
