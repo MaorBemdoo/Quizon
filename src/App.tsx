@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { HelmetProvider } from "react-helmet-async"
 import GlobalStyles from "./styles/GlobalStyles"
 import HomeStyle from "./styles/Home.style"
 import ErrorStyle from "./styles/Error.style"
@@ -13,20 +14,24 @@ function App() {
   const loading = useSelector((state) => state.categories.loading);
   const error = useSelector((state) => state.categories.error);
 
+  const HelmetContext = {}
+
   return (
-    <BrowserRouter>
-      <GlobalStyles/>
-      <Routes>
-        <Route path="/" element={<SharedLayout/>}>
-          <Route index element={<HomeStyle categories={categories}/>}/>
-          <Route path="category" element={<SharedCategoryLayout/>}>
-            <Route index element={<Navigate to='/'/>}/>
-            <Route path=":categoryId" element={<CategoryStyle categories={categories}/>}></Route>
+    <HelmetProvider context={HelmetContext}>
+      <BrowserRouter>
+        <GlobalStyles/>
+        <Routes>
+          <Route path="/" element={<SharedLayout/>}>
+            <Route index element={<HomeStyle categories={categories}/>}/>
+            <Route path="category" element={<SharedCategoryLayout/>}>
+              <Route index element={<Navigate to='/'/>}/>
+              <Route path=":categoryId" element={<CategoryStyle categories={categories}/>}></Route>
+            </Route>
+            <Route path="*" element={<ErrorStyle />}/>
           </Route>
-          <Route path="*" element={<ErrorStyle />}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   )
 }
 
