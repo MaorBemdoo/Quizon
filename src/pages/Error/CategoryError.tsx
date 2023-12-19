@@ -1,27 +1,16 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import axios from 'axios'
+import { fetchCategories } from '../../features/categories/categoriesSlice'
+import { useDispatch } from 'react-redux'
 
-const CategoryError = ({className, error, setTempCategories}: any) => {
+const CategoryError = ({className, error}: any) => {
 
-    const reFetchCategories = () => {
-        axios.get("https://opentdb.com/api_category.php")
-            .then(res => {
-                // setCategories(res.data.trivia_categories)
-                console.log(res.data.trivia_categories)
-                setTempCategories(res.data.trivia_categories)
-            })
-            .catch((err) => {
-                // setCategories("error")
-                console.log(err);
-                setTempCategories("error")
-            })
-}
+    const dispatch = useDispatch()
 
     return (
         <div className={className}>
             <Typography variant="h4" color="initial">{error == "netError" ? "Looks like your're offline" : "Looks like there's no quiz here"}</Typography>
-            <Button variant="contained" color="primary" onClick={reFetchCategories}>{error == "netError" ? "Retry" : "See list of categories"}</Button>
+            <Button variant="contained" color="primary" onClick={() => dispatch(fetchCategories())}>{error == "netError" ? "Retry" : "See list of categories"}</Button>
         </div>
     )
 }

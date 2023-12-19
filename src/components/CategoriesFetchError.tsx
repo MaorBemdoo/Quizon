@@ -1,25 +1,11 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import axios from 'axios'
 import { fetchCategories } from '../features/categories/categoriesSlice'
 import { useDispatch } from 'react-redux'
 
 const CategoriesFetchError = ({ setTempCategories }: any) => {
 
     const dispatch = useDispatch()
-    const reFetchCategories = () => {
-            axios.get("https://opentdb.com/api_category.php")
-                .then(res => {
-                    // setCategories(res.data.trivia_categories)
-                    console.log(res.data.trivia_categories)
-                    setTempCategories(res.data.trivia_categories)
-                })
-                .catch((err) => {
-                    // setCategories("error")
-                    console.log(err);
-                    setTempCategories("error")
-                })
-    }
 
     return (
         <div className='categories' style={{placeItems: "center", gridTemplateColumns: "repeat(1, 1fr)"}}>
