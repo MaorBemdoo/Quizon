@@ -1,9 +1,12 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import axios from 'axios'
+import { fetchCategories } from '../features/categories/categoriesSlice'
+import { useDispatch } from 'react-redux'
 
 const CategoriesFetchError = ({ setTempCategories }: any) => {
-    
+
+    const dispatch = useDispatch()
     const reFetchCategories = () => {
             axios.get("https://opentdb.com/api_category.php")
                 .then(res => {
@@ -21,7 +24,7 @@ const CategoriesFetchError = ({ setTempCategories }: any) => {
     return (
         <div className='categories' style={{placeItems: "center", gridTemplateColumns: "repeat(1, 1fr)"}}>
             <Typography variant="h4" color="initial">An Error Occured</Typography>
-            <Button variant="contained" color="primary" onClick={reFetchCategories}>Retry</Button>
+            <Button variant="contained" color="primary" onClick={() => dispatch(fetchCategories())}>Retry</Button>
         </div>
     )
 }
