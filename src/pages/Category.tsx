@@ -11,7 +11,7 @@ const Category = ({className, categories, setTempCategories}: any) => {
         <main className={className}>
             {category !== null && category !== "netError" ? (
                 <h1>{category?.name}</h1>
-            ) : <CategoryError error={category} setTempCategories={setTempCategories}/>}
+            ) : <CategoryError error={category}/>}
         </main>
     )
 }
