@@ -12,14 +12,21 @@ export const fetchCategories = createAsyncThunk("categories/fetchCategories", as
   }
 });
 
+interface initialStateType{
+  categories: {id: number, name: string}[]
+  loading: boolean
+  error: null | string
+}
+
+const initialState: initialStateType = {
+  categories: [],
+  loading: false,
+  error: null,
+}
+
 const categoriesSlice = createSlice({
   name: "categories",
-  initialState: {
-    // Define your initial state here
-    categories: [],
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     // Other synchronous reducers can be defined here if needed
   },

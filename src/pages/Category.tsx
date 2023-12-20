@@ -2,11 +2,16 @@ import { useParams } from "react-router-dom"
 import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
 
-const Category = ({className, categories}: any) => {
+interface CategoryProps{
+    className?: string
+    categories: string | {id: number, name: string}[]
+}
 
-    const { categoryId }: any = useParams()
+const Category = ({className, categories}: CategoryProps) => {
 
-    const category = categories == "error" ? "netError" : (categories.find(({ id }) => categoryId == id ) || '404')
+    const { categoryId } = useParams()
+
+    const category = typeof categories === 'string' ? "netError" : (categories.find(({ id }) => Number(categoryId) == id ) || '404')
 
     return (
         <main className={className}>

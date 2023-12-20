@@ -6,13 +6,13 @@ import ErrorStyle from "./styles/Error.style"
 import CategoryStyle from "./styles/Category.style"
 import SharedLayout from "./pages/SharedLayouts/SharedLayout"
 import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "./store"
 
 function App() {
 
-  const categories = useSelector((state) => state.categories.categories);
-  const loading = useSelector((state) => state.categories.loading);
-  const error = useSelector((state) => state.categories.error);
+  const categories = useAppSelector((state) => state.categories.categories);
+  const loading = useAppSelector((state) => state.categories.loading);
+  const error = useAppSelector((state) => state.categories.error);
 
   const HelmetContext = {}
 

@@ -1,11 +1,11 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { fetchCategories } from '../features/categories/categoriesSlice'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../store'
 
 const CategoriesFetchError = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (
         <div className='categories' style={{placeItems: "center", gridTemplateColumns: "repeat(1, 1fr)"}}>

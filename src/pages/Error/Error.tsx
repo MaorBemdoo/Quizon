@@ -3,7 +3,11 @@ import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-const Error = ({className}: any) => {
+interface ErrorProps{
+    className?: string
+}
+
+const Error = ({className}: ErrorProps) => {
     return (
         <main className={className}>
             <Helmet>

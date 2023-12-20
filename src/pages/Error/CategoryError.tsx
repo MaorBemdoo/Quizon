@@ -1,12 +1,17 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { fetchCategories } from '../../features/categories/categoriesSlice'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../store'
 import { Helmet } from 'react-helmet-async'
 
-const CategoryError = ({className, error}: any) => {
+interface CategoryErrorProp{
+    className?: string
+    error: string
+}
 
-    const dispatch = useDispatch()
+const CategoryError = ({className, error}: CategoryErrorProp) => {
+
+    const dispatch = useAppDispatch()
 
     return (
         <div className={className}>

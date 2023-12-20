@@ -4,7 +4,12 @@ import CategoriesFetchError from '../components/CategoriesFetchError'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-const Home = ({className, categories}: any) => {
+interface HomeProps{
+    className?: string
+    categories: {id: number, name: string}[] | string
+}
+
+const Home = ({className, categories}: HomeProps) => {
 
     return (
         <main className={className}>
@@ -31,7 +36,7 @@ const Home = ({className, categories}: any) => {
             </div>
             <div></div>
                 {
-                    categories == "error" ? (
+                    typeof categories === 'string' ? (
                         <CategoriesFetchError />
                     ) : (
                         <div className='categories'>
