@@ -1,21 +1,31 @@
 import { useParams } from "react-router-dom"
 import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
+import { useAppSelector } from "../store"
 
 interface CategoryProps{
     className?: string
-    categories: string | {id: number, name: string}[]
+    // categories: {id: number, name: string}[]
 }
 
-const Category = ({className, categories}: CategoryProps) => {
+const Category = ({className}: CategoryProps) => {
 
     const { categoryId } = useParams()
+    const categories = useAppSelector((state) => state.categories.categories)
+    let error = useAppSelector((state) => state.categories.error)
 
-    const category = typeof categories === 'string' ? "netError" : (categories.find(({ id }) => Number(categoryId) == id ) || '404')
+    if(error == "error"){
+        error = "netError"
+    }
+
+    const category = error == "netError" ? {} : categories?.find(({ id }) => Number(categoryId) == id )
+    if(typeof category === 'undefined'){
+        error = "404"
+    }
 
     return (
         <main className={className}>
-            {category !== 'netError' && category !== '404' ? (
+            {error === null && typeof category !== 'undefined' ? (
                 <>
                     <Helmet>
                         <title>{`${category.name} - Quizon`}</title>
@@ -36,7 +46,7 @@ const Category = ({className, categories}: CategoryProps) => {
                     </Helmet>
                     <h1>{category.name}</h1>
                 </>
-            ) : <CategoryError error={category}/>}
+            ) : <CategoryError error={error}/>}
         </main>
     )
 }

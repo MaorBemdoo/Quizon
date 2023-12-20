@@ -3,13 +3,16 @@ import Card from '@mui/material/Card'
 import CategoriesFetchError from '../components/CategoriesFetchError'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { useAppSelector } from '../store'
 
 interface HomeProps{
     className?: string
-    categories: {id: number, name: string}[] | string
+    categories: {id: number, name: string}[]
 }
 
 const Home = ({className, categories}: HomeProps) => {
+
+  const error = useAppSelector((state) => state.categories.error);
 
     return (
         <main className={className}>
@@ -36,7 +39,7 @@ const Home = ({className, categories}: HomeProps) => {
             </div>
             <div></div>
                 {
-                    typeof categories === 'string' ? (
+                    error == "error" ? (
                         <CategoriesFetchError />
                     ) : (
                         <div className='categories'>

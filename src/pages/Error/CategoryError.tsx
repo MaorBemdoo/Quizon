@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async'
 
 interface CategoryErrorProp{
     className?: string
-    error: string
+    error: string | null
 }
 
 const CategoryError = ({className, error}: CategoryErrorProp) => {

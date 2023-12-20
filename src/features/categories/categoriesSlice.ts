@@ -5,9 +5,11 @@ import axios from "axios";
 export const fetchCategories = createAsyncThunk("categories/fetchCategories", async () => {
   try {
     const response = await axios.get("https://opentdb.com/api_category.php") // Assuming a function to fetch todos from an API
+    console.log(response.status);
     return response.data; // Return the data received from the API
   } catch (error) {
     // Handle error scenarios
+    console.log(error);
     throw new Error("Failed to fetch todos");
   }
 });
@@ -38,11 +40,11 @@ const categoriesSlice = createSlice({
         .addCase(fetchCategories.fulfilled, (state, action) => {
             state.loading = false;
             state.categories = action.payload.trivia_categories;
+            state.error = null;
         })
-        .addCase(fetchCategories.rejected, (state, action) => {
+        .addCase(fetchCategories.rejected, (state) => {
             state.loading = false;
-            state.error = action.error.message;
-            state.categories = "error"
+            state.error = "error";
         })
   },
 });

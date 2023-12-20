@@ -11,8 +11,7 @@ import { useAppSelector } from "./store"
 function App() {
 
   const categories = useAppSelector((state) => state.categories.categories);
-  const loading = useAppSelector((state) => state.categories.loading);
-  const error = useAppSelector((state) => state.categories.error);
+  // const loading = useAppSelector((state) => state.categories.loading);
 
   const HelmetContext = {}
 
