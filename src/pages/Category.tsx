@@ -6,11 +6,11 @@ const Category = ({className, categories}: any) => {
 
     const { categoryId }: any = useParams()
 
-    const category = categories === "error" ? "netError" : categories.find(({ id }) => categoryId == id )
+    const category = categories == "error" ? "netError" : (categories.find(({ id }) => categoryId == id ) || '404')
 
     return (
         <main className={className}>
-            {category !== null && category !== undefined ? (
+            {category !== 'netError' && category !== '404' ? (
                 <>
                     <Helmet>
                         <title>{`${category.name} - Quizon`}</title>
