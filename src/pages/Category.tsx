@@ -13,7 +13,7 @@ const Category = ({className, categories}: any) => {
             {category !== null && category !== undefined ? (
                 <>
                     <Helmet>
-                        <title>{category.name} - Quizon</title>
+                        <title>{`${category.name} - Quizon`}</title>
                         <meta name="title" content={`${category.name} - Quizon`} />
                         {/* <meta name="description" content="" /> */}
 
