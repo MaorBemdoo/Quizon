@@ -12,12 +12,13 @@ const Header = ({ className }: HeaderProps) => {
             <div>
                 <Link to='/' style={{display: "flex", alignItems: "center"}}>
                     <img src={logo} alt="Quizon logo" />
-                    <Typography variant="h4" color="initial">U</Typography>
-                    <Typography variant="h4" color="initial">I</Typography>
-                    <Typography variant="h4" color="initial">Z</Typography>
-                    <Typography variant="h4" color="initial">O</Typography>
-                    <Typography variant="h4" color="initial">N</Typography>
+                    <Typography variant="h5" color="initial">U</Typography>
+                    <Typography variant="h5" color="initial">I</Typography>
+                    <Typography variant="h5" color="initial">Z</Typography>
+                    <Typography variant="h5" color="initial">O</Typography>
+                    <Typography variant="h5" color="initial">N</Typography>
                 </Link>
+                <Link to=""><Typography variant='subtitle1' color="initial">Discover</Typography></Link>
             </div>
             <div>
                 <SettingsIcon/>
