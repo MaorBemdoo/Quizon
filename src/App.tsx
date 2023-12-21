@@ -6,12 +6,10 @@ import ErrorStyle from "./styles/Error.style"
 import CategoryStyle from "./styles/Category.style"
 import SharedLayout from "./pages/SharedLayouts/SharedLayout"
 import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
-import { useAppSelector } from "./store"
 import { useEffect, useState } from "react"
 
 function App() {
 
-  const categories = useAppSelector((state) => state.categories.categories);
   // const loading = useAppSelector((state) => state.categories.loading);
 
   const [dark, isDark] = useState(() => {
@@ -30,7 +28,7 @@ function App() {
         <GlobalStyles dark={dark}/>
         <Routes>
           <Route path="/" element={<SharedLayout dark={dark} isDark={isDark}/>}>
-            <Route index element={<HomeStyle categories={categories}/>}/>
+            <Route index element={<HomeStyle />}/>
             <Route path="category" element={<SharedCategoryLayout/>}>
               <Route index element={<Navigate to='/'/>}/>
               <Route path=":categoryId" element={<CategoryStyle />}></Route>

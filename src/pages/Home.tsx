@@ -30,13 +30,13 @@ import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
 interface HomeProps{
     className?: string
-    categories: {id: number, name: string}[]
 }
 
 const categoryImages = [category9, category10, category11, category12, category13, category14, category15, category16, category17, category18, category19, category20, category21, category22, category23, category24, category25, category26, category27, category28, category29, category30, category31, category32]
 
-const Home = ({className, categories}: HomeProps) => {
+const Home = ({className}: HomeProps) => {
 
+    const categories = useAppSelector((state) => state.categories.categories);
   const error = useAppSelector((state) => state.categories.error);
 
     return (
