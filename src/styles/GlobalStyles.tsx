@@ -13,7 +13,6 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         margin: 0;
         padding: 0;
-        min-height: 100vh;
     }
     a{
         text-decoration: none;
