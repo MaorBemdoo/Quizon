@@ -28,13 +28,17 @@ import category29 from '../assets/category29.jpeg'
 import category30 from '../assets/category30.jpeg'
 import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
+import homeIllustrationL from '../assets/QuizonIllustration.gif'
+import homeIllustrationD from '../assets/QuizonIllustrationDark.gif'
+
 interface HomeProps{
     className?: string
+    dark: boolean
 }
 
 const categoryImages = [category9, category10, category11, category12, category13, category14, category15, category16, category17, category18, category19, category20, category21, category22, category23, category24, category25, category26, category27, category28, category29, category30, category31, category32]
 
-const Home = ({className}: HomeProps) => {
+const Home = ({className, dark}: HomeProps) => {
 
     const categories = useAppSelector((state) => state.categories.categories);
   const error = useAppSelector((state) => state.categories.error);
@@ -58,16 +62,18 @@ const Home = ({className}: HomeProps) => {
                 <meta property="twitter:description" content="Bring out the genius in you with Quizon" />
                 <meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
             </Helmet>
-            <div>
-                <Typography variant="h4" color="initial">Welcome to Quizon</Typography>
-                <Typography variant="body1" color="initial">Bring out the genius in you by answering questions from viarities of topics</Typography>
-            </div>
-            <div></div>
+            <section>
+                <div>
+                    <Typography variant="h4" color="initial" paddingBottom={2}>Bring out the genius in you, Today</Typography>
+                    <Typography variant="body1" color="initial">Answer questions from viarities of topics and categories, with difficulty levels that can be changed to suite you</Typography>
+                </div>
+                <img src={dark ? homeIllustrationD : homeIllustrationL} alt="Quizon Illustration" />
+            </section>
                 {
                     error == "error" ? (
                         <CategoriesFetchError />
                     ) : (
-                        <div className='categories'>
+                        <section className='categories' id='#categories'>
                             {categories?.map(({ id, name}: {id: number, name: string}) => {
                                 return (
                                         <Link to={"/category/" + id} key={id}>
@@ -79,7 +85,7 @@ const Home = ({className}: HomeProps) => {
                                         </Link>
                                 )
                             })}
-                        </div>
+                        </section>
                     )
                 }
         </main>

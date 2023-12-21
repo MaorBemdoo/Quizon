@@ -28,7 +28,7 @@ function App() {
         <GlobalStyles dark={dark}/>
         <Routes>
           <Route path="/" element={<SharedLayout dark={dark} isDark={isDark}/>}>
-            <Route index element={<HomeStyle />}/>
+            <Route index element={<HomeStyle dark={dark}/>}/>
             <Route path="category" element={<SharedCategoryLayout/>}>
               <Route index element={<Navigate to='/'/>}/>
               <Route path=":categoryId" element={<CategoryStyle />}></Route>
