@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import logo from '../../public/logo.png'
-import SettingsIcon from '@mui/icons-material/Settings'
+import Switch from '@mui/material/Switch';
 import { Typography } from '@mui/material'
-import { MouseEventHandler } from 'react'
+import { MouseEventHandler} from 'react'
 interface HeaderProps{
     className?: string
+    dark: boolean
+    isDark: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const aMouseEnterEven: MouseEventHandler<HTMLImageElement> = (e) => {
@@ -12,7 +14,7 @@ const aMouseEnterEven: MouseEventHandler<HTMLImageElement> = (e) => {
     if(!target.parentElement?.nextElementSibling) return;
     if(target.parentElement?.nextElementSibling instanceof HTMLElement){
         target.parentElement.nextElementSibling.style.transform = "translateX(0)"
-        target.parentElement.nextElementSibling.style.transition = "all 500ms ease-in"
+        target.parentElement.nextElementSibling.style.transition = "all 250ms ease-in"
     }
 }
 
@@ -25,7 +27,8 @@ const aMouseLeaveEven: MouseEventHandler<HTMLImageElement> = (e) => {
 }
 
 
-const Header = ({ className }: HeaderProps) => {
+const Header = ({ className, dark, isDark }: HeaderProps) => {
+
     return (
         <header className={className}>
             <div>
@@ -40,7 +43,7 @@ const Header = ({ className }: HeaderProps) => {
                 <Link to="" id='a2'><Typography variant='subtitle1' color="initial">Discover</Typography></Link>
             </div>
             <div>
-                <SettingsIcon/>
+                <Switch aria-label='Switch-demo' checked={dark} onChange={() => isDark(!dark)}/>
             </div>
         </header>
     )

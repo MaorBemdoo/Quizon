@@ -1,13 +1,17 @@
 import { createGlobalStyle } from "styled-components"; 
 
-const GlobalStyles = createGlobalStyle`
+interface GlobalStylesProps{
+    dark: boolean
+}
+
+const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     *{
         border: 0;
         margin: 0;
         padding: 0;
     }
     html{
-        color-scheme: dark;
+        color-scheme: ${props => props.dark ? "dark" : "light"};
     }
     body{
         border: 0;

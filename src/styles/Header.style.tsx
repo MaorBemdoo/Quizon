@@ -42,7 +42,14 @@ const HeaderStyle = styled(Header)`
             user-select: all;
             cursor: pointer;
             transform: translateY(0);
-            transition: 500ms all 500ms ease-in;
+            transition: 250ms all 250ms ease-in;
+        }
+    }
+    & div:last-child{
+        & > svg{
+            cursor: pointer;
+            transform: rotateX(45deg);
+            transition: transform 10s ease-out;
         }
     }
 `
