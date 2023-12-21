@@ -1,7 +1,11 @@
 
-const Header = () => {
+interface HeaderProps{
+    className?: string
+}
+
+const Header = ({ className }: HeaderProps) => {
     return (
-        <header>Header</header>
+        <header className={className}>Header</header>
     )
 }
 

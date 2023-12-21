@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
-import Header from "../../components/Header"
+import HeaderStyle from "../../styles/Header.style"
 
 const SharedLayout = () => {
     return (
         <>
-            <Header/>
+            <HeaderStyle/>
             <Outlet/>
         </>
     )
