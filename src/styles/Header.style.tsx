@@ -32,6 +32,21 @@ const HeaderStyle = styled(Header)`
         & a:nth-child(2){
             transform: translateX(-80px);
         }
+
+        & a:first-child:hover{
+            & > h5{
+                opacity: 1;
+                pointer-events: all;
+                user-select: all;
+                cursor: pointer;
+                transform: translateY(0);
+                transition: 500ms all 500ms ease-in;
+            }
+        }
+        & a:first-child:hover ~ a:nth-child(2){
+            transform: translateX(0);
+            transition: all 500ms ease-in;
+        }
     }
 `
 
