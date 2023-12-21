@@ -5,7 +5,6 @@ import { useAppSelector } from "../store"
 
 interface CategoryProps{
     className?: string
-    // categories: {id: number, name: string}[]
 }
 
 const Category = ({className}: CategoryProps) => {
@@ -19,7 +18,7 @@ const Category = ({className}: CategoryProps) => {
         error = "netError"
     }
 
-    const category = categories?.find(({ id }) => Number(categoryId) == id )
+    const category = categories.find(({ id }) => Number(categoryId) == id )
 
     if(typeof category === 'undefined'){
         error = "404"
