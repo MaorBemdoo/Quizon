@@ -16,11 +16,14 @@ const HeaderStyle = styled(Header)`
         justify-content: space-between;
         & a:first-child{
             padding-right: 2rem;
+            cursor: default;
+            & img{
+                cursor: pointer;
+            }
             & > h5{
                 opacity: 0;
                 pointer-events: none;
                 user-select: none;
-                cursor: default;
             }
             & > h5:nth-child(even){
                 transform: translateY(-25px);
@@ -29,23 +32,17 @@ const HeaderStyle = styled(Header)`
                 transform: translateY(25px);
             }
         }
-        & a:nth-child(2){
+        & > #a2{
             transform: translateX(-80px);
         }
 
-        & a:first-child:hover{
-            & > h5{
-                opacity: 1;
-                pointer-events: all;
-                user-select: all;
-                cursor: pointer;
-                transform: translateY(0);
-                transition: 500ms all 500ms ease-in;
-            }
-        }
-        & a:first-child:hover ~ a:nth-child(2){
-            transform: translateX(0);
-            transition: all 500ms ease-in;
+        & a:first-child img:hover ~ h5{
+            opacity: 1;
+            pointer-events: all;
+            user-select: all;
+            cursor: pointer;
+            transform: translateY(0);
+            transition: 500ms all 500ms ease-in;
         }
     }
 `
