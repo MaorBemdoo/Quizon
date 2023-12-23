@@ -80,7 +80,7 @@ const Home = ({className, dark}: HomeProps) => {
                                             <Card variant='elevation' elevation={1}>
                                                 {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
                                                 <img src={categoryImages[id-9]} alt={name} />
-                                                <Typography variant="body1">{name}</Typography>
+                                                <Typography variant="h5" textAlign={"center"}>{name}</Typography>
                                             </Card>
                                         </Link>
                                 )
