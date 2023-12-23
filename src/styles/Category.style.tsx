@@ -13,6 +13,7 @@ const CategoryStyle = styled(Category)`
         margin-top: 1em;
     }
     .category-header{
+        border-bottom: .1px solid;
         & > a{
             position: absolute;
             color: initial;
@@ -36,6 +37,12 @@ const CategoryStyle = styled(Category)`
                 transition: opacity 500ms ease-out;
             } */
         }
+    }
+    .category-footer{
+        display: grid;
+        place-items: center;
+        border-top: .1px solid;
+        padding: 1em;
     }
 `
 

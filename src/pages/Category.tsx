@@ -3,6 +3,7 @@ import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
 import { useAppSelector } from "../store"
 import Card from '@mui/material/Card'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import category9 from '../assets/category9.jpeg'
 import category10 from '../assets/category10.jpeg'
@@ -95,7 +96,9 @@ const Category = ({className}: CategoryProps) => {
                 <div className="category-body">
 
                 </div>
-                <div className="category-footer"></div>
+                <div className="category-footer">
+                    <Button variant="contained" color='success'>Start Quiz!</Button>
+                </div>
             </div>
         </main>
     )
