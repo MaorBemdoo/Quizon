@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
+import CircularProgress from '@mui/material/CircularProgress'
 import CategoriesFetchError from '../components/CategoriesFetchError'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
@@ -40,8 +41,7 @@ const categoryImages = [category9, category10, category11, category12, category1
 
 const Home = ({className, dark}: HomeProps) => {
 
-    const categories = useAppSelector((state) => state.categories.categories);
-  const error = useAppSelector((state) => state.categories.error);
+    const { categories, error, loading } = useAppSelector((state) => state.categories);
 
     return (
         <main className={className}>
@@ -69,6 +69,14 @@ const Home = ({className, dark}: HomeProps) => {
                 </div>
                 <img src={dark ? homeIllustrationD : homeIllustrationL} alt="Quizon Illustration" />
             </section>
+                {
+                    loading && 
+                    <section className='loading'>
+                        <CircularProgress color='inherit' size={100}/>
+                        <Typography variant='h5'>Getting list of Quizzes</Typography>
+                        <Typography variant='body1'>Just hold on a sec</Typography>
+                    </section>
+                }
                 {
                     error == "error" ? (
                         <CategoriesFetchError />

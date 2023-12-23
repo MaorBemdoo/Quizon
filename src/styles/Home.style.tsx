@@ -24,6 +24,8 @@ const HomeStyle = styled(Home)`
     }
     & section:nth-child(2){
         background-color: #86b8a5;
+    }
+    .categories{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         padding: 1em;
@@ -37,6 +39,14 @@ const HomeStyle = styled(Home)`
             background-position: center;
             background-size: cover;
         }
+    }
+    .loading{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: .4em;
+        padding: 1em;
     }
 `
 
