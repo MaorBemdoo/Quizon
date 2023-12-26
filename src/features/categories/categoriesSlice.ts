@@ -21,9 +21,9 @@ interface initialStateType{
 }
 
 const initialState: initialStateType = {
-  categories: [],
+  categories: sessionStorage.getItem("categoriesStore") !== null ? JSON.parse(sessionStorage.getItem("categoriesStore")).categories : [],
   loading: false,
-  error: null,
+  error: sessionStorage.getItem("categoriesStore") !== null ? JSON.parse(sessionStorage.getItem("categoriesStore")).error : null,
 }
 
 const categoriesSlice = createSlice({
@@ -41,10 +41,18 @@ const categoriesSlice = createSlice({
             state.loading = false;
             state.categories = action.payload.trivia_categories;
             state.error = null;
+            sessionStorage.setItem("categoriesStore", JSON.stringify({
+              categories: action.payload.trivia_categories,
+              error: null
+            }))
         })
         .addCase(fetchCategories.rejected, (state) => {
             state.loading = false;
             state.error = "error";
+            sessionStorage.setItem("categoriesStore", JSON.stringify({
+              categories: [],
+              error: "error"
+            }))
         })
   },
 });
