@@ -15,7 +15,7 @@ export const fetchCategories = createAsyncThunk("categories/fetchCategories", as
 });
 
 interface initialStateType{
-  categories: {id: number, name: string}[] | null | []
+  categories: {id: number, name: string}[] | []
   loading: boolean
   error: null | string
 }
