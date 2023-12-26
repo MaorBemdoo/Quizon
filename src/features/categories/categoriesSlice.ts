@@ -20,10 +20,12 @@ interface initialStateType{
   error: null | string
 }
 
+const categoriesStore = sessionStorage.getItem("categoriesStore")
+
 const initialState: initialStateType = {
-  categories: sessionStorage.getItem("categoriesStore") !== null ? JSON.parse(sessionStorage.getItem("categoriesStore")).categories : [],
+  categories: typeof categoriesStore == "undefined" ? JSON.parse(categoriesStore).categories : [],
   loading: false,
-  error: sessionStorage.getItem("categoriesStore") !== null ? JSON.parse(sessionStorage.getItem("categoriesStore")).error : null,
+  error: typeof categoriesStore == "undefined" ? JSON.parse(categoriesStore).error : null,
 }
 
 const categoriesSlice = createSlice({
