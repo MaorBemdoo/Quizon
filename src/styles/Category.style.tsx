@@ -38,11 +38,45 @@ const CategoryStyle = styled(Category)`
             } */
         }
     }
+    .category-body{
+        padding: 1em;
+        display: grid;
+        place-items: center;
+    .difficulty-cards{
+        padding-top: 2em;
+        display: flex;
+        gap: 1em;
+        width: 100%;
+        & > div{
+            position: relative;
+            display: grid;
+            place-items: center;
+            /* gap: 1em; */
+            height: 300px;
+            width: 100%;
+            background-color: #7dc1a7;
+            border-radius: 7px;
+            &:hover{
+                filter: brightness(1.1);
+            }
+            & svg{
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-size: 2rem;
+            }
+        }
+    }
+    }
     .category-footer{
         display: grid;
         place-items: center;
         border-top: .1px solid;
         padding: 1em;
+        & button:hover{
+            filter: brightness(1.1);
+            background-color: #7dc1a7;
+        }
     }
 `
 

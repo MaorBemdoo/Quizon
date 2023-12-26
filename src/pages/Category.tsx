@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
-import { useAppSelector } from "../store"
+import { useAppDispatch, useAppSelector } from "../store"
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -29,8 +29,9 @@ import category29 from '../assets/category29.jpeg'
 import category30 from '../assets/category30.jpeg'
 import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
-import { ArrowBack } from "@mui/icons-material"
+import { ArrowBack, CheckCircle, CheckCircleOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom"
+import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
 interface CategoryProps{
     className?: string
 }
@@ -39,10 +40,19 @@ const categoryImages = [category9, category10, category11, category12, category1
 
 const Category = ({className}: CategoryProps) => {
 
+    const dispatch = useAppDispatch()
+    // useEffect(() => {
+    //     dispatch(fetchCategory({difficulty: 'easy', categoryId: '12'}))
+    // }, [dispatch])
     const { categoryId } = useParams()
+
+    dispatch(setCategoryId(categoryId))
+
     const categories = useAppSelector((state) => state.categories.categories)
     const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
+
+    const { difficulty } = useAppSelector((state) => state.category)
 
     if(error == "error"){
         error = "netError"
@@ -94,24 +104,27 @@ const Category = ({className}: CategoryProps) => {
                     <Typography variant="h4">{category.name}</Typography>
                 </div>
                 <div className="category-body">
-                    <Typography variant="h5">Which difficuly do you prefer</Typography>
-                    <div className="difficulty-card">
-                        <div>
+                    <Typography variant="h3">Which difficuly do you prefer</Typography>
+                    <div className="difficulty-cards">
+                        <div onClick={() => dispatch(setCategoryDifficulty("easy"))}>
+                            {difficulty == "easy" ? <CheckCircle sx={{fill: "blue"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Easy</Typography>
                             <Typography variant="h5">5 - 10yrs</Typography>
                         </div>
-                        <div>
+                        <div onClick={() => dispatch(setCategoryDifficulty("medium"))}>
+                            {difficulty == "medium" ? <CheckCircle sx={{fill: "blue"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Medium</Typography>
                             <Typography variant="h5">11 - 15yrs</Typography>
                         </div>
-                        <div>
+                        <div onClick={() => dispatch(setCategoryDifficulty("hard"))}>
+                            {difficulty == "hard" ? <CheckCircle sx={{fill: "blue"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Hard</Typography>
                             <Typography variant="h5">16+yrs</Typography>
                         </div>
                     </div>
                 </div>
                 <div className="category-footer">
-                    <Button variant="contained" color='success'>Start Quiz!</Button>
+                    <Button variant="contained" sx={{backgroundColor: "#82B9A4"}} onClick={() => dispatch(fetchCategory({difficulty, categoryId}))}>Start Quiz!</Button>
                 </div>
             </div>
         </main>
