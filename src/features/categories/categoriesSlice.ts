@@ -15,18 +15,38 @@ export const fetchCategories = createAsyncThunk("categories/fetchCategories", as
 });
 
 interface initialStateType{
-  categories: {id: number, name: string}[]
+  categories: {id: number, name: string}[] | null | []
   loading: boolean
   error: null | string
 }
 
-const categoriesStore = sessionStorage.getItem("categoriesStore")
+// const categoriesStore = sessionStorage.getItem("categoriesStore")
+
+// const initialState: initialStateType = {
+//   categories: typeof categoriesStore !== "undefined" ? JSON.parse(categoriesStore).categories : [],
+//   loading: false,
+//   error: typeof categoriesStore !== "undefined" ? JSON.parse(categoriesStore).error : null,
+// }
+
+const categoriesStore = sessionStorage.getItem("categoriesStore");
+
+let parsedCategories: { id: number; name: string }[] | null = null;
+let parsedError: string | null = null;
+
+try {
+  if (categoriesStore) {
+    parsedCategories = JSON.parse(categoriesStore).categories;
+    parsedError = JSON.parse(categoriesStore).error
+  }
+} catch (error) {
+  console.error("Error parsing categoriesStore:", error);
+}
 
 const initialState: initialStateType = {
-  categories: typeof categoriesStore == "undefined" ? JSON.parse(categoriesStore).categories : [],
+  categories: parsedCategories || [],
   loading: false,
-  error: typeof categoriesStore == "undefined" ? JSON.parse(categoriesStore).error : null,
-}
+  error: parsedError,
+};
 
 const categoriesSlice = createSlice({
   name: "categories",
