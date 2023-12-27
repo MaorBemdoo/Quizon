@@ -32,6 +32,8 @@ import category32 from '../assets/category32.jpeg'
 import { ArrowBack, CheckCircle, CheckCircleOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
+import { Modal } from "@mui/material"
+import ModalStyle from "../styles/Modal.style"
 interface CategoryProps{
     className?: string
 }
@@ -53,7 +55,11 @@ const Category = ({className}: CategoryProps) => {
     const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
-    const { difficulty } = useAppSelector((state) => state.category)
+    const { difficulty, loading: categoryLoading } = useAppSelector((state) => state.category)
+
+    const startQuiz = () => {
+        dispatch(fetchCategory({difficulty, categoryId}))
+    }
 
     if(error == "error"){
         error = "netError"
@@ -76,7 +82,6 @@ const Category = ({className}: CategoryProps) => {
     if (category === null) {
         return null; // Handle case when category is null
     }
-
 
     return (
         <main className={className}>
@@ -125,9 +130,10 @@ const Category = ({className}: CategoryProps) => {
                     </div>
                 </div>
                 <div className="category-footer">
-                    <Button variant="contained" onClick={() => dispatch(fetchCategory({difficulty, categoryId}))}>Start Quiz!</Button>
+                    <Button variant="contained" onClick={startQuiz}>Start Quiz!</Button>
                 </div>
             </div>
+            {categoryLoading && <Modal open={categoryLoading} children={<ModalStyle />}></Modal>}
         </main>
     )
 }
