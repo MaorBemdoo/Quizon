@@ -10,7 +10,8 @@ export const fetchCategory = createAsyncThunk(
                 method: 'get',
                 url: 'https://opentdb.com/api_config.php',
                 params: {
-                    amount: arg.categoryId,
+                    amount: 10,
+                    category: arg.categoryId,
                     difficulty: arg.difficulty
                 }
             })
