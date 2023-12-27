@@ -48,7 +48,8 @@ const Category = ({className}: CategoryProps) => {
 
     dispatch(setCategoryId(categoryId))
 
-    const categories = useAppSelector((state) => state.categories.categories)
+    // const categories = useAppSelector((state) => state.categories.categories)
+    const categories = [{id: 16, name: "Test"}]
     const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
@@ -124,7 +125,7 @@ const Category = ({className}: CategoryProps) => {
                     </div>
                 </div>
                 <div className="category-footer">
-                    <Button variant="contained" sx={{backgroundColor: "#82B9A4"}} onClick={() => dispatch(fetchCategory({difficulty, categoryId}))}>Start Quiz!</Button>
+                    <Button variant="contained" onClick={() => dispatch(fetchCategory({difficulty, categoryId}))}>Start Quiz!</Button>
                 </div>
             </div>
         </main>

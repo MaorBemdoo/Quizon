@@ -56,6 +56,7 @@ const CategoryStyle = styled(Category)`
             width: 100%;
             background-color: #7dc1a7;
             border-radius: 7px;
+            cursor: default;
             &:hover{
                 filter: brightness(1.1);
             }
@@ -73,10 +74,6 @@ const CategoryStyle = styled(Category)`
         place-items: center;
         border-top: .1px solid;
         padding: 1em;
-        & button:hover{
-            filter: brightness(1.1);
-            background-color: #7dc1a7;
-        }
     }
 `
 

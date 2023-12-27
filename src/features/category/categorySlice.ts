@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchCategory = createAsyncThunk(
     "category/fetchCategory",
-    async (arg) => {
+    async (arg: {difficulty: string, categoryId: string | undefined}) => {
         try {
             console.log(arg);
             const response = await axios.request({
@@ -14,6 +14,7 @@ export const fetchCategory = createAsyncThunk(
                     difficulty: arg.difficulty
                 }
             })
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -27,13 +28,17 @@ interface initialStateType {
     options: string[]
     difficulty: string
     id: string
+    loading: boolean
+    error: string | null
 }
 
 const initialState: initialStateType = {
     question: "",
     options: [],
-    difficuly: "",
-    id: ""
+    difficulty: "easy",
+    id: "",
+    loading: false,
+    error: null
 };
 
 const categorySlice = createSlice({
@@ -50,13 +55,13 @@ const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchCategory.pending, (state) => {
-
+                state.loading = true
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
-            
+                state.loading = true
             })
             .addCase(fetchCategory.rejected, (state) => {
-
+                state.loading = true
             });
     },
 });
