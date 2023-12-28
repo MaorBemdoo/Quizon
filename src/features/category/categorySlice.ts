@@ -8,7 +8,7 @@ export const fetchCategory = createAsyncThunk(
             console.log(arg);
             const response = await axios.request({
                 method: 'get',
-                url: 'https://opentdb.com/api_config.php',
+                url: 'https://opentdb.com/api.php',
                 params: {
                     amount: 10,
                     category: arg.categoryId,
