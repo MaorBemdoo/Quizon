@@ -31,7 +31,7 @@ import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
 import { ArrowBack, CheckCircle, CheckCircleOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom"
-import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
+import { fetchCategory, setCategoryDifficulty, setCategoryId, setCategoryLoading } from "../features/category/categorySlice"
 import { Modal } from "@mui/material"
 import ModalStyle from "../styles/Modal.style"
 interface CategoryProps{
@@ -59,6 +59,9 @@ const Category = ({className}: CategoryProps) => {
 
     const startQuiz = () => {
         dispatch(fetchCategory({difficulty, categoryId}))
+        setInterval(() => {
+            dispatch(setCategoryLoading(false))
+        }, 10000)
     }
 
     if(error == "error"){

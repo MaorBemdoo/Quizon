@@ -51,6 +51,9 @@ const categorySlice = createSlice({
         },
         setCategoryDifficulty(state, action){
             state.difficulty = action.payload
+        },
+        setCategoryLoading(state, action){
+            state.loading = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -59,13 +62,13 @@ const categorySlice = createSlice({
                 state.loading = true
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
-                state.loading = false
+                
             })
             .addCase(fetchCategory.rejected, (state) => {
-                state.loading = false
+                
             });
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setCategoryLoading } = categorySlice.actions
 export default categorySlice.reducer;
