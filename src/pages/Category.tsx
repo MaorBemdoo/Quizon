@@ -113,7 +113,7 @@ const Category = ({className}: CategoryProps) => {
                     <Typography variant="h4">{category.name}</Typography>
                 </div>
                 <div className="category-body">
-                    <Typography variant="h3">Which difficuly do you prefer?</Typography>
+                    <Typography variant="h4">Which difficuly do you prefer?</Typography>
                     <div className="difficulty-cards">
                         <div onClick={() => dispatch(setCategoryDifficulty("easy"))}>
                             {difficulty == "easy" ? <CheckCircle sx={{fill: "#4040e3"}}/> : <CheckCircleOutlined/>}
