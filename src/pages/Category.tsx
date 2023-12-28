@@ -116,17 +116,17 @@ const Category = ({className}: CategoryProps) => {
                     <Typography variant="h4">Which difficuly do you prefer?</Typography>
                     <div className="difficulty-cards">
                         <div onClick={() => dispatch(setCategoryDifficulty("easy"))}>
-                            {difficulty == "easy" ? <CheckCircle sx={{fill: "#4040e3"}}/> : <CheckCircleOutlined/>}
+                            {difficulty == "easy" ? <CheckCircle sx={{fill: "#7e7eef"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Easy</Typography>
                             <Typography variant="h5">5 - 10yrs</Typography>
                         </div>
                         <div onClick={() => dispatch(setCategoryDifficulty("medium"))}>
-                            {difficulty == "medium" ? <CheckCircle sx={{fill: "#4040e3"}}/> : <CheckCircleOutlined/>}
+                            {difficulty == "medium" ? <CheckCircle sx={{fill: "#7e7eef"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Medium</Typography>
                             <Typography variant="h5">11 - 15yrs</Typography>
                         </div>
                         <div onClick={() => dispatch(setCategoryDifficulty("hard"))}>
-                            {difficulty == "hard" ? <CheckCircle sx={{fill: "#4040e3"}}/> : <CheckCircleOutlined/>}
+                            {difficulty == "hard" ? <CheckCircle sx={{fill: "#7e7eef"}}/> : <CheckCircleOutlined/>}
                             <Typography variant="h3">Hard</Typography>
                             <Typography variant="h5">16+yrs</Typography>
                         </div>
