@@ -59,10 +59,10 @@ const categorySlice = createSlice({
                 state.loading = true
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
-                state.loading = true
+                state.loading = false
             })
             .addCase(fetchCategory.rejected, (state) => {
-                state.loading = true
+                state.loading = false
             });
     },
 });
