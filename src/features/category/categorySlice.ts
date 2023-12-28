@@ -65,7 +65,7 @@ const categorySlice = createSlice({
                 
             })
             .addCase(fetchCategory.rejected, (state) => {
-                
+                state.error = "error"
             });
     },
 });

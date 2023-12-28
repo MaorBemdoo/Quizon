@@ -15,20 +15,25 @@ const ModalStyle = styled(Modal)`
     place-items: center;
     padding: 2em;
     background-color: ${backgroundColor};
-    & > img{
-        animation: imgLoading 700ms infinite ease-out;
-    }
-    & > div{
-        padding: 1em 0;
-        & p, h5{
-            text-align: center;
+    #loading{
+        & > img{
+            animation: imgLoading 700ms infinite ease-out;
         }
-        & ul{
+        & > div{
             padding: 1em 0;
-            & li{
-                padding: .1em 0;
+            & p, h5{
+                text-align: center;
+            }
+            & ul{
+                padding: 1em 0;
+                & li{
+                    padding: .1em 0;
+                }
             }
         }
+    }
+    #error{
+        gap: 1em;
     }
 
     @keyframes imgLoading {
