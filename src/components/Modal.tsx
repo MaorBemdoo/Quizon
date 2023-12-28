@@ -14,10 +14,6 @@ const Modal = ({ className }: ModalProps) => {
 
     const { error } = useAppSelector(state => state.category)
 
-    if (error == "error") {
-        dispatch(setCategoryLoading(true))
-    }
-
     return (
         <>
             {

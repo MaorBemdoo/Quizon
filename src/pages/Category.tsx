@@ -59,9 +59,9 @@ const Category = ({className}: CategoryProps) => {
 
     const startQuiz = () => {
         dispatch(fetchCategory({difficulty, categoryId}))
-        setInterval(() => {
-            dispatch(setCategoryLoading(false))
-        }, 10000)
+        // setInterval(() => {
+        //     dispatch(setCategoryLoading(false))
+        // }, 10000)
     }
 
     if(error == "error"){
