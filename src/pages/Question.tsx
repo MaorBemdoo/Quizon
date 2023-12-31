@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async"
 import { useAppSelector } from "../store"
 
 interface QuestionProps{
@@ -6,18 +7,28 @@ interface QuestionProps{
 
 const Question = ({ className }: QuestionProps) => {
 
-    const { question, incorrectAnswers, correctAnswer } = useAppSelector(state => state.category)
+    const { number, question, incorrectAnswers, correctAnswer } = useAppSelector(state => state.category)
     const options = [...incorrectAnswers]
-    options.splice(Math.floor(Math.random() * (incorrectAnswers.length + 1)), 0, `${correctAnswer}: correct`)
+    if(incorrectAnswers.length !== 1){
+        options.splice(Math.floor(Math.random() * (incorrectAnswers.length + 1)), 0, `${correctAnswer}: correct`)
+    }
 
     return (
         <main className={className}>
-            <p>{question}</p>
-            {
-                options.map((opt, idx) => {
-                    return <p key={idx}>{opt}</p>
-                })
-            }
+            <Helmet>
+                <title>Question - Quizon</title>
+            </Helmet>
+            <div>
+                <p><h1>Question {number}</h1>/10</p>
+                <div>{question}</div>
+            </div>
+            <ul>
+                {
+                    options.map((opt, idx) => {
+                        return <li key={idx}>{opt}</li>
+                    })
+                }
+            </ul>
         </main>
     )
 }

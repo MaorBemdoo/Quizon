@@ -33,10 +33,10 @@ function App() {
             <Route path="category" element={<SharedCategoryLayout/>}>
               <Route index element={<Navigate to='/'/>}/>
               <Route path=":categoryId" element={<CategoryStyle />}></Route>
-              <Route path=":categoryId/quiz" element={<QuestionStyle/>}></Route>
             </Route>
             <Route path="*" element={<ErrorStyle />}/>
           </Route>
+          <Route path="category/:categoryId/quiz" element={<QuestionStyle/>}></Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
