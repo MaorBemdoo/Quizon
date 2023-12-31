@@ -1,16 +1,15 @@
 import Typography from '@mui/material/Typography'
 import logo from '../../public/logo.png'
-import { useAppDispatch, useAppSelector } from '../store'
+import { useAppSelector } from '../store'
 import { Button } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
-import { setCategoryLoading } from '../features/category/categorySlice'
+import React from 'react'
 interface ModalProps{
     className?: string
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Modal = ({ className }: ModalProps) => {
-
-    const dispatch = useAppDispatch()
+const Modal = ({ className, setOpenModal }: ModalProps) => {
 
     const { error } = useAppSelector(state => state.category)
 
@@ -20,7 +19,7 @@ const Modal = ({ className }: ModalProps) => {
                 error == "error" ?
                 <div className={className} id="error">
                     <Typography variant="h4" color="initial">Something went wrong</Typography>
-                    <Button variant="contained" onClick={() => dispatch(setCategoryLoading(false))}><ArrowBack/> Go Back</Button>
+                    <Button variant="contained" onClick={() => setOpenModal(false)}><ArrowBack/> Go Back</Button>
                 </div> :
                 <div className={className} id="loading">
                     <img src={logo} alt="Quizon logo" />

@@ -33,6 +33,7 @@ interface initialStateType {
     id: string
     loading: boolean
     error: string | null
+    success: boolean
 }
 
 const initialState: initialStateType = {
@@ -43,7 +44,8 @@ const initialState: initialStateType = {
     number: 1,
     id: "",
     loading: false,
-    error: null
+    error: null,
+    success: false
 };
 
 const categorySlice = createSlice({
@@ -56,9 +58,14 @@ const categorySlice = createSlice({
         setCategoryDifficulty(state, action){
             state.difficulty = action.payload
         },
-        setCategoryLoading(state, action){
-            state.loading = action.payload
-        }
+        setFetchToDefault(state){
+            state.loading = false
+            state.error = null
+            state.success = false
+        },
+        // setCategoryLoading(state, action){
+        //     state.loading = action.payload
+        // }
     },
     extraReducers: (builder) => {
         builder
@@ -67,15 +74,17 @@ const categorySlice = createSlice({
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.loading = false
+                state.success = true
                 state.question = action.payload.results[state.number-1].question
                 state.incorrectAnswers = action.payload.results[state.number-1].incorrect_answers
                 state.correctAnswer = action.payload.results[state.number-1].correct_answer
             })
             .addCase(fetchCategory.rejected, (state) => {
+                state.loading = false
                 state.error = "error"
             });
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty, setCategoryLoading } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setFetchToDefault } = categorySlice.actions
 export default categorySlice.reducer;

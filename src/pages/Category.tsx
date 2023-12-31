@@ -31,9 +31,10 @@ import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
 import { ArrowBack, CheckCircle, CheckCircleOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom"
-import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
+import { fetchCategory, setCategoryDifficulty, setCategoryId, setFetchToDefault } from "../features/category/categorySlice"
 import { Modal } from "@mui/material"
 import ModalStyle from "../styles/Modal.style"
+import { useEffect, useState } from "react"
 // import { useEffect } from "react"
 interface CategoryProps{
     className?: string
@@ -52,32 +53,34 @@ const Category = ({className}: CategoryProps) => {
 
     dispatch(setCategoryId(categoryId))
 
+    const [openModal, setOpenModal] = useState(false)
     // const categories = [{id: 18, name: "Test"}]
     const categories = useAppSelector((state) => state.categories.categories)
     const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
-    const { difficulty, loading: categoryLoading, error: categoryError } = useAppSelector((state) => state.category)
+    const { difficulty, success } = useAppSelector((state) => state.category)
 
-    // useEffect(() => {
-    //     if(categoryError !== "error" || categoryError !== null){
-    //         // setInterval(() => {
-    //             navigate(`/category/${categoryId}/quiz`)
-    //         // }, 10000)
-    //     }else{
-    //         return
-    //     }
-    // }, [navigate, categoryError, categoryId])
-
-    const startQuiz = () => {
-        dispatch(fetchCategory({difficulty, categoryId}))
-        if(categoryError !== "error" && categoryLoading !== true){
+    useEffect(() => {
+        if(success == true){
+            setOpenModal(false)
             // setInterval(() => {
                 navigate(`/category/${categoryId}/quiz`)
             // }, 10000)
-        }else{
-            return
         }
+        dispatch(setFetchToDefault())
+    }, [navigate, success, categoryId, dispatch])
+
+    const startQuiz = () => {
+        setOpenModal(true)
+        dispatch(fetchCategory({difficulty, categoryId}))
+        // dispatch(setFetchToDefault())
+        // if(success == true){
+        //     setOpenModal(false)
+        //     // setInterval(() => {
+        //         navigate(`/category/${categoryId}/quiz`)
+        //     // }, 10000)
+        // }
         // setInterval(() => {
         //     dispatch(setCategoryLoading(false))
         // }, 10000)
@@ -155,7 +158,7 @@ const Category = ({className}: CategoryProps) => {
                     <Button variant="contained" onClick={startQuiz}>Start Quiz!</Button>
                 </div>
             </div>
-            {<Modal open={categoryLoading} children={<ModalStyle />}></Modal>}
+            {<Modal open={openModal} children={<ModalStyle setOpenModal={setOpenModal}/>}></Modal>}
         </main>
     )
 }

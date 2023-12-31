@@ -8,7 +8,7 @@ const Question = ({ className }: QuestionProps) => {
 
     const { question, incorrectAnswers, correctAnswer } = useAppSelector(state => state.category)
     const options = [...incorrectAnswers]
-    options.splice(Math.floor(Math.random() * incorrectAnswers.length + 1), 0, `${correctAnswer}: correct`)
+    options.splice(Math.floor(Math.random() * (incorrectAnswers.length + 1)), 0, `${correctAnswer}: correct`)
 
     return (
         <main className={className}>
