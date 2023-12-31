@@ -34,7 +34,7 @@ import { Link } from "react-router-dom"
 import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
 import { Modal } from "@mui/material"
 import ModalStyle from "../styles/Modal.style"
-import { useEffect } from "react"
+// import { useEffect } from "react"
 interface CategoryProps{
     className?: string
 }
