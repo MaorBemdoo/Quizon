@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
 import { useAppDispatch, useAppSelector } from "../store"
@@ -31,9 +31,10 @@ import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
 import { ArrowBack, CheckCircle, CheckCircleOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom"
-import { fetchCategory, setCategoryDifficulty, setCategoryId, setCategoryLoading } from "../features/category/categorySlice"
+import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features/category/categorySlice"
 import { Modal } from "@mui/material"
 import ModalStyle from "../styles/Modal.style"
+import { useEffect } from "react"
 interface CategoryProps{
     className?: string
 }
@@ -43,6 +44,7 @@ const categoryImages = [category9, category10, category11, category12, category1
 const Category = ({className}: CategoryProps) => {
 
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     // useEffect(() => {
     //     dispatch(fetchCategory({difficulty: 'easy', categoryId: '12'}))
     // }, [dispatch])
@@ -50,15 +52,32 @@ const Category = ({className}: CategoryProps) => {
 
     dispatch(setCategoryId(categoryId))
 
-    // const categories = useAppSelector((state) => state.categories.categories)
-    const categories = [{id: 16, name: "Test"}]
+    // const categories = [{id: 18, name: "Test"}]
+    const categories = useAppSelector((state) => state.categories.categories)
     const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
-    const { difficulty, loading: categoryLoading } = useAppSelector((state) => state.category)
+    const { difficulty, loading: categoryLoading, error: categoryError } = useAppSelector((state) => state.category)
+
+    // useEffect(() => {
+    //     if(categoryError !== "error" || categoryError !== null){
+    //         // setInterval(() => {
+    //             navigate(`/category/${categoryId}/quiz`)
+    //         // }, 10000)
+    //     }else{
+    //         return
+    //     }
+    // }, [navigate, categoryError, categoryId])
 
     const startQuiz = () => {
         dispatch(fetchCategory({difficulty, categoryId}))
+        if(categoryError !== "error" && categoryLoading !== true){
+            // setInterval(() => {
+                navigate(`/category/${categoryId}/quiz`)
+            // }, 10000)
+        }else{
+            return
+        }
         // setInterval(() => {
         //     dispatch(setCategoryLoading(false))
         // }, 10000)

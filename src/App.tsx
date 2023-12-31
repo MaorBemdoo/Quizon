@@ -7,6 +7,7 @@ import CategoryStyle from "./styles/Category.style"
 import SharedLayout from "./pages/SharedLayouts/SharedLayout"
 import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
 import { useEffect, useState } from "react"
+import QuestionStyle from "./styles/Question.style"
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="category" element={<SharedCategoryLayout/>}>
               <Route index element={<Navigate to='/'/>}/>
               <Route path=":categoryId" element={<CategoryStyle />}></Route>
+              <Route path=":categoryId/quiz" element={<QuestionStyle/>}></Route>
             </Route>
             <Route path="*" element={<ErrorStyle />}/>
           </Route>

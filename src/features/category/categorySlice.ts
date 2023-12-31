@@ -26,8 +26,10 @@ export const fetchCategory = createAsyncThunk(
 
 interface initialStateType {
     question: string
-    options: string[]
+    incorrectAnswers: string[]
+    correctAnswer: string
     difficulty: string
+    number: number
     id: string
     loading: boolean
     error: string | null
@@ -35,8 +37,10 @@ interface initialStateType {
 
 const initialState: initialStateType = {
     question: "",
-    options: [],
+    incorrectAnswers: [],
+    correctAnswer: "",
     difficulty: "easy",
+    number: 1,
     id: "",
     loading: false,
     error: null
@@ -62,7 +66,10 @@ const categorySlice = createSlice({
                 state.loading = true
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
-                
+                state.loading = false
+                state.question = action.payload.results[state.number-1].question
+                state.incorrectAnswers = action.payload.results[state.number-1].incorrect_answers
+                state.correctAnswer = action.payload.results[state.number-1].correct_answer
             })
             .addCase(fetchCategory.rejected, (state) => {
                 state.error = "error"
