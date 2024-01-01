@@ -12,13 +12,13 @@ const Question = ({ className }: QuestionProps) => {
 
     const dispatch = useDispatch()
 
-    // const { number, question, incorrectAnswers, correctAnswer, score, type } = useAppSelector(state => state.category)
-    const number = useAppSelector(state => state.category.number)
-    const score = useAppSelector(state => state.category.score)
-    const type = useAppSelector(state => state.category.type)
-    const question = "A custom question for test it can br changed but when I'm low on data I use it"
-    const incorrectAnswers = ["Hi", "It's", "Bem"]
-    const correctAnswer = "random"
+    const { number, question, incorrectAnswers, correctAnswer, score, type } = useAppSelector(state => state.category)
+    // const number = useAppSelector(state => state.category.number)
+    // const score = useAppSelector(state => state.category.score)
+    // const type = useAppSelector(state => state.category.type)
+    // const question = "A custom question for test it can br changed but when I'm low on data I use it"
+    // const incorrectAnswers = ["Hi", "It's", "Bem"]
+    // const correctAnswer = "random"
     
     let options = [...incorrectAnswers]
     if(incorrectAnswers.length !== 1){
