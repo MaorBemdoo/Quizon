@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Question from "../pages/Question";
 
 const QuestionStyle = styled(Question)`
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,13 +18,14 @@ const QuestionStyle = styled(Question)`
     /* gap: 2em; */
     width: 550px;
     height: 220px;
+    font-family: 'Open Sans', sans-serif;
     & > *{
         flex-basis: 50%;
     }
     & > div{
         max-width: 200px;
         & div:first-child span:first-child{
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         & div:last-child{
             padding-top: 1em;

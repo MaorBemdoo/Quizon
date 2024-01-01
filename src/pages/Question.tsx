@@ -38,7 +38,7 @@ const Question = ({ className }: QuestionProps) => {
                     </Helmet>
                     <div>
                         <div>
-                            <span>Question {number}</span>
+                            <span><i>Question {number}</i></span>
                             <span>/10</span>
                         </div>
                         <div dangerouslySetInnerHTML={{ __html: question }}></div>
