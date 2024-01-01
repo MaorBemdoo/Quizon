@@ -33,11 +33,11 @@ const QuestionStyle = styled(Question)`
     .options{
         display: flex;
         flex-direction: column;
-        gap: .6rem;
+        justify-content: center;
+        gap: 1rem;
         user-select: none;
         & li{
             list-style: none;
-            margin: auto 0;
             padding: .3em;
             box-shadow: 0 0 2px 1px #7dc1a7;
             border-radius: 4px;
