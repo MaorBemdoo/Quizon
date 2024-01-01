@@ -14,18 +14,38 @@ const QuestionStyle = styled(Question)`
     color: ${props => props.dark == true ? "black" : "white"};
     display: flex;
     justify-content: space-between;
-    gap: 2em;
-    width: 500px;
-    height: 300px;
+    /* gap: 2em; */
+    width: 550px;
+    height: 220px;
     & > *{
         flex-basis: 50%;
     }
     & > div{
+        max-width: 200px;
         & div:first-child span:first-child{
             font-size: 2.5rem;
         }
         & div:last-child{
             padding-top: 1em;
+            user-select: none;
+        }
+    }
+    .options{
+        display: flex;
+        flex-direction: column;
+        gap: .6rem;
+        user-select: none;
+        & li{
+            list-style: none;
+            margin: auto 0;
+            padding: .3em;
+            box-shadow: 0 0 2px 1px #7dc1a7;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            &:hover{
+                background-color: #7dc1a7;
+            }
         }
     }
 `
