@@ -36,7 +36,7 @@ function App() {
             </Route>
             <Route path="*" element={<ErrorStyle />}/>
           </Route>
-          <Route path="category/:categoryId/quiz" element={<QuestionStyle/>}></Route>
+          <Route path="category/:categoryId/quiz" element={<QuestionStyle dark={dark}/>}></Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
