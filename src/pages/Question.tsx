@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux"
 import { nextQuestion } from "../features/category/categorySlice"
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom"
-import { useEffect, useRef } from "react"
 interface QuestionProps{
     className?: string
     dark: boolean
