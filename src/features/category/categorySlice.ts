@@ -78,7 +78,7 @@ const categorySlice = createSlice({
             state.success = false
         },
         nextQuestion(state, action){
-            if(action.payload == `${state.correctAnswer}: correct`){
+            if(action.payload == state.correctAnswer){
                 state.score++
             }
             if(state.number < 10){

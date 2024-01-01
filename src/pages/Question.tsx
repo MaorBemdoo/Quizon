@@ -23,7 +23,7 @@ const Question = ({ className }: QuestionProps) => {
     
     let options = [...incorrectAnswers]
     if(incorrectAnswers.length !== 1){
-        options.splice(Math.floor(Math.random() * (incorrectAnswers.length + 1)), 0, `${correctAnswer}: correct`)
+        options.splice(Math.floor(Math.random() * (incorrectAnswers.length + 1)), 0, correctAnswer)
     }else{
         options = ["True", "False"]
     }
