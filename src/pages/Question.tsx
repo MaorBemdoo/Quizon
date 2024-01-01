@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async"
 import { useAppSelector } from "../store"
 import { useDispatch } from "react-redux"
 import { nextQuestion } from "../features/category/categorySlice"
+import Button from '@mui/material/Button'
+import { Link } from "react-router-dom"
 
 interface QuestionProps{
     className?: string
@@ -12,7 +14,7 @@ const Question = ({ className }: QuestionProps) => {
 
     const dispatch = useDispatch()
 
-    const { number, question, incorrectAnswers, correctAnswer, score, type } = useAppSelector(state => state.category)
+    const { number, question, incorrectAnswers, correctAnswer, score, type, id } = useAppSelector(state => state.category)
     // const number = useAppSelector(state => state.category.number)
     // const score = useAppSelector(state => state.category.score)
     // const type = useAppSelector(state => state.category.type)
@@ -54,7 +56,10 @@ const Question = ({ className }: QuestionProps) => {
                     <Helmet>
                         <title>Result - Quizon</title>
                     </Helmet>
-                        <div id="score">You scored {score} out of 10</div>
+                        <div id="score">
+                            <div>You scored {score} out of 10</div>
+                            <Link to={`/category/${id}/quiz`}><Button variant="contained" color="success" id="bTH">Back to Quiz Home</Button></Link>
+                        </div>
                 </main>
             }
         </>
