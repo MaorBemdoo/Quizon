@@ -8,6 +8,7 @@ import SharedLayout from "./pages/SharedLayouts/SharedLayout"
 import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
 import { useEffect, useState } from "react"
 import QuestionStyle from "./styles/Question.style"
+import ProtectedQuestionRoute from "./pages/ProtectedRoutes/ProtectedQuestionRoute"
 
 function App() {
 
@@ -36,7 +37,9 @@ function App() {
             </Route>
             <Route path="*" element={<ErrorStyle />}/>
           </Route>
-          <Route path="category/:categoryId/quiz" element={<QuestionStyle dark={dark}/>}></Route>
+          <Route path="category/:categoryId/quiz" element={<ProtectedQuestionRoute>
+                                                            <QuestionStyle dark={dark}/>
+                                                          </ProtectedQuestionRoute>}></Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
