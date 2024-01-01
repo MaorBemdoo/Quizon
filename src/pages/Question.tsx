@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { nextQuestion } from "../features/category/categorySlice"
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom"
-
+import { useEffect, useRef } from "react"
 interface QuestionProps{
     className?: string
     dark: boolean
@@ -42,12 +42,12 @@ const Question = ({ className }: QuestionProps) => {
                             <span>Question {number}</span>
                             <span>/10</span>
                         </div>
-                        <div>{question}</div>
+                        <div dangerouslySetInnerHTML={{ __html: question }}></div>
                     </div>
                     <ul className="options">
                         {
                             options.map((opt, idx) => {
-                                return <li onClick={() => dispatch(nextQuestion(opt))} key={idx}>{opt}</li>
+                                return <li onClick={() => dispatch(nextQuestion(opt))} dangerouslySetInnerHTML={{ __html: opt }} key={idx}></li>
                             })
                         }
                     </ul>

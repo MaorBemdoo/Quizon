@@ -24,7 +24,16 @@ export const fetchCategory = createAsyncThunk(
     }
 );
 
+type QuizzesType = {
+    type: string
+    difficulty: string
+    category: string
+    question: string
+    correct_answer: string,
+    incorrect_answers: string[]
+}
 interface initialStateType {
+    quizzes: QuizzesType[] | []
     question: string
     incorrectAnswers: string[]
     correctAnswer: string
@@ -39,6 +48,7 @@ interface initialStateType {
 }
 
 const initialState: initialStateType = {
+    quizzes: [],
     question: "",
     incorrectAnswers: [],
     correctAnswer: "",
@@ -73,9 +83,17 @@ const categorySlice = createSlice({
             }
             if(state.number < 10){
                 state.number++
+                state.question = state.quizzes[state.number-1].question
+                state.incorrectAnswers = state.quizzes[state.number-1].incorrect_answers
+                state.correctAnswer = state.quizzes[state.number-1].correct_answer
             }else{
                 state.type = "result"
             }
+        },
+        setQuestion(state, action){
+            state.question = state.quizzes[action.payload-1].question
+            state.incorrectAnswers = state.quizzes[action.payload-1].incorrect_answers
+            state.correctAnswer = state.quizzes[action.payload-1].correct_answer
         }
         // setCategoryLoading(state, action){
         //     state.loading = action.payload
@@ -89,6 +107,7 @@ const categorySlice = createSlice({
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.loading = false
                 state.success = true
+                state.quizzes = action.payload.results
                 state.question = action.payload.results[state.number-1].question
                 state.incorrectAnswers = action.payload.results[state.number-1].incorrect_answers
                 state.correctAnswer = action.payload.results[state.number-1].correct_answer
@@ -100,5 +119,5 @@ const categorySlice = createSlice({
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion, setQuestion } = categorySlice.actions
 export default categorySlice.reducer;
