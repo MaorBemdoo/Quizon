@@ -34,6 +34,8 @@ interface initialStateType {
     loading: boolean
     error: string | null
     success: boolean
+    score: number
+    type: "question" | "result"
 }
 
 const initialState: initialStateType = {
@@ -45,7 +47,9 @@ const initialState: initialStateType = {
     id: "",
     loading: false,
     error: null,
-    success: false
+    success: false,
+    score: 0,
+    type: "question"
 };
 
 const categorySlice = createSlice({
@@ -63,6 +67,16 @@ const categorySlice = createSlice({
             state.error = null
             state.success = false
         },
+        nextQuestion(state, action){
+            if(action.payload == `${state.correctAnswer}: correct`){
+                state.score++
+            }
+            if(state.number < 10){
+                state.number++
+            }else{
+                state.type = "result"
+            }
+        }
         // setCategoryLoading(state, action){
         //     state.loading = action.payload
         // }
@@ -86,5 +100,5 @@ const categorySlice = createSlice({
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty, setFetchToDefault } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion } = categorySlice.actions
 export default categorySlice.reducer;

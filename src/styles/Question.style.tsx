@@ -48,6 +48,13 @@ const QuestionStyle = styled(Question)`
             }
         }
     }
+    #score{
+        display: grid;
+        place-items: center;
+        font-size: 2.3rem;
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 `
 
 export default QuestionStyle
