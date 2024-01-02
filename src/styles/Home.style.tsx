@@ -4,8 +4,7 @@ import Home from "../pages/Home"
 const HomeStyle = styled(Home)`
     overflow-x: hidden;
     & section:first-child{
-        padding: 0 1em;
-        position: relative;
+        padding: 1em;
         min-height: 90vh;
         display: flex;
         & div{
@@ -14,10 +13,7 @@ const HomeStyle = styled(Home)`
             max-width: 40%;
         }
         & img{
-            position: absolute;
-            right: 30%;
-            bottom: 60%;
-            transform: translate(50%, 50%);
+            margin: auto;
             z-index: -5;
             height: 600px;
             width: 600px;
