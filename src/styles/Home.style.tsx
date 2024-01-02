@@ -12,6 +12,9 @@ const HomeStyle = styled(Home)`
             gap: 1.5rem;
             margin: auto 0;
             max-width: 40%;
+            & p{
+                font-size: 1.3rem;
+            }
         }
         & img{
             margin: auto;
@@ -45,6 +48,19 @@ const HomeStyle = styled(Home)`
         align-items: center;
         gap: .4em;
         padding: 1em;
+    }
+
+    @media (max-width: 963px) {
+        & section:first-child{
+            & div{
+                max-width: 100%;
+                text-align: center;
+                margin: auto;
+            }
+            & img{
+                display: none;
+            }
+        }
     }
 `
 
