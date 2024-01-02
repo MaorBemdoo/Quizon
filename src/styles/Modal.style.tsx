@@ -15,7 +15,9 @@ const ModalStyle = styled(Modal)`
     place-items: center;
     padding: 2em;
     background-color: ${backgroundColor};
+    border-radius: 7px;
     gap: 2em;
+    text-align: center;
     & > img{
         animation: imgLoading 700ms infinite ease-out;
     }
@@ -25,6 +27,7 @@ const ModalStyle = styled(Modal)`
         }
         & ul{
             padding: 1em 0;
+            text-align: start;
             & li{
                 padding: .1em 0;
             }
@@ -34,6 +37,18 @@ const ModalStyle = styled(Modal)`
     @keyframes imgLoading {
         to{
             rotate: 360deg;
+        }
+    }
+    @media (max-width: 700px){
+        &{
+            gap: 1em;
+        }
+        & > img{
+            height: 100px;
+            width: 50px;
+        }
+        & ul{
+            padding: .5em 0;
         }
     }
 `

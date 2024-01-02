@@ -76,7 +76,7 @@ const CategoryStyle = styled(Category)`
         border-top: .1px solid;
         padding: 1em;
     }
-    @media(max-width: 665px){
+    @media(max-width: 700px){
         .category-body h4{
             font-size: 2rem;
         }
