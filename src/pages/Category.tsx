@@ -63,7 +63,7 @@ const Category = ({className}: CategoryProps) => {
     const { difficulty, success } = useAppSelector((state) => state.category)
 
     useEffect(() => {
-        if(success == true){
+        if(success){
             setInterval(() => {
                 setOpenModal(false)
                 navigate(`/category/${categoryId}/quiz`)
