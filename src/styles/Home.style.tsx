@@ -13,7 +13,7 @@ const HomeStyle = styled(Home)`
             margin: auto 0;
             max-width: 40%;
             & p{
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
         }
         & img{
