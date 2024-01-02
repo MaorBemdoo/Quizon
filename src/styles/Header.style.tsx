@@ -6,7 +6,6 @@ const HeaderStyle = styled(Header)`
     align-items: center;
     justify-content: space-between;
     padding: 1em;
-    width: calc(100vh - 2em);
     & img{
         height: 50px;
         width: 40px;
