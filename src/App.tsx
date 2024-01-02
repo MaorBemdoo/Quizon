@@ -39,7 +39,8 @@ function App() {
           </Route>
           <Route path="category/:categoryId/quiz" element={<ProtectedQuestionRoute>
                                                             <QuestionStyle dark={dark}/>
-                                                          </ProtectedQuestionRoute>}></Route>
+                                                          </ProtectedQuestionRoute>}>
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
