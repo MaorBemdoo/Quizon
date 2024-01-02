@@ -40,7 +40,7 @@ const Header = ({ className, dark, isDark }: HeaderProps) => {
                     <Typography variant="h5" color="initial">O</Typography>
                     <Typography variant="h5" color="initial">N</Typography>
                 </Link>
-                <Link to="#categories" id='a2'><Typography variant='subtitle1' color="initial">Discover</Typography></Link>
+                <Link to="/#categories" id='a2'><Typography variant='subtitle1' color="initial">Discover</Typography></Link>
             </div>
             <div>
                 <Switch aria-label='Switch-demo' color='success' checked={dark} onChange={() => isDark(!dark)}/>
