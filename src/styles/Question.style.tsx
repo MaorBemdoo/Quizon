@@ -17,7 +17,7 @@ const QuestionStyle = styled(Question)`
     justify-content: space-between;
     /* gap: 2em; */
     width: 550px;
-    height: 220px;
+    height: 270px;
     font-family: 'Open Sans', sans-serif;
     & > *{
         flex-basis: 50%;
