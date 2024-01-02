@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     }
     html{
         color-scheme: ${props => props.dark ? "dark" : "light"};
+        margin: 0;
+        padding: 0;
     }
     button{
         background-color: #82B9A4 !important;

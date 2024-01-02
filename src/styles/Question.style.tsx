@@ -60,12 +60,35 @@ const QuestionStyle = styled(Question)`
         flex-basis: 100%;
         max-width: 100%;
         & .btns{
-            & > *{
-                margin: 0 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+            & > a {
+                height: 60px;
             }
             & > button{
                 background-color: #121212 !important;
                 color: white;
+            }
+        }
+    }
+    @media(max-width: 600px){
+        &{
+            flex-direction: column;
+            width: auto;
+            height: auto;
+            gap: 1em;
+        }
+        & > div{
+            align-self: start;
+            text-align: center;
+            max-width: 100%;
+        }
+        #score{
+            & .btns{
+                flex-direction: column;
+                gap: initial;
             }
         }
     }
