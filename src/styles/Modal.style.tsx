@@ -45,7 +45,7 @@ const ModalStyle = styled(Modal)`
         }
         & > img{
             height: 100px;
-            width: 50px;
+            width: 80px;
         }
         & ul{
             padding: .5em 0;
