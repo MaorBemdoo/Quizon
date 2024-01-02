@@ -63,11 +63,13 @@ const Category = ({className}: CategoryProps) => {
     const { difficulty, success } = useAppSelector((state) => state.category)
 
     useEffect(() => {
-        if(success){
-            setInterval(() => {
-                setOpenModal(false)
-                navigate(`/category/${categoryId}/quiz`)
-            }, 15000)
+        if (success) {
+            const timeoutId = setTimeout(() => {
+                setOpenModal(false);
+                navigate(`/category/${categoryId}/quiz`);
+            }, 15000);
+
+            return () => clearTimeout(timeoutId);
         }
         // dispatch(setFetchToDefault())
     }, [navigate, success, categoryId, dispatch])
