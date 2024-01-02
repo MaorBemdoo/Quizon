@@ -110,6 +110,11 @@ const categorySlice = createSlice({
             state.question = state.quizzes[action.payload-1].question
             state.incorrectAnswers = state.quizzes[action.payload-1].incorrect_answers
             state.correctAnswer = state.quizzes[action.payload-1].correct_answer
+        },
+        retakeQuiz(state){
+            state.type = "question"
+            state.number = 1
+            state.score = 0
         }
         // setCategoryLoading(state, action){
         //     state.loading = action.payload
@@ -135,5 +140,5 @@ const categorySlice = createSlice({
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion, setQuestion, setToDefault } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion, setQuestion, setToDefault, retakeQuiz } = categorySlice.actions
 export default categorySlice.reducer;

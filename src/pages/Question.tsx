@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async"
 import { useAppSelector } from "../store"
 import { useDispatch } from "react-redux"
-import { nextQuestion, setToDefault } from "../features/category/categorySlice"
+import { nextQuestion, setToDefault, retakeQuiz } from "../features/category/categorySlice"
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom"
 import { useEffect, useMemo, useState } from "react"
@@ -97,7 +97,7 @@ const Question = ({ className }: QuestionProps) => {
                         <div id="score">
                             <div>You scored {score} out of 10</div>
                             <div className="btns">
-                                <Button variant="contained">Retake Quiz</Button>
+                                <Button variant="contained" onClick={() => dispatch(retakeQuiz())}>Retake Quiz</Button>
                                 <Link to={`/category/${id}`} onClick={() => dispatch(setToDefault())}><Button variant="contained" color="success" id="bTH">Quiz Home</Button></Link>
                             </div>
                         </div>
