@@ -57,9 +57,9 @@ const Question = ({ className }: QuestionProps) => {
     // }, [options]);
 
     const optFontSize = () => {
-        if(maxText <= 20){
+        if(maxText <= 15){
             return '1.4rem'
-        } else if(maxText > 20 && maxText <= 30){
+        } else if(maxText > 15 && maxText <= 30){
             return '1.2rem'
         }
         else if(maxText > 30){
