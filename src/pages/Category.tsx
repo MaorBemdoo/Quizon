@@ -165,7 +165,7 @@ const Category = ({className}: CategoryProps) => {
                     <Button variant="contained" onClick={startQuiz}>Start Quiz!</Button>
                 </div>
             </div>
-            {<Modal open={true} children={<ModalStyle setOpenModal={setOpenModal}/>}></Modal>}
+            {<Modal open={openModal} children={<ModalStyle setOpenModal={setOpenModal}/>}></Modal>}
         </main>
     )
 }
