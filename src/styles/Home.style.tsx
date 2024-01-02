@@ -2,6 +2,7 @@ import styled from "styled-components"
 import Home from "../pages/Home"
 
 const HomeStyle = styled(Home)`
+    overflow-x: hidden;
     & section:first-child{
         padding: 0 1em;
         position: relative;
