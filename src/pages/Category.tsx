@@ -64,8 +64,8 @@ const Category = ({className}: CategoryProps) => {
 
     useEffect(() => {
         if(success == true){
-            setOpenModal(false)
             setInterval(() => {
+                setOpenModal(false)
                 navigate(`/category/${categoryId}/quiz`)
             }, 15000)
         }
