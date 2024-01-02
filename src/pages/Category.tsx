@@ -54,6 +54,7 @@ const Category = ({className}: CategoryProps) => {
     dispatch(setCategoryId(categoryId))
 
     const [openModal, setOpenModal] = useState(false)
+    const [category, setCategory] = useState<{ id: number; name: string; } | undefined>(undefined)
     // const categories = [{id: 18, name: "Test"}]
     const categories = useAppSelector((state) => state.categories.categories)
     const isLoading = useAppSelector((state) => state.categories.loading)
@@ -90,13 +91,18 @@ const Category = ({className}: CategoryProps) => {
         error = "netError"
     }
 
-    const category = categories.find(({ id }) => Number(categoryId) == id )
+    useEffect(() => {
+        if (categoryId) {
+            setCategory(categories.find(({ id }) => Number(categoryId) == id ))
+        }
+    }, [categoryId, categories]);
+
 
     if(typeof category === 'undefined'){
         error = "404"
     }
 
-    if (isLoading) {
+    if (!category && !categoryId) {
         return <div>Loading...</div>;
     }
 
