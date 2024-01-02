@@ -8,7 +8,8 @@ const HomeStyle = styled(Home)`
         min-height: 90vh;
         display: flex;
         & div{
-            // margin-top: 10%;
+            display: grid;
+            gap: 1.5rem;
             margin: auto 0;
             max-width: 40%;
         }
