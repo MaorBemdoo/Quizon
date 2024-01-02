@@ -17,7 +17,7 @@ const QuestionStyle = styled(Question)`
     justify-content: space-between;
     /* gap: 2em; */
     width: 550px;
-    height: 270px;
+    height: 220px;
     font-family: 'Open Sans', sans-serif;
     & > *{
         flex-basis: 50%;
@@ -52,11 +52,18 @@ const QuestionStyle = styled(Question)`
         }
     }
     #score{
-        display: grid;
-        place-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         font-size: 2.3rem;
         flex-basis: 100%;
         max-width: 100%;
+        & .btns{
+            & > *{
+                margin: 0 1em;
+            }
+        }
     }
 `
 

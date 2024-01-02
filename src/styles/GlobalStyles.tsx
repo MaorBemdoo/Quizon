@@ -9,7 +9,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         border: 0;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
     }
     html{
         color-scheme: ${props => props.dark ? "dark" : "light"};

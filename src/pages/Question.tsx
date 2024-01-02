@@ -96,7 +96,10 @@ const Question = ({ className }: QuestionProps) => {
                     </Helmet>
                         <div id="score">
                             <div>You scored {score} out of 10</div>
-                            <Link to={`/category/${id}`} onClick={() => dispatch(setToDefault())}><Button variant="contained" color="success" id="bTH">Back to Quiz Home</Button></Link>
+                            <div className="btns">
+                                <Button variant="contained">Retake Quiz</Button>
+                                <Link to={`/category/${id}`} onClick={() => dispatch(setToDefault())}><Button variant="contained" color="success" id="bTH">Quiz Home</Button></Link>
+                            </div>
                         </div>
                 </main>
             }
