@@ -65,9 +65,9 @@ const Category = ({className}: CategoryProps) => {
     useEffect(() => {
         if(success == true){
             setOpenModal(false)
-            // setInterval(() => {
+            setInterval(() => {
                 navigate(`/category/${categoryId}/quiz`)
-            // }, 10000)
+            }, 15000)
         }
         // dispatch(setFetchToDefault())
     }, [navigate, success, categoryId, dispatch])
