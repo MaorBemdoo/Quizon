@@ -42,6 +42,8 @@ const ModalStyle = styled(Modal)`
     @media (max-width: 700px){
         &{
             gap: 1em;
+            height: 500px;
+            overflow-y: scroll;
         }
         & > img{
             height: 100px;
