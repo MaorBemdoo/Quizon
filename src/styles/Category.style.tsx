@@ -3,9 +3,9 @@ import Category from "../pages/Category";
 
 const CategoryStyle = styled(Category)`
     display: grid;
+    text-align: center;
     .category{
         position: relative;
-        width: 700px;
         /* height: ${document.scrollingElement?.clientHeight}px; */
         border-radius: 7px;
         border: 1px solid;
@@ -43,17 +43,18 @@ const CategoryStyle = styled(Category)`
         display: grid;
         place-items: center;
     .difficulty-cards{
-        padding-top: 2em;
+        padding-top: 1em;
         display: flex;
         gap: 1em;
         width: 100%;
+        overflow-x: scroll;
         & > div{
             position: relative;
             display: grid;
             place-items: center;
             /* gap: 1em; */
             height: 300px;
-            width: 100%;
+            width: 200px;
             background-color: #7dc1a7;
             border-radius: 7px;
             cursor: default;
@@ -74,6 +75,23 @@ const CategoryStyle = styled(Category)`
         place-items: center;
         border-top: .1px solid;
         padding: 1em;
+    }
+    @media(max-width: 665px){
+        .category-body h4{
+            font-size: 2rem;
+        }
+        .difficulty-cards{
+            & > div{
+                height: 200px !important;
+                width: calc(100% - 2em) !important;
+                & > h3{
+                    font-size: 2rem;
+                }
+                & > h5{
+                    font-size: 1rem;
+                }
+            }
+        }
     }
 `
 
