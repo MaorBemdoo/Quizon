@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom"
-import CategoryError from "./Error/CategoryError"
 import { Helmet } from "react-helmet-async"
 import { useAppDispatch, useAppSelector } from "../store"
 import Card from '@mui/material/Card'
@@ -35,6 +34,7 @@ import { fetchCategory, setCategoryDifficulty, setCategoryId } from "../features
 import { Modal } from "@mui/material"
 import ModalStyle from "../styles/Modal.style"
 import { useEffect, useState } from "react"
+import CategoryErrorStyle from "../styles/CategoryError.style"
 // import { useEffect } from "react"
 interface CategoryProps{
     className?: string
@@ -57,7 +57,7 @@ const Category = ({className}: CategoryProps) => {
     const [category, setCategory] = useState<{ id: number; name: string; } | undefined>(undefined)
     // const categories = [{id: 18, name: "Test"}]
     const categories = useAppSelector((state) => state.categories.categories)
-    // const isLoading = useAppSelector((state) => state.categories.loading)
+    const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
     const { difficulty, success } = useAppSelector((state) => state.category)
@@ -102,12 +102,13 @@ const Category = ({className}: CategoryProps) => {
         error = "404"
     }
 
-    if (!category && !categoryId) {
-        return <div>Loading...</div>;
+    if (isLoading) {
+        // return <div>Loading...</div>;
+        return;
     }
 
     if (typeof category === 'undefined') {
-        return <CategoryError error={error} />;
+        return <CategoryErrorStyle error={error} />;
     }
 
     if (category === null) {
