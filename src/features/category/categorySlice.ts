@@ -77,6 +77,22 @@ const categorySlice = createSlice({
             state.error = null
             state.success = false
         },
+        setToDefault(){
+            return {
+                quizzes: [],
+                question: "",
+                incorrectAnswers: [],
+                correctAnswer: "",
+                difficulty: "easy",
+                number: 1,
+                id: "",
+                loading: false,
+                error: null,
+                success: false,
+                score: 0,
+                type: "question"
+            }
+        },
         nextQuestion(state, action){
             if(action.payload == state.correctAnswer){
                 state.score++
@@ -119,5 +135,5 @@ const categorySlice = createSlice({
     },
 });
 
-export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion, setQuestion } = categorySlice.actions
+export const { setCategoryId, setCategoryDifficulty, setFetchToDefault, nextQuestion, setQuestion, setToDefault } = categorySlice.actions
 export default categorySlice.reducer;

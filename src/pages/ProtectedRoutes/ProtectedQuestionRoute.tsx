@@ -1,13 +1,12 @@
 import { ReactNode } from "react"
-// import { useAppSelector } from "../../store"
-// import { Navigate } from "react-router-dom"
+import { useAppSelector } from "../../store"
+import { Navigate } from "react-router-dom"
 
 const ProtectedQuestionRoute = ({ children }: {children: ReactNode}) => {
-    // const { success } = useAppSelector(state => state.category)
-    // if(!success){
-    //     // return <Navigate to={"/"}/>
-    //     return
-    // }
+    const { success } = useAppSelector(state => state.category)
+    if(!success){
+        return <Navigate to={`/`}/>
+    }
     return children
 }
 
