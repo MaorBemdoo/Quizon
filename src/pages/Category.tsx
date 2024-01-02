@@ -57,7 +57,7 @@ const Category = ({className}: CategoryProps) => {
     const [category, setCategory] = useState<{ id: number; name: string; } | undefined>(undefined)
     // const categories = [{id: 18, name: "Test"}]
     const categories = useAppSelector((state) => state.categories.categories)
-    const isLoading = useAppSelector((state) => state.categories.loading)
+    // const isLoading = useAppSelector((state) => state.categories.loading)
     let error = useAppSelector((state) => state.categories.error) || "error"
 
     const { difficulty, success } = useAppSelector((state) => state.category)
