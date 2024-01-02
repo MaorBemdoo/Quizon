@@ -45,7 +45,7 @@ const QuestionStyle = styled(Question)`
             border-radius: 4px;
             cursor: pointer;
             /* font-size: 1.5rem; */
-            &:hover{
+            &:hover,&:focus{
                 background-color: #7dc1a7;
             }
         }
