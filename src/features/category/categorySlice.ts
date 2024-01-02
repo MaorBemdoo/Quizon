@@ -5,7 +5,6 @@ export const fetchCategory = createAsyncThunk(
     "category/fetchCategory",
     async (arg: {difficulty: string, categoryId: string | undefined}) => {
         try {
-            console.log(arg);
             const response = await axios.request({
                 method: 'get',
                 url: 'https://opentdb.com/api.php',
@@ -15,7 +14,7 @@ export const fetchCategory = createAsyncThunk(
                     difficulty: arg.difficulty
                 }
             })
-            console.log(response.data);
+            console.log(response.data.response_code);
             return response.data;
         } catch (error) {
             console.log(error);
