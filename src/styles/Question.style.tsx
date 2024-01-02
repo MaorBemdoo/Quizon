@@ -63,6 +63,10 @@ const QuestionStyle = styled(Question)`
             & > *{
                 margin: 0 1em;
             }
+            & > button{
+                background-color: #121212 !important;
+                color: white;
+            }
         }
     }
 `

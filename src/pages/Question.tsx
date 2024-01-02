@@ -97,8 +97,8 @@ const Question = ({ className }: QuestionProps) => {
                         <div id="score">
                             <div>You scored {score} out of 10</div>
                             <div className="btns">
-                                <Button variant="contained" onClick={() => dispatch(retakeQuiz())}>Retake Quiz</Button>
                                 <Link to={`/category/${id}`} onClick={() => dispatch(setToDefault())}><Button variant="contained" color="success" id="bTH">Quiz Home</Button></Link>
+                                <Button variant="contained" onClick={() => dispatch(retakeQuiz())}>Retake Quiz</Button>
                             </div>
                         </div>
                 </main>
