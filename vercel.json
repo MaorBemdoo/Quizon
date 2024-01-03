@@ -2,7 +2,7 @@
     "routes": [
         { "handle": "filesystem" },
         { "src": "/*", "dest": "/" },
-        { "src": "/category", "dest": "/category" },
+        { "src": "/category", "dest": "/" },
         { "src": "/category/:categoryId", "dest": "/category/:categoryId" },
         { "src": "/category/:categoryId/quiz", "dest": "/category/:categoryId/quiz" }
     ]
