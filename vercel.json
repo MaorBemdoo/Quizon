@@ -1,0 +1,8 @@
+{
+    "routes": [
+        { "src": "/*", "dest": "/" },
+        { "src": "/category", "dest": "/category" },
+        { "src": "/category/:categoryId", "dest": "/category/:categoryId" },
+        { "src": "/category/:categoryId/quiz", "dest": "/category/:categoryId/quiz" }
+    ]
+}
