@@ -3,7 +3,7 @@
         { "handle": "filesystem" },
         { "src": "/*", "dest": "/" },
         { "src": "/category", "dest": "/" },
-        { "src": "/category/:categoryId", "dest": "/" },
+        { "src": "/category/:categoryId", "dest": "/category" },
         { "src": "/category/:categoryId/quiz", "dest": "/" }
     ]
 }
