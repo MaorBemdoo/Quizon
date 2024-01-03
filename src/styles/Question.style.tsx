@@ -68,8 +68,13 @@ const QuestionStyle = styled(Question)`
                 height: 60px;
             }
             & > button{
-                background-color: #121212 !important;
-                color: white;
+                background-color: transparent !important;
+                border: 1px solid ${props => props.dark == true ? "#121212" : "white"};
+                color: ${props => props.dark == true ? "black" : "white"};
+                &:hover{
+                    background-color: ${props => props.dark == true ? "#121212" : "white"} !important;
+                    color: ${props => props.dark == false ? "black" : "white"};
+                }
             }
         }
     }
