@@ -81,7 +81,7 @@ const Home = ({className, dark}: HomeProps) => {
                     error == "error" ? (
                         <CategoriesFetchError />
                     ) : (
-                        <section className='categories' id='#categories'>
+                        <section className='categories' id='categories'>
                             {categories?.map(({ id, name}: {id: number, name: string}) => {
                                 return (
                                         <Link to={"/category/" + id} key={id}>
