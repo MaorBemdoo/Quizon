@@ -112,19 +112,22 @@ const Home = ({className, dark}: HomeProps) => {
                         error == "error" ? (
                             <CategoriesFetchError />
                         ) : (
-                            <div className='categories' ref={gridRef} style={{gridTemplateColumns: `repeat(${numOfCols}, 1fr)`}}>{
-                                categories.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())).map(({ id, name}: {id: number, name: string}) => {
+                            <div className='categories' ref={gridRef} style={{gridTemplateColumns: `repeat(${numOfCols}, 1fr)`}}>
+                                {categories.filter(({ name }) => (name.toLowerCase().includes(search.toLowerCase()))).map(({ id, name}: {id: number, name: string}) => {
                                         return (
-                                                <Link to={"/category/" + id} key={id}>
-                                                    <Card variant='elevation' elevation={1}>
-                                                        {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
-                                                        <img src={categoryImages[id-9]} alt={name} />
-                                                        <Typography variant="h5" textAlign={"center"}>{name}</Typography>
-                                                    </Card>
-                                                </Link>
+                                            <Link to={"/category/" + id} key={id}>
+                                                <Card variant='elevation' elevation={1}>
+                                                    {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
+                                                    <img src={categoryImages[id-9]} alt={name} />
+                                                    <Typography variant="h5" textAlign={"center"}>{name}</Typography>
+                                                </Card>
+                                            </Link>
                                         )
-                                })
-                            }</div>
+                                })}
+                                {categories.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())).length === 0 && (
+                                    <Typography variant="h4" color="initial" sx={{gridColumn: `span ${numOfCols}`, textAlign: "center"}}>No results found!</Typography>
+                                )}
+                            </div>
                         )}
                 </section>
         </main>
