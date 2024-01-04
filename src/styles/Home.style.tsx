@@ -5,7 +5,7 @@ const HomeStyle = styled(Home)`
     overflow-x: hidden;
     & section:first-child{
         padding: 1em;
-        min-height: 90vh;
+        /* min-height: 90vh; */
         display: flex;
         & div{
             display: grid;
