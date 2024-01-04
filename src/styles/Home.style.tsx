@@ -42,7 +42,7 @@ const HomeStyle = styled(Home)`
     }
     .categories{
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
         gap: 2em;
         width: 100%;
         & > a > div{

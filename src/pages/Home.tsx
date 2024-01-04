@@ -32,7 +32,7 @@ import category32 from '../assets/category32.jpeg'
 import homeIllustrationL from '../assets/QuizonIllustration.gif'
 import homeIllustrationD from '../assets/QuizonIllustrationDark.gif'
 import { SearchOutlined } from '@mui/icons-material'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface HomeProps{
     className?: string
@@ -44,8 +44,30 @@ const categoryImages = [category9, category10, category11, category12, category1
 const Home = ({className, dark}: HomeProps) => {
 
     const [search, setSearch] = useState("")
+    const gridRef = useRef(null);
+    const [numOfCols, setNumOfCols] = useState(3);
 
     const { categories, error, loading } = useAppSelector((state) => state.categories);
+
+    useEffect(() => {
+        const resizeObserver = new ResizeObserver(entries => {
+        const gridContainer = entries[0];
+        const width = gridContainer.contentRect.width;
+
+        const newNumOfCols = Math.floor(width / 300);
+        setNumOfCols(newNumOfCols > 0 ? newNumOfCols : 1);
+        });
+
+        if (gridRef.current){
+            resizeObserver.observe(gridRef.current);
+        }
+
+        return () => {
+            if (gridRef.current) {
+            resizeObserver.unobserve(gridRef.current);
+        }
+        };
+    }, [search]);
 
     return (
         <main className={className}>
@@ -90,7 +112,7 @@ const Home = ({className, dark}: HomeProps) => {
                         error == "error" ? (
                             <CategoriesFetchError />
                         ) : (
-                            <div className='categories'>{
+                            <div className='categories' ref={gridRef} style={{gridTemplateColumns: `repeat(${numOfCols}, 1fr)`}}>{
                                 categories.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())).map(({ id, name}: {id: number, name: string}) => {
                                         return (
                                                 <Link to={"/category/" + id} key={id}>
