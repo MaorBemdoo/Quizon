@@ -83,7 +83,7 @@ const Home = ({className, dark}: HomeProps) => {
                 }
                 <section id='categories'>
                     <div style={{position: "relative"}}>
-                        <input type="text" className="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                        <input type="text" className="search" placeholder='Search...' value={search} onChange={(e) => setSearch(e.target.value)}/>
                         <SearchOutlined sx={{fontSize: "1.8rem", position: "absolute", right: "5px", top: "50%", transform: "translate(-50%, -50%)"}}/>
                     </div>
                     {
