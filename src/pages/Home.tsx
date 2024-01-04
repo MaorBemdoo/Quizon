@@ -31,6 +31,7 @@ import category31 from '../assets/category31.jpeg'
 import category32 from '../assets/category32.jpeg'
 import homeIllustrationL from '../assets/QuizonIllustration.gif'
 import homeIllustrationD from '../assets/QuizonIllustrationDark.gif'
+import { SearchOutlined } from '@mui/icons-material'
 
 interface HomeProps{
     className?: string
@@ -77,25 +78,30 @@ const Home = ({className, dark}: HomeProps) => {
                         <Typography variant='body1'>Just hold on a sec</Typography>
                     </section>
                 }
-                {
-                    error == "error" ? (
-                        <CategoriesFetchError />
-                    ) : (
-                        <section className='categories' id='categories'>
-                            {categories?.map(({ id, name}: {id: number, name: string}) => {
-                                return (
-                                        <Link to={"/category/" + id} key={id}>
-                                            <Card variant='elevation' elevation={1}>
-                                                {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
-                                                <img src={categoryImages[id-9]} alt={name} />
-                                                <Typography variant="h5" textAlign={"center"}>{name}</Typography>
-                                            </Card>
-                                        </Link>
-                                )
-                            })}
-                        </section>
-                    )
-                }
+                <section id='categories'>
+                    <div style={{position: "relative"}}>
+                        <input type="text" className="search" />
+                        <SearchOutlined sx={{fontSize: "1.8rem", position: "absolute", right: "5px", top: "50%", transform: "translate(-50%, -50%)"}}/>
+                    </div>
+                    {
+                        error == "error" ? (
+                            <CategoriesFetchError />
+                        ) : (
+                            <div className='categories'>{
+                                categories.map(({ id, name}: {id: number, name: string}) => {
+                                        return (
+                                                <Link to={"/category/" + id} key={id}>
+                                                    <Card variant='elevation' elevation={1}>
+                                                        {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
+                                                        <img src={categoryImages[id-9]} alt={name} />
+                                                        <Typography variant="h5" textAlign={"center"}>{name}</Typography>
+                                                    </Card>
+                                                </Link>
+                                        )
+                                })
+                            }</div>
+                        )}
+                </section>
         </main>
     )
 }

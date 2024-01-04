@@ -23,14 +23,28 @@ const HomeStyle = styled(Home)`
             width: 600px;
         }
     }
-    & section:nth-child(2){
+    #categories{
+        display: grid;
+        place-items: center;
+        padding: 1em;
         background-color: #86b8a5;
+        gap: 2em;
+    }
+    .search{
+        /* grid-column: span 2; */
+        width: 500px;
+        height: 30px;
+        border-radius: 7px;
+        border: 1px solid;
+        outline: none;
+        padding: .5em;
+        font-size: 1.2rem;
     }
     .categories{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        padding: 1em;
         gap: 2em;
+        width: 100%;
         & > a > div{
             height: 270px;
         }
@@ -59,6 +73,17 @@ const HomeStyle = styled(Home)`
             }
             & img{
                 display: none;
+            }
+        }
+        #categories > div:first-child{
+            width: 100%;
+            & .search{
+                width: calc(100% - 1em);
+            }
+        }
+        .categories{
+            & > a > div{
+                width: auto;
             }
         }
     }
