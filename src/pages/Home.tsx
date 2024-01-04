@@ -32,6 +32,7 @@ import category32 from '../assets/category32.jpeg'
 import homeIllustrationL from '../assets/QuizonIllustration.gif'
 import homeIllustrationD from '../assets/QuizonIllustrationDark.gif'
 import { SearchOutlined } from '@mui/icons-material'
+import { useState } from 'react'
 
 interface HomeProps{
     className?: string
@@ -41,6 +42,8 @@ interface HomeProps{
 const categoryImages = [category9, category10, category11, category12, category13, category14, category15, category16, category17, category18, category19, category20, category21, category22, category23, category24, category25, category26, category27, category28, category29, category30, category31, category32]
 
 const Home = ({className, dark}: HomeProps) => {
+
+    const [search, setSearch] = useState("")
 
     const { categories, error, loading } = useAppSelector((state) => state.categories);
 
@@ -80,7 +83,7 @@ const Home = ({className, dark}: HomeProps) => {
                 }
                 <section id='categories'>
                     <div style={{position: "relative"}}>
-                        <input type="text" className="search" />
+                        <input type="text" className="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
                         <SearchOutlined sx={{fontSize: "1.8rem", position: "absolute", right: "5px", top: "50%", transform: "translate(-50%, -50%)"}}/>
                     </div>
                     {
@@ -88,7 +91,7 @@ const Home = ({className, dark}: HomeProps) => {
                             <CategoriesFetchError />
                         ) : (
                             <div className='categories'>{
-                                categories.map(({ id, name}: {id: number, name: string}) => {
+                                categories.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())).map(({ id, name}: {id: number, name: string}) => {
                                         return (
                                                 <Link to={"/category/" + id} key={id}>
                                                     <Card variant='elevation' elevation={1}>
