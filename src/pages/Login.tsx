@@ -45,9 +45,11 @@ const Login = () => {
                     <Input
                     id="password"
                     aria-describedby="password-text"
+                    type={pwdVisibility ? "text" : "password"}
                     value={user.password}
                     onChange={(e) => setUser({...user, password: e.target.value})}
                     />
+                    {!pwdVisibility ? <VisibilityOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/>}
                     <FormHelperText id="password-text">Pssword field is required</FormHelperText>
                 </FormControl>
                 <Typography variant="body1" color="initial">Forgot password?</Typography>
