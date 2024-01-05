@@ -9,6 +9,8 @@ import SharedCategoryLayout from "./pages/SharedLayouts/SharedCategoryLayout"
 import { useEffect, useState } from "react"
 import QuestionStyle from "./styles/Question.style"
 import ProtectedQuestionRoute from "./pages/ProtectedRoutes/ProtectedQuestionRoute"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
       <BrowserRouter>
         <GlobalStyles dark={dark}/>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<SharedLayout dark={dark} isDark={isDark}/>}>
             <Route index element={<HomeStyle dark={dark}/>}/>
             <Route path="category" element={<SharedCategoryLayout/>}>
