@@ -14,7 +14,7 @@ const LoginStyle = styled(Login)`
         flex-basis: 50%;
     }
     & *{
-        color: ${props => props.dark ? "white" : "black"} !important;
+        color: ${props => props.dark ? "white" : "black"};
     }
     & > div:first-child{
         clip-path: polygon(0 0, 71% 0, 100% 100%, 0% 100%);

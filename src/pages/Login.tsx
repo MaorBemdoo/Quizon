@@ -4,8 +4,10 @@ import { Helmet } from "react-helmet-async";
 import background from "../assets/background1.jpg"
 import logo from "../../public/logo.png"
 import googleLogo from "../assets/googleLogo.jpg"
-import { FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
+import { Alert, FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
 import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../firebaseConfig";
 
 interface LoginProps{
     className?: string
@@ -18,11 +20,35 @@ const Login = ({ className }: LoginProps) => {
         email: '',
         password: ''
     })
+    const [emailError, setEmailError] = useState(false)
+    const [pwdError, setPwdError] = useState(false)
+    const [uniError, setUniError] = useState(false)
 
     const [pwdVisibility, setPwdVisibility] = useState(false)
+    const auth = getAuth(app);
+    const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
 
     const submitHandler = () => {
+        if(user.email.trim() == "" || !emailReg.test(user.email)){
+            setEmailError(true)
+            return;
+        }else if(user.password.trim() == ""){
+            setPwdError(true)
+            return;
+        }else{
+            setEmailError(false)
+            setPwdError(false)
+        }
 
+        signInWithEmailAndPassword(auth, user.email, user.password)
+            .then((userCredential) => {
+                console.log(userCredential)
+                setUniError(false)
+            })
+            .catch((error) => {
+                console.log(error)
+                setUniError(true)
+            });
     }
 
     return (
@@ -35,7 +61,8 @@ const Login = ({ className }: LoginProps) => {
                 <img src={logo} alt="Quizon logo" />
                 <Typography variant="h4" color="initial" sx={{fontWeight: "500"}}>Welcome back!</Typography>
                 <Typography variant="body2" color="initial" sx={{opacity: ".8"}}>Please enter your details</Typography>
-                <FormControl variant="standard" sx={{margin: "1.3em 0"}} fullWidth>
+                <Alert severity="error" variant="filled" sx={{display: `${uniError ? "flex" : "none"}`}}>Incorrect credentials</Alert>
+                <FormControl variant="standard" sx={{margin: "1.3em 0"}} error={emailError || uniError} fullWidth>
                     <InputLabel htmlFor="email">Email</InputLabel>
                     <Input
                     id="email"
@@ -43,9 +70,9 @@ const Login = ({ className }: LoginProps) => {
                     value={user.email}
                     onChange={(e) => setUser({...user, email: e.target.value})}
                     />
-                    <FormHelperText id="fullname-text">Email field is required</FormHelperText>
+                    <FormHelperText id="fullname-text" hidden={!emailError}>{user.email.trim() == "" ? "Email field is required" : "Invalid email format: example@test.com"}</FormHelperText>
                 </FormControl>
-                <FormControl variant="standard" fullWidth>
+                <FormControl variant="standard" error={pwdError || uniError} fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
                     id="password"
@@ -55,10 +82,10 @@ const Login = ({ className }: LoginProps) => {
                     onChange={(e) => setUser({...user, password: e.target.value})}
                     />
                     {!pwdVisibility ? <VisibilityOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/>}
-                    <FormHelperText id="password-text">Password field is required</FormHelperText>
+                    <FormHelperText id="password-text" hidden={!pwdError}>Password field is required</FormHelperText>
                 </FormControl>
                 <Typography variant="body2" color="initial" className="forgot-pwd">Forgot password?</Typography>
-                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}}><b style={{color: "white !important"}}>Log In</b></button>
+                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}} onClick={submitHandler}><b style={{color: "white !important"}}>Log In</b></button>
                 <div className="or">
                     <hr />
                     <Typography variant="body1" color="initial">OR</Typography>
