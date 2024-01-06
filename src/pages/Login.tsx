@@ -57,7 +57,7 @@ const Login = ({ className }: LoginProps) => {
                     {!pwdVisibility ? <VisibilityOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/>}
                     <FormHelperText id="password-text">Password field is required</FormHelperText>
                 </FormControl>
-                <Typography variant="body2" color="initial" sx={{opacity: ".4", textAlign: "end", cursor: "pointer", paddingBottom: "1em"}}>Forgot password?</Typography>
+                <Typography variant="body2" color="initial" className="forgot-pwd">Forgot password?</Typography>
                 <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}}><b style={{color: "white !important"}}>Log In</b></button>
                 <div className="or">
                     <hr />

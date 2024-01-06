@@ -41,6 +41,29 @@ const LoginStyle = styled(Login)`
             border-radius: 50px;
             cursor: pointer;
         }
+        .forgot-pwd{
+            position: relative;
+            opacity: .4;
+            text-align: end; 
+            cursor: pointer;
+            padding-bottom: 1em;
+            overflow: hidden;
+            &:hover{
+                &::after{
+                    width: 115px;
+                    transition: all 1s ease;
+                }
+            }
+            &::after{
+                content: "";
+                position: absolute;
+                left: calc(100% - 115px);
+                bottom: 1em;
+                width: 0;
+                height: 1px;
+                background-color: ${props => props.dark ? "white" : "black"};
+            }
+        }
         .or{
             padding: 2em 0;
             position: relative;
@@ -77,6 +100,23 @@ const LoginStyle = styled(Login)`
             transform: translate(-50%, -50%);
             & a{
                 font-weight: 500;
+                position: relative;
+                overflow: hidden;
+                &:hover{
+                    &::after{
+                        width: 100%;
+                        transition: all 1s ease;
+                    }
+                }
+                &::after{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 0;
+                    height: 1px;
+                    background-color: ${props => props.dark ? "white" : "black"};
+                }
             }
         }
     }
