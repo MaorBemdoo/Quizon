@@ -7,7 +7,12 @@ import googleLogo from "../assets/googleLogo.jpg"
 import { FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
 import { Link } from "react-router-dom";
 
-const Login = () => {
+interface LoginProps{
+    className?: string
+    dark: boolean
+}
+
+const Login = ({ className }: LoginProps) => {
 
     const [user, setUser] = useState({
         email: '',
@@ -21,16 +26,16 @@ const Login = () => {
     }
 
     return (
-        <main>
+        <main className={className}>
             <Helmet>
                 <title>Login - Quizon</title>
             </Helmet>
             <div><img src={background} alt="Background" /></div>
-            <div>
+            <div className="login">
                 <img src={logo} alt="Quizon logo" />
-                <Typography variant="h4" color="initial">Welcome back!</Typography>
-                <Typography variant="body1" color="initial">Welcome back!</Typography>
-                <FormControl variant="standard">
+                <Typography variant="h4" color="initial" sx={{fontWeight: "500"}}>Welcome back!</Typography>
+                <Typography variant="body2" color="initial" sx={{opacity: ".8"}}>Please enter your details</Typography>
+                <FormControl variant="standard" sx={{margin: "1.3em 0"}} fullWidth>
                     <InputLabel htmlFor="email">Email</InputLabel>
                     <Input
                     id="email"
@@ -40,7 +45,7 @@ const Login = () => {
                     />
                     <FormHelperText id="fullname-text">Email field is required</FormHelperText>
                 </FormControl>
-                <FormControl variant="standard">
+                <FormControl variant="standard" fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
                     id="password"
@@ -49,18 +54,18 @@ const Login = () => {
                     value={user.password}
                     onChange={(e) => setUser({...user, password: e.target.value})}
                     />
-                    {!pwdVisibility ? <VisibilityOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/>}
-                    <FormHelperText id="password-text">Pssword field is required</FormHelperText>
+                    {!pwdVisibility ? <VisibilityOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/>}
+                    <FormHelperText id="password-text">Password field is required</FormHelperText>
                 </FormControl>
-                <Typography variant="body1" color="initial">Forgot password?</Typography>
-                <button>Log In</button>
-                <div>
+                <Typography variant="body2" color="initial" sx={{opacity: ".4", textAlign: "end", cursor: "pointer", paddingBottom: "1em"}}>Forgot password?</Typography>
+                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}}><b style={{color: "white !important"}}>Log In</b></button>
+                <div className="or">
                     <hr />
                     <Typography variant="body1" color="initial">OR</Typography>
                 </div>
-                <button>
-                    <img src={googleLogo} alt="google Logo" />
-                    <b><Typography variant="h5" color="initial">Log in with Google</Typography></b>
+                <button className="google-login" style={{fontSize: "1.2rem"}}>
+                    <img src={googleLogo} alt="google Logo" width={25} height={25}/>
+                    <b>Log in with Google</b>
                 </button>
                 <Typography variant="body1" color="initial">Don't have an account? <Link to="/signup">Sign Up</Link></Typography>
             </div>

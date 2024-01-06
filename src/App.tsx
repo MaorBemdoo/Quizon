@@ -31,8 +31,8 @@ function App() {
       <BrowserRouter>
         <GlobalStyles dark={dark}/>
         <Routes>
-          <Route path="/login" element={<LoginStyle />} />
-          <Route path="/signup" element={<SignupStyle />} />
+          <Route path="/login" element={<LoginStyle dark={dark}/>} />
+          <Route path="/signup" element={<SignupStyle dark={dark}/>} />
           <Route path="/" element={<SharedLayout dark={dark} isDark={isDark}/>}>
             <Route index element={<HomeStyle dark={dark}/>}/>
             <Route path="category" element={<SharedCategoryLayout/>}>
