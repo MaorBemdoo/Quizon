@@ -6,7 +6,7 @@ import logo from "../../public/logo.png"
 import googleLogo from "../assets/googleLogo.jpg"
 import { Alert, FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
 import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebaseConfig";
 
 interface LoginProps{
@@ -26,6 +26,7 @@ const Login = ({ className }: LoginProps) => {
 
     const [pwdVisibility, setPwdVisibility] = useState(false)
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
 
     const submitHandler = () => {
@@ -48,6 +49,17 @@ const Login = ({ className }: LoginProps) => {
             .catch((error) => {
                 console.log(error)
                 setUniError(true)
+            });
+    }
+
+    const signWithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                console.log(result)
+                console.log(GoogleAuthProvider.credentialFromResult(result))
+            }).catch((error) => {
+                console.log(error)
+                console.log(GoogleAuthProvider.credentialFromError(error))
             });
     }
 
@@ -90,7 +102,7 @@ const Login = ({ className }: LoginProps) => {
                     <hr />
                     <Typography variant="body1" color="initial">OR</Typography>
                 </div>
-                <button className="google-login" style={{fontSize: "1.2rem"}}>
+                <button className="google-login" style={{fontSize: "1.2rem"}} onClick={signWithGoogle}>
                     <img src={googleLogo} alt="google Logo" width={25} height={25}/>
                     <b>Log in with Google</b>
                 </button>
