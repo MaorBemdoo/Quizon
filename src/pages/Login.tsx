@@ -32,14 +32,17 @@ const Login = ({ className }: LoginProps) => {
     const submitHandler = () => {
         if(user.email.trim() == "" || !emailReg.test(user.email)){
             setEmailError(true)
-            return;
-        }else if(user.password.trim() == ""){
+            if(user.password.trim() !== ""){
+                return;
+            }
+        }
+        if(user.password.trim() == ""){
             setPwdError(true)
             return;
-        }else{
-            setEmailError(false)
-            setPwdError(false)
         }
+
+        setEmailError(false)
+        setPwdError(false)
 
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
@@ -82,7 +85,7 @@ const Login = ({ className }: LoginProps) => {
                     value={user.email}
                     sx={{color: "initial"}}
                     onChange={(e) => setUser({...user, email: e.target.value})}
-                    onFocus={() => {setEmailError(false); setPwdError(false)}}
+                    onFocus={() => {setEmailError(false); setPwdError(false); setUniError(false)}}
                     />
                     <FormHelperText id="fullname-text" hidden={!emailError}>{user.email.trim() == "" ? "Email field is required" : "Invalid email format: example@test.com"}</FormHelperText>
                 </FormControl>
@@ -95,7 +98,7 @@ const Login = ({ className }: LoginProps) => {
                     value={user.password}
                     sx={{color: "initial"}}
                     onChange={(e) => setUser({...user, password: e.target.value})}
-                    onFocus={() => {setEmailError(false); setPwdError(false)}}
+                    onFocus={() => {setEmailError(false); setPwdError(false); setUniError(false)}}
                     />
                     {!pwdVisibility ? <VisibilityOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOffOutlined sx={{cursor: "pointer", position: "absolute", right: "15px", top: "30px", transform: "translate(-50%, -50%)"}} onClick={() => setPwdVisibility(!pwdVisibility)}/>}
                     <FormHelperText id="password-text" hidden={!pwdError}>Password field is required</FormHelperText>
