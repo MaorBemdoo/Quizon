@@ -51,8 +51,7 @@ const HomeStyle = styled(Home)`
         & img{
             width: 100%;
             height: 200px;
-            background-position: center;
-            background-size: cover;
+            object-fit: cover;
         }
     }
     .loading{

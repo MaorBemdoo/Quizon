@@ -125,6 +125,16 @@ const LoginStyle = styled(Login)`
             }
         }
     }
+    @media(max-width: 700px){
+        & > div:first-child{
+            display: none;
+            flex-basis: 0;
+        }
+        .login{
+            width: calc(100% - 2em);
+            flex-basis: 100%;
+        }
+    }
 `
 
 export default LoginStyle
