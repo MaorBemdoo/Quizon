@@ -29,6 +29,8 @@ const LoginStyle = styled(Login)`
         position: relative;
         text-align: center;
         padding: 2em;
+        max-width: 400px;
+        margin: 0 auto;
         &  *{
             &::before,
             &::after{
@@ -43,11 +45,14 @@ const LoginStyle = styled(Login)`
         }
         .forgot-pwd{
             position: relative;
+            left: 100%;
+            transform: translateX(-100%);
             opacity: .4;
             text-align: end; 
             cursor: pointer;
-            padding-bottom: 1em;
+            padding: 1em 0;
             overflow: hidden;
+            width: fit-content;
             &:hover{
                 &::after{
                     width: 115px;
