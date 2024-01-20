@@ -52,7 +52,7 @@ const Login = ({ className }: LoginProps) => {
             .then((userCredential) => {
                 console.log(userCredential)
                 setCredentials({
-                    user,
+                    user: userCredential.user,
                     accessToken: userCredential.user.getIdToken()
                 })
                 setUniError({
@@ -81,6 +81,10 @@ const Login = ({ className }: LoginProps) => {
             .then((result) => {
                 console.log(result)
                 console.log(GoogleAuthProvider.credentialFromResult(result))
+                setCredentials({
+                    user: result.user,
+                    accessToken: GoogleAuthProvider.credentialFromResult(result)?.accessToken
+                })
             }).catch((error) => {
                 console.log(error)
                 console.log(GoogleAuthProvider.credentialFromError(error))
