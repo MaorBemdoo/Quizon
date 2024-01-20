@@ -58,7 +58,7 @@ const SignupStyle = styled(Signup)`
                 top: 50%;
                 transform: translate(-50%, -50%);
                 padding: 0 1em;
-                background-color: ${props => !props.dark ? "white" : "black"};
+                background-color: ${props => !props.dark ? "white" : "#121212"};
             }
         }
         & .google-signup{
