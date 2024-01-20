@@ -67,10 +67,15 @@ const Login = ({ className }: LoginProps) => {
                         status: true,
                         msg: 'No internet connection'
                     })
-                }else{
+                }else if(error.code == "auth/invalid-credential"){
                     setUniError({
                         status: true,
                         msg: 'Incorrect credentials'
+                    })
+                }else{
+                    setUniError({
+                        status: true,
+                        msg: 'An error occured'
                     })
                 }
             });
