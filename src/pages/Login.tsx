@@ -78,7 +78,13 @@ const Login = ({ className }: LoginProps) => {
                         msg: 'An error occured'
                     })
                 }
-            });
+            })
+            .finally(() => {
+                setUser({
+                    email: '',
+                    password: ''
+                })
+            })
     }
 
     const signWithGoogle = () => {
@@ -104,7 +110,12 @@ const Login = ({ className }: LoginProps) => {
                         msg: "An error occured"
                     })
                 }
-            });
+            }).finally(() => {
+                setUser({
+                    email: '',
+                    password: ''
+                })
+            })
     }
 
     return (
