@@ -8,6 +8,7 @@ import { Alert, FormControl, FormHelperText, Input, InputLabel, Typography } fro
 import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebaseConfig";
+import { setCredentials } from "../features/auth/authSlice";
 
 interface LoginProps{
     className?: string
@@ -50,6 +51,10 @@ const Login = ({ className }: LoginProps) => {
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
                 console.log(userCredential)
+                setCredentials({
+                    user,
+                    accessToken: userCredential.user.getIdToken()
+                })
                 setUniError({
                     status: false,
                     msg: ''
