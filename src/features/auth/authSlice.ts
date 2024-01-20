@@ -1,8 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type User = {
-    email: string;
-    password: string;
+    accessToken: string
+    auth: object
+    displayName: null | string
+    email: string
+    emailVerified: boolean
+    isAnonymous: boolean
+    metadata: object
+    phoneNumber: null | string
+    photoURL: null | string
+    proactiveRefresh: object
+    providerData: object
+    providerId: string
+    reloadListener: null
+    reloadUserInfo: object
+    stsTokenManager: object
+    tenantId: string
+    uid: string
 };
 
 interface initialStateType {

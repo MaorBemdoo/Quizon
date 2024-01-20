@@ -51,9 +51,11 @@ const Login = ({ className }: LoginProps) => {
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
                 console.log(userCredential)
-                setCredentials({
-                    user: userCredential.user,
-                    accessToken: userCredential.user.getIdToken()
+                userCredential.user.getIdToken().then(idToken => {
+                    setCredentials({
+                        user: userCredential.user,
+                        accessToken: idToken
+                    })
                 })
                 setUniError({
                     status: false,
