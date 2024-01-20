@@ -10,13 +10,14 @@ const LoginStyle = styled(Login)`
     overflow: hidden;
     display: flex;
     z-index: 3;
-    & > *{
+    /* & > *{
         flex-basis: 50%;
-    }
+    } */
     & *{
         color: ${props => props.dark ? "white" : "black"};
     }
     & > div:first-child{
+        flex-basis: 30%;
         clip-path: polygon(0 0, 71% 0, 100% 100%, 0% 100%);
         &  img{
             object-fit: cover;
