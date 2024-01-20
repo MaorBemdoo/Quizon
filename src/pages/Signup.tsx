@@ -134,18 +134,40 @@ const Signup = ({ className }: SignupProps) => {
                             Password field is required
                         </FormHelperText> */}
                 </FormControl>
-                <Typography
-                    variant="body2"
-                    color="initial"
-                    className="forgot-pwd"
+                <FormControl
+                    variant="standard"
+                    // error={pwdError || uniError}
+                    sx={{margin: "1.3em 0"}}
+                    fullWidth
                 >
-                    Forgot password?
-                </Typography>
+                    <InputLabel
+                        htmlFor="com-password"
+                        sx={{ color: "initial !important" }}
+                    >
+                        Comfirm Password
+                    </InputLabel>
+                    <Input
+                        id="com-password"
+                        aria-describedby="com-password"
+                        type="password"
+                        // value={user.password}
+                        sx={{ color: "initial" }}
+                        // onChange={(e) =>
+                        //     // setUser({ ...user, password: e.target.value })
+                        // }
+                        onFocus={() => {
+                            // setEmailError(false);
+                            // setPwdError(false);
+                            // setUniError(false);
+                        }}
+                    />
+                </FormControl>
                 <button
                     style={{
                         fontSize: "1.2rem",
                         fontWeight: "500",
                         color: "white !important",
+                        marginTop: "1.3em"
                     }}
                     // onClick={submitHandler}
                 >

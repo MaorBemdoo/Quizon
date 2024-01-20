@@ -44,32 +44,6 @@ const SignupStyle = styled(Signup)`
             border-radius: 50px;
             cursor: pointer;
         }
-        .forgot-pwd{
-            position: relative;
-            left: 100%;
-            transform: translateX(-100%);
-            opacity: .4;
-            text-align: end; 
-            cursor: pointer;
-            padding: 1em 0;
-            overflow: hidden;
-            width: fit-content;
-            &:hover{
-                &::after{
-                    width: 115px;
-                    transition: all 1s ease;
-                }
-            }
-            &::after{
-                content: "";
-                position: absolute;
-                left: calc(100% - 115px);
-                bottom: 1em;
-                width: 0;
-                height: 1px;
-                background-color: ${props => props.dark ? "white" : "black"};
-            }
-        }
         .or{
             padding: 2em 0;
             position: relative;
