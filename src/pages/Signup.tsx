@@ -171,7 +171,7 @@ const Signup = ({ className }: SignupProps) => {
                     }}
                     // onClick={submitHandler}
                 >
-                    <b style={{ color: "white !important" }}>Log In</b>
+                    <b style={{ color: "white !important" }}>Continue</b>
                 </button>
                 <div className="or">
                     <hr />

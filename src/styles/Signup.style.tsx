@@ -108,6 +108,10 @@ const SignupStyle = styled(Signup)`
         .signup{
             width: calc(100% - 2em) !important;
             flex-basis: 100%;
+            & > img:first-child{
+                width: 50px;
+                height: 80px;
+            }
         }
     }
 `
