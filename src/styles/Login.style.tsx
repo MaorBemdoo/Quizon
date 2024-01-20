@@ -30,7 +30,7 @@ const LoginStyle = styled(Login)`
         position: relative;
         text-align: center;
         padding: 2em;
-        max-width: 400px;
+        width: 450px;
         margin: 0 auto;
         &  *{
             &::before,
@@ -132,7 +132,7 @@ const LoginStyle = styled(Login)`
             flex-basis: 0;
         }
         .login{
-            width: calc(100% - 2em);
+            width: calc(100% - 2em) !important;
             flex-basis: 100%;
         }
     }
