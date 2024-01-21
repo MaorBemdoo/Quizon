@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 interface SignupProps {
     className?: string;
@@ -20,6 +20,14 @@ interface SignupProps {
 }
 
 const Signup = ({ className }: SignupProps) => {
+
+    const [user, setUser] = useState({
+        fullName: "",
+        email: "",
+        password: "",
+        comPassword: ""
+    })
+    const [pwdVisibility, setPwdVisibility] = useState(false)
 
     return (
         <main className={className}>
@@ -67,11 +75,11 @@ const Signup = ({ className }: SignupProps) => {
                     <Input
                         id="fullName"
                         aria-describedby="fullName-text"
-                        // value={user.email}
+                        value={user.fullName}
                         sx={{ color: "initial" }}
-                        // onChange={(e) =>
-                        //     // setUser({ ...user, email: e.target.value })
-                        // }
+                        onChange={(e) =>
+                            setUser({ ...user, fullName: e.target.value })
+                        }
                         onFocus={() => {
                             // setEmailError(false);
                             // setPwdError(false);
@@ -97,11 +105,11 @@ const Signup = ({ className }: SignupProps) => {
                     <Input
                         id="email"
                         aria-describedby="email-text"
-                        // value={user.email}
+                        value={user.email}
                         sx={{ color: "initial" }}
-                        // onChange={(e) =>
-                        //     // setUser({ ...user, email: e.target.value })
-                        // }
+                        onChange={(e) =>
+                            setUser({ ...user, email: e.target.value })
+                        }
                         onFocus={() => {
                             // setEmailError(false);
                             // setPwdError(false);
@@ -128,19 +136,19 @@ const Signup = ({ className }: SignupProps) => {
                     <Input
                         id="password"
                         aria-describedby="password-text"
-                        // type={pwdVisibility ? "text" : "password"}
-                        // value={user.password}
+                        type={pwdVisibility ? "text" : "password"}
+                        value={user.password}
                         sx={{ color: "initial" }}
-                        // onChange={(e) =>
-                        //     // setUser({ ...user, password: e.target.value })
-                        // }
+                        onChange={(e) =>
+                            setUser({ ...user, password: e.target.value })
+                        }
                         onFocus={() => {
                             // setEmailError(false);
                             // setPwdError(false);
                             // setUniError(false);
                         }}
                     />
-                    {/* {!pwdVisibility ? (
+                    {!pwdVisibility ? (
                             <VisibilityOutlined
                                 sx={{
                                     cursor: "pointer",
@@ -162,7 +170,7 @@ const Signup = ({ className }: SignupProps) => {
                                 }}
                                 onClick={() => setPwdVisibility(!pwdVisibility)}
                             />
-                        )} */}
+                        )}
                     {/* <FormHelperText id="password-text" hidden={!pwdError}>
                             Password field is required
                         </FormHelperText> */}
@@ -183,11 +191,11 @@ const Signup = ({ className }: SignupProps) => {
                         id="com-password"
                         aria-describedby="com-password"
                         type="password"
-                        // value={user.password}
+                        value={user.comPassword}
                         sx={{ color: "initial" }}
-                        // onChange={(e) =>
-                        //     // setUser({ ...user, password: e.target.value })
-                        // }
+                        onChange={(e) =>
+                            setUser({ ...user, comPassword: e.target.value })
+                        }
                         onFocus={() => {
                             // setEmailError(false);
                             // setPwdError(false);
@@ -223,7 +231,7 @@ const Signup = ({ className }: SignupProps) => {
                         width={25}
                         height={25}
                     />
-                    <b>Log in with Google</b>
+                    <b>Sign up with Google</b>
                 </button>
                 <Typography variant="body1" color="initial">
                     Already have an account? <Link to="/login">Login</Link>
