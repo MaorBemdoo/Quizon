@@ -75,7 +75,7 @@ const Signup = ({ className }: SignupProps) => {
         } else if(!emailReg.test(user.email)){
             setEmailErr({
                 status: true,
-                msg: "Email is invalid; example@test.com"
+                msg: "Invalid email format\nexample@test.com"
             })
         }
 
@@ -188,8 +188,7 @@ const Signup = ({ className }: SignupProps) => {
                         }
                         onFocus={focusHandler}
                     />
-                    <FormHelperText id="fullname-text" hidden={!emailErr.status}>
-                            {emailErr.msg}
+                    <FormHelperText id="fullname-text" dangerouslySetInnerHTML={{__html: emailErr.msg}} hidden={!emailErr.status}>
                         </FormHelperText>
                 </FormControl>
                 <FormControl
