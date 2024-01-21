@@ -158,7 +158,7 @@ const Login = ({ className }: LoginProps) => {
                     <FormHelperText id="password-text" hidden={!pwdError}>Password field is required</FormHelperText>
                 </FormControl>
                 <Typography variant="body2" color="initial" className="forgot-pwd">Forgot password?</Typography>
-                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}} onClick={submitHandler}><b style={{color: "white !important"}}>Continue</b></button>
+                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}} onClick={submitHandler}><b style={{color: "white !important"}}>LOGIN</b></button>
                 <div className="or">
                     <hr />
                     <Typography variant="body1" color="initial">OR</Typography>

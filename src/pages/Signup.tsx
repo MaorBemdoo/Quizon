@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import background from "../assets/background1.jpg";
 import logo from "../../public/logo.png";
+import googleLogo from "../assets/googleLogo.jpg";
 import {
     Alert,
     FormControl,
@@ -11,6 +12,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
+import { ChangeEvent, useState } from "react";
 
 interface SignupProps {
     className?: string;
@@ -18,6 +20,7 @@ interface SignupProps {
 }
 
 const Signup = ({ className }: SignupProps) => {
+
     return (
         <main className={className}>
             <Helmet>
@@ -49,6 +52,36 @@ const Signup = ({ className }: SignupProps) => {
                 >
                     Incorrect credentials
                 </Alert>
+                <FormControl
+                    variant="standard"
+                    sx={{ marginTop: "1.3em" }}
+                    // error={emailError || uniError}
+                    fullWidth
+                >
+                    <InputLabel
+                        htmlFor="fullName"
+                        sx={{ color: "initial !important" }}
+                    >
+                        Full Name
+                    </InputLabel>
+                    <Input
+                        id="fullName"
+                        aria-describedby="fullName-text"
+                        // value={user.email}
+                        sx={{ color: "initial" }}
+                        // onChange={(e) =>
+                        //     // setUser({ ...user, email: e.target.value })
+                        // }
+                        onFocus={() => {
+                            // setEmailError(false);
+                            // setPwdError(false);
+                            // setUniError(false);
+                        }}
+                    />
+                    {/* <FormHelperText id="fullname-text" hidden={!emailError}>
+                            
+                        </FormHelperText> */}
+                </FormControl>
                 <FormControl
                     variant="standard"
                     sx={{ margin: "1.3em 0" }}
@@ -137,7 +170,7 @@ const Signup = ({ className }: SignupProps) => {
                 <FormControl
                     variant="standard"
                     // error={pwdError || uniError}
-                    sx={{margin: "1.3em 0"}}
+                    sx={{ margin: "1.3em 0" }}
                     fullWidth
                 >
                     <InputLabel
@@ -167,11 +200,11 @@ const Signup = ({ className }: SignupProps) => {
                         fontSize: "1.2rem",
                         fontWeight: "500",
                         color: "white !important",
-                        marginTop: "1.3em"
+                        marginTop: "1.3em",
                     }}
                     // onClick={submitHandler}
                 >
-                    <b style={{ color: "white !important" }}>Continue</b>
+                    <b style={{ color: "white !important" }}>SIGN UP</b>
                 </button>
                 <div className="or">
                     <hr />
@@ -185,7 +218,7 @@ const Signup = ({ className }: SignupProps) => {
                     // onClick={signWithGoogle}
                 >
                     <img
-                        // src={googleLogo}
+                        src={googleLogo}
                         alt="google Logo"
                         width={25}
                         height={25}
