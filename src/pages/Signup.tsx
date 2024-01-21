@@ -13,6 +13,8 @@ import {
 import { Link } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { useState } from "react";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { app } from "../firebaseConfig";
 
 interface SignupProps {
     className?: string;
@@ -20,6 +22,8 @@ interface SignupProps {
 }
 
 const Signup = ({ className }: SignupProps) => {
+
+    const auth = getAuth(app)
 
     const [user, setUser] = useState({
         fullName: "",
@@ -99,12 +103,21 @@ const Signup = ({ className }: SignupProps) => {
                 status: true,
                 msg: "Passwords do not match"
             })
+            return
         }
 
         if(user.comPassword.trim() == ""){
             setComPasswordErr(true)
             return
         }
+
+        createUserWithEmailAndPassword(auth, user.email, user.password)
+            .then(userCredential => {
+                console.log(userCredential);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     const focusHandler = () => {
