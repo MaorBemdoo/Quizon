@@ -43,6 +43,8 @@ const Signup = ({ className }: SignupProps) => {
     const [comPasswordErr, setComPasswordErr] = useState(false)
     const [pwdVisibility, setPwdVisibility] = useState(false)
 
+    const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
+
     const submitHandler = () => {
         if(user.fullName.trim() == "" && user.email.trim() == "" && user.password.trim() == "" && user.comPassword.trim() == ""){
             setUniError({
@@ -61,6 +63,50 @@ const Signup = ({ className }: SignupProps) => {
             setComPasswordErr(true)
             return
         }
+        if(user.fullName.trim() == ""){
+            setFullNameErr(true)
+        }
+
+        if(user.email.trim() == ""){
+            setEmailErr({
+                status: true,
+                msg: "Email field is required"
+            })
+        } else if(!emailReg.test(user.email)){
+            setEmailErr({
+                status: true,
+                msg: "Email is invalid; example@test.com"
+            })
+        }
+
+        if(user.password.trim() == ""){
+            setPasswordErr({
+                status: true,
+                msg: "Password field is required"
+            })
+        } else if(user.password.trim().length < 8){
+            setPasswordErr({
+                status: true,
+                msg: "Password should be more than 8 characters"
+            })
+        }
+    }
+
+    const focusHandler = () => {
+        setUniError({
+            status: false,
+            msg: ''
+        })
+        setFullNameErr(false)
+        setEmailErr({
+            status: false,
+            msg: ""
+        })
+        setPasswordErr({
+            status: false,
+            msg: ""
+        })
+        setComPasswordErr(false)
     }
 
     return (
@@ -114,14 +160,10 @@ const Signup = ({ className }: SignupProps) => {
                         onChange={(e) =>
                             setUser({ ...user, fullName: e.target.value })
                         }
-                        onFocus={() => {
-                            // setEmailError(false);
-                            // setPwdError(false);
-                            // setUniError(false);
-                        }}
+                        onFocus={focusHandler}
                     />
                     <FormHelperText id="fullname-text" hidden={!fullNameErr}>
-                        {!uniError ? "Full Name field is required" : ''}
+                        {!comPasswordErr ? "Full Name field is required" : ''}
                     </FormHelperText>
                 </FormControl>
                 <FormControl
@@ -144,11 +186,7 @@ const Signup = ({ className }: SignupProps) => {
                         onChange={(e) =>
                             setUser({ ...user, email: e.target.value })
                         }
-                        onFocus={() => {
-                            // setEmailError(false);
-                            // setPwdError(false);
-                            // setUniError(false);
-                        }}
+                        onFocus={focusHandler}
                     />
                     <FormHelperText id="fullname-text" hidden={!emailErr.status}>
                             {emailErr.msg}
@@ -174,11 +212,7 @@ const Signup = ({ className }: SignupProps) => {
                         onChange={(e) =>
                             setUser({ ...user, password: e.target.value })
                         }
-                        onFocus={() => {
-                            // setEmailError(false);
-                            // setPwdError(false);
-                            // setUniError(false);
-                        }}
+                        onFocus={focusHandler}
                     />
                     {!pwdVisibility ? (
                             <VisibilityOutlined
@@ -228,11 +262,7 @@ const Signup = ({ className }: SignupProps) => {
                         onChange={(e) =>
                             setUser({ ...user, comPassword: e.target.value })
                         }
-                        onFocus={() => {
-                            // setEmailError(false);
-                            // setPwdError(false);
-                            // setUniError(false);
-                        }}
+                        onFocus={focusHandler}
                     />
                 </FormControl>
                 <button
