@@ -27,7 +27,41 @@ const Signup = ({ className }: SignupProps) => {
         password: "",
         comPassword: ""
     })
+    const [uniError, setUniError] = useState({
+        status: false,
+        msg: ''
+    })
+    const [fullNameErr, setFullNameErr] = useState(false)
+    const [emailErr, setEmailErr] = useState({
+        status: false,
+        msg: ''
+    })
+    const [passwordErr, setPasswordErr] = useState({
+        status: false,
+        msg: ''
+    })
+    const [comPasswordErr, setComPasswordErr] = useState(false)
     const [pwdVisibility, setPwdVisibility] = useState(false)
+
+    const submitHandler = () => {
+        if(user.fullName.trim() == "" && user.email.trim() == "" && user.password.trim() == "" && user.comPassword.trim() == ""){
+            setUniError({
+                status: true,
+                msg: 'All fields are required'
+            })
+            setFullNameErr(true)
+            setEmailErr({
+                status: true,
+                msg: ''
+            })
+            setPasswordErr({
+                status: true,
+                msg: ''
+            })
+            setComPasswordErr(true)
+            return
+        }
+    }
 
     return (
         <main className={className}>
@@ -56,14 +90,14 @@ const Signup = ({ className }: SignupProps) => {
                 <Alert
                     severity="error"
                     variant="filled"
-                    // sx={{ display: `${uniError ? "flex" : "none"}` }}
+                    sx={{ display: `${uniError.status ? "flex" : "none"}` }}
                 >
-                    Incorrect credentials
+                    {uniError.msg}
                 </Alert>
                 <FormControl
                     variant="standard"
                     sx={{ marginTop: "1.3em" }}
-                    // error={emailError || uniError}
+                    error={fullNameErr || uniError.status}
                     fullWidth
                 >
                     <InputLabel
@@ -86,14 +120,14 @@ const Signup = ({ className }: SignupProps) => {
                             // setUniError(false);
                         }}
                     />
-                    {/* <FormHelperText id="fullname-text" hidden={!emailError}>
-                            
-                        </FormHelperText> */}
+                    <FormHelperText id="fullname-text" hidden={!fullNameErr}>
+                        {!uniError ? "Full Name field is required" : ''}
+                    </FormHelperText>
                 </FormControl>
                 <FormControl
                     variant="standard"
                     sx={{ margin: "1.3em 0" }}
-                    // error={emailError || uniError}
+                    error={emailErr.status || uniError.status}
                     fullWidth
                 >
                     <InputLabel
@@ -116,15 +150,13 @@ const Signup = ({ className }: SignupProps) => {
                             // setUniError(false);
                         }}
                     />
-                    {/* <FormHelperText id="fullname-text" hidden={!emailError}>
-                            {user.email.trim() == ""
-                                ? "Email field is required"
-                                : "Invalid email format: example@test.com"}
-                        </FormHelperText> */}
+                    <FormHelperText id="fullname-text" hidden={!emailErr.status}>
+                            {emailErr.msg}
+                        </FormHelperText>
                 </FormControl>
                 <FormControl
                     variant="standard"
-                    // error={pwdError || uniError}
+                    error={passwordErr.status || uniError.status}
                     fullWidth
                 >
                     <InputLabel
@@ -171,13 +203,13 @@ const Signup = ({ className }: SignupProps) => {
                                 onClick={() => setPwdVisibility(!pwdVisibility)}
                             />
                         )}
-                    {/* <FormHelperText id="password-text" hidden={!pwdError}>
-                            Password field is required
-                        </FormHelperText> */}
+                    <FormHelperText id="password-text" hidden={!passwordErr.status}>
+                            {passwordErr.msg}
+                        </FormHelperText>
                 </FormControl>
                 <FormControl
                     variant="standard"
-                    // error={pwdError || uniError}
+                    error={comPasswordErr || uniError.status}
                     sx={{ margin: "1.3em 0" }}
                     fullWidth
                 >
@@ -210,7 +242,7 @@ const Signup = ({ className }: SignupProps) => {
                         color: "white !important",
                         marginTop: "1.3em",
                     }}
-                    // onClick={submitHandler}
+                    onClick={submitHandler}
                 >
                     <b style={{ color: "white !important" }}>SIGN UP</b>
                 </button>
