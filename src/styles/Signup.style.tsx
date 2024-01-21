@@ -7,9 +7,7 @@ const SignupStyle = styled(Signup)`
     border-radius: 10px;
     height: 100vh;
     width: 100%;
-    overflow: hidden;
     display: flex;
-    z-index: 3;
     /* & > *{
         flex-basis: 50%;
     } */
@@ -17,7 +15,10 @@ const SignupStyle = styled(Signup)`
         color: ${props => props.dark ? "white" : "black"};
     }
     & > div:first-child{
-        flex-basis: 30%;
+        position: fixed;
+        left: 0;
+        height: 100vh;
+        width: 30%;
         clip-path: polygon(0 0, 71% 0, 100% 100%, 0% 100%);
         &  img{
             object-fit: cover;
@@ -27,11 +28,10 @@ const SignupStyle = styled(Signup)`
         }
     }
     .signup{
-        position: relative;
         text-align: center;
         padding: 2em;
-        width: 450px;
-        margin: 0 auto;
+        max-width: 450px;
+        margin-left: calc(30% + (70% - 450px)/2);
         &  *{
             &::before,
             &::after{
@@ -75,10 +75,7 @@ const SignupStyle = styled(Signup)`
             }
         }
         & > *:last-child{
-            position: absolute;
-            bottom: 2em;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-top: 2em;
             & a{
                 font-weight: 500;
                 position: relative;
@@ -109,6 +106,7 @@ const SignupStyle = styled(Signup)`
         .signup{
             width: calc(100% - 2em) !important;
             flex-basis: 100%;
+            margin: 0 auto;
             & > img:first-child{
                 width: 50px;
                 height: 80px;
