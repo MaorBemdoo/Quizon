@@ -89,6 +89,21 @@ const Signup = ({ className }: SignupProps) => {
                 status: true,
                 msg: "Password should be more than 8 characters"
             })
+        } else if(user.password !== user.comPassword){
+            setPasswordErr({
+                status: true,
+                msg: ''
+            })
+            setComPasswordErr(true)
+            setUniError({
+                status: true,
+                msg: "Passwords do not match"
+            })
+        }
+
+        if(user.comPassword.trim() == ""){
+            setComPasswordErr(true)
+            return
         }
     }
 
