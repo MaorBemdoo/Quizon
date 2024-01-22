@@ -50,66 +50,107 @@ const Signup = ({ className }: SignupProps) => {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
 
     const submitHandler = () => {
-        if(user.fullName.trim() == "" && user.email.trim() == "" && user.password.trim() == "" && user.comPassword.trim() == ""){
-            setUniError({
-                status: true,
-                msg: 'All fields are required'
-            })
-            setFullNameErr(true)
-            setEmailErr({
-                status: true,
-                msg: ''
-            })
-            setPasswordErr({
-                status: true,
-                msg: ''
-            })
-            setComPasswordErr(true)
-            return
-        }
-        if(user.fullName.trim() == ""){
-            setFullNameErr(true)
-        }
+        const errors = {
+        fullName: user.fullName.trim() === '',
+        email: user.email.trim() === '' || !emailReg.test(user.email),
+        password: user.password.trim().length <= 8,
+        comPassword: user.comPassword.trim() === '',
+        passwordMismatch: user.password !== user.comPassword,
+        };
 
-        if(user.email.trim() == ""){
-            setEmailErr({
-                status: true,
-                msg: "Email field is required"
-            })
-        } else if(!emailReg.test(user.email)){
-            setEmailErr({
-                status: true,
-                msg: "Invalid email format\nexample@test.com"
-            })
-        }
+        // Set error states based on conditions
+        setFullNameErr(errors.fullName);
+        setEmailErr({
+            status: errors.email,
+            msg: errors.email
+                ? 'Invalid email format\nexample@test.com'
+                : '',
+        });
+        setPasswordErr({
+            status: errors.password,
+            msg: errors.password
+                ? 'Password should be more than 8 characters'
+                : '',
+        });
+        setComPasswordErr(errors.comPassword);
+        setUniError({
+            status: errors.passwordMismatch,
+            msg: errors.passwordMismatch ? 'Passwords do not match' : '',
+        });
 
-        if(user.password.trim() == ""){
-            setPasswordErr({
-                status: true,
-                msg: "Password field is required"
-            })
-        } else if(user.password.trim().length < 8){
-            setPasswordErr({
-                status: true,
-                msg: "Password should be more than 8 characters"
-            })
-        } else if(user.password !== user.comPassword){
-            setPasswordErr({
-                status: true,
-                msg: ''
-            })
-            setComPasswordErr(true)
-            setUniError({
-                status: true,
-                msg: "Passwords do not match"
-            })
-            return
+        // If any errors exist, stop further processing
+        if (Object.values(errors).some((error) => error)) {
+            return;
         }
+        // if(user.fullName.trim() == "" && user.email.trim() == "" && user.password.trim() == "" && user.comPassword.trim() == ""){
+        //     setUniError({
+        //         status: true,
+        //         msg: 'All fields are required'
+        //     })
+        //     setFullNameErr(true)
+        //     setEmailErr({
+        //         status: true,
+        //         msg: ''
+        //     })
+        //     setPasswordErr({
+        //         status: true,
+        //         msg: ''
+        //     })
+        //     setComPasswordErr(true)
+        //     return
+        // }
+        // if(user.fullName.trim() == ""){
+        //     setFullNameErr(true)
+        //     // if(user.email.trim() !== "" || user.password.trim() !== "" || user.comPassword.trim() !== ""){
+        //     //     return
+        //     // }
+        // }
 
-        if(user.comPassword.trim() == ""){
-            setComPasswordErr(true)
-            return
-        }
+        // if(user.email.trim() == ""){
+        //     setEmailErr({
+        //         status: true,
+        //         msg: "Email field is required"
+        //     })
+        //     // if(user.password.trim() !== ""){
+        //     //     return
+        //     // }
+        // } else if(!emailReg.test(user.email)){
+        //     setEmailErr({
+        //         status: true,
+        //         msg: "Invalid email format\nexample@test.com"
+        //     })
+        //     // if(user.password.trim() !== ""){
+        //     //     return
+        //     // }
+        // }
+
+        // if(user.password.trim().length <= 8){
+        //     setPasswordErr({
+        //         status: true,
+        //         msg: "Password should be more than 8 characters"
+        //     })
+        //     // if(user.comPassword.trim() !== ""){
+        //     //     return
+        //     // }
+        // }
+
+        // if(user.comPassword.trim() == ""){
+        //     setComPasswordErr(true)
+        //     // return
+        // } 
+        
+        // if(user.password !== user.comPassword){
+        //     setPasswordErr({
+        //         status: true,
+        //         msg: ''
+        //     })
+        //     setComPasswordErr(true)
+        //     setUniError({
+        //         status: true,
+        //         msg: "Passwords do not match"
+        //     })
+        //     return
+        // }
 
         createUserWithEmailAndPassword(auth, user.email, user.password)
             .then(userCredential => {
@@ -190,8 +231,8 @@ const Signup = ({ className }: SignupProps) => {
                         }
                         onFocus={focusHandler}
                     />
-                    <FormHelperText id="fullname-text" hidden={!fullNameErr}>
-                        {!comPasswordErr ? "Full Name field is required" : ''}
+                    <FormHelperText id="fullname-text" hidden={!fullNameErr || uniError.status}>
+                        Full Name field is required
                     </FormHelperText>
                 </FormControl>
                 <FormControl
