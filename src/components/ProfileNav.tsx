@@ -1,16 +1,15 @@
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebaseConfig";
-import React, { useEffect, useState } from "react";
-import { Switch, CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 import { ExpandMore, Logout } from "@mui/icons-material";
 
 interface Props {
     className?: string
     dark: boolean;
-    isDark: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProfileNav = ({ className, dark, isDark }: Props) => {
+const ProfileNav = ({ className, dark }: Props) => {
 
     const [activeDD, setActiveDD] = useState(false)
     const [user, setUser] = useState<null | User>(null);
@@ -54,12 +53,12 @@ const ProfileNav = ({ className, dark, isDark }: Props) => {
                     </>
                 ) : (
                     <>
-                        <Switch
+                        {/* <Switch
                             aria-label="Switch-demo"
                             color="success"
                             checked={dark}
                             onChange={() => isDark(!dark)}
-                        />
+                        /> */}
                     </>
                 )
             )}

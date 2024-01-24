@@ -45,7 +45,10 @@ const HeaderStyle = styled(Header)`
             transition: 250ms all 250ms ease-in;
         }
     }
-    & div:last-child{
+    & .lastNav{
+        display: flex;
+        align-items: center;
+        gap: 1em;
         & > svg{
             cursor: pointer;
             transform: rotateX(45deg);
