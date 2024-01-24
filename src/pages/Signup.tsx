@@ -14,8 +14,10 @@ import { Link } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { useState } from "react";
 import {
+    GoogleAuthProvider,
     createUserWithEmailAndPassword,
     getAuth,
+    signInWithPopup,
     updateProfile,
 } from "firebase/auth";
 import { app } from "../firebaseConfig";
@@ -28,6 +30,7 @@ interface SignupProps {
 
 const Signup = ({ className }: SignupProps) => {
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider()
 
     const [user, setUser] = useState({
         fullName: "",
@@ -133,8 +136,49 @@ const Signup = ({ className }: SignupProps) => {
                         msg: "An error occured",
                     });
                 }
-            });
+            })
+            .finally(() => {
+                setUser({
+                    fullName: "",
+                    email: "",
+                    password: "",
+                    comPassword: "",
+                })
+            })
     };
+
+    const signWithGoogle = () => {
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            console.log(result)
+            console.log(GoogleAuthProvider.credentialFromResult(result))
+            setCredentials({
+                user: result.user,
+                accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log(GoogleAuthProvider.credentialFromError(error))
+            if(error.code == "auth/internal-error"){
+                setUniError({
+                    status: true,
+                    msg: "No internet connection"
+                })
+            }else{
+                setUniError({
+                    status: true,
+                    msg: "An error occured"
+                })
+            }
+        }).finally(() => {
+            setUser({
+                fullName: "",
+                email: "",
+                password: "",
+                comPassword: "",
+            })
+        })
+    }
 
     const focusHandler = () => {
         setUniError({
@@ -337,7 +381,7 @@ const Signup = ({ className }: SignupProps) => {
                 <button
                     className="google-signup"
                     style={{ fontSize: "1.2rem" }}
-                    // onClick={signWithGoogle}
+                    onClick={signWithGoogle}
                 >
                     <img
                         src={googleLogo}

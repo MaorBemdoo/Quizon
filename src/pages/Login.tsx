@@ -96,7 +96,7 @@ const Login = ({ className }: LoginProps) => {
                 console.log(GoogleAuthProvider.credentialFromResult(result))
                 setCredentials({
                     user: result.user,
-                    accessToken: GoogleAuthProvider.credentialFromResult(result)?.accessToken
+                    accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
                 })
             }).catch((error) => {
                 console.log(error)
