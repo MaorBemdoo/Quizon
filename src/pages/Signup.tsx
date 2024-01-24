@@ -13,8 +13,13 @@ import {
 import { Link } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    updateProfile,
+} from "firebase/auth";
 import { app } from "../firebaseConfig";
+import { setCredentials } from "../features/auth/authSlice";
 
 interface SignupProps {
     className?: string;
@@ -22,60 +27,57 @@ interface SignupProps {
 }
 
 const Signup = ({ className }: SignupProps) => {
-
-    const auth = getAuth(app)
+    const auth = getAuth(app);
 
     const [user, setUser] = useState({
         fullName: "",
         email: "",
         password: "",
-        comPassword: ""
-    })
+        comPassword: "",
+    });
     const [uniError, setUniError] = useState({
         status: false,
-        msg: ''
-    })
-    const [fullNameErr, setFullNameErr] = useState(false)
+        msg: "",
+    });
+    const [fullNameErr, setFullNameErr] = useState(false);
     const [emailErr, setEmailErr] = useState({
         status: false,
-        msg: ''
-    })
+        msg: "",
+    });
     const [passwordErr, setPasswordErr] = useState({
         status: false,
-        msg: ''
-    })
-    const [comPasswordErr, setComPasswordErr] = useState(false)
-    const [pwdVisibility, setPwdVisibility] = useState(false)
+        msg: "",
+    });
+    const [comPasswordErr, setComPasswordErr] = useState(false);
+    const [pwdVisibility, setPwdVisibility] = useState(false);
 
-    const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
+    const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
 
     const submitHandler = () => {
         const errors = {
-        fullName: user.fullName.trim() === '',
-        email: user.email.trim() === '' || !emailReg.test(user.email),
-        password: user.password.trim().length <= 8,
-        comPassword: user.comPassword.trim() === '',
-        passwordMismatch: user.password !== user.comPassword,
+            fullName: user.fullName.trim() === "",
+            email: user.email.trim() === "" || !emailReg.test(user.email),
+            password: user.password.trim().length <= 8,
+            comPassword: user.comPassword.trim() === "",
+            passwordMismatch: user.password !== user.comPassword,
         };
 
         // Set error states based on conditions
         setFullNameErr(errors.fullName);
         setEmailErr({
             status: errors.email,
-            msg: errors.email
-                ? 'Invalid email format\nexample@test.com'
-                : '',
+            msg: errors.email ? "Invalid email format\nexample@test.com" : "",
         });
         setPasswordErr({
             status: errors.password,
             msg: errors.password
-                ? 'Password should be more than 8 characters'
-                : '',
+                ? "Password should be more than 8 characters"
+                : "",
         });
         setComPasswordErr(errors.comPassword);
         setUniError({
             status: errors.passwordMismatch,
-            msg: errors.passwordMismatch ? 'Passwords do not match' : '',
+            msg: errors.passwordMismatch ? "Passwords do not match" : "",
         });
 
         // If any errors exist, stop further processing
@@ -84,30 +86,72 @@ const Signup = ({ className }: SignupProps) => {
         }
 
         createUserWithEmailAndPassword(auth, user.email, user.password)
-            .then(userCredential => {
+            .then((userCredential) => {
                 console.log(userCredential);
+                updateProfile(userCredential.user, {
+                    displayName: user.fullName,
+                })
+                    .then(() => {
+                        userCredential.user.getIdToken()
+                            .then(idTok => {
+                                setCredentials({
+                                    user: userCredential.user,
+                                    accessToken: idTok
+                                })
+                            })
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        if (err.code == "auth/network-request-failed") {
+                            setUniError({
+                                status: true,
+                                msg: "No internet connetion",
+                            });
+                        } else {
+                            setUniError({
+                                status: true,
+                                msg: "An error occured",
+                            });
+                        }
+                    });
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
-            })
-    }
+                if (err.code == "auth/network-request-failed") {
+                    setUniError({
+                        status: true,
+                        msg: "No internet connetion",
+                    });
+                } else if(err.code == "auth/email-already-in-use"){
+                    setUniError({
+                        status: true,
+                        msg: "This email address is in use by another account",
+                    });
+                }else {
+                    setUniError({
+                        status: true,
+                        msg: "An error occured",
+                    });
+                }
+            });
+    };
 
     const focusHandler = () => {
         setUniError({
             status: false,
-            msg: ''
-        })
-        setFullNameErr(false)
+            msg: "",
+        });
+        setFullNameErr(false);
         setEmailErr({
             status: false,
-            msg: ""
-        })
+            msg: "",
+        });
         setPasswordErr({
             status: false,
-            msg: ""
-        })
-        setComPasswordErr(false)
-    }
+            msg: "",
+        });
+        setComPasswordErr(false);
+    };
 
     return (
         <main className={className}>
@@ -162,7 +206,10 @@ const Signup = ({ className }: SignupProps) => {
                         }
                         onFocus={focusHandler}
                     />
-                    <FormHelperText id="fullname-text" hidden={!fullNameErr || uniError.status}>
+                    <FormHelperText
+                        id="fullname-text"
+                        hidden={!fullNameErr || uniError.status}
+                    >
                         Full Name field is required
                     </FormHelperText>
                 </FormControl>
@@ -188,8 +235,11 @@ const Signup = ({ className }: SignupProps) => {
                         }
                         onFocus={focusHandler}
                     />
-                    <FormHelperText id="fullname-text" dangerouslySetInnerHTML={{__html: emailErr.msg}} hidden={!emailErr.status}>
-                        </FormHelperText>
+                    <FormHelperText
+                        id="fullname-text"
+                        dangerouslySetInnerHTML={{ __html: emailErr.msg }}
+                        hidden={!emailErr.status}
+                    ></FormHelperText>
                 </FormControl>
                 <FormControl
                     variant="standard"
@@ -214,31 +264,34 @@ const Signup = ({ className }: SignupProps) => {
                         onFocus={focusHandler}
                     />
                     {!pwdVisibility ? (
-                            <VisibilityOutlined
-                                sx={{
-                                    cursor: "pointer",
-                                    position: "absolute",
-                                    right: "15px",
-                                    top: "30px",
-                                    transform: "translate(-50%, -50%)",
-                                }}
-                                onClick={() => setPwdVisibility(!pwdVisibility)}
-                            />
-                        ) : (
-                            <VisibilityOffOutlined
-                                sx={{
-                                    cursor: "pointer",
-                                    position: "absolute",
-                                    right: "15px",
-                                    top: "30px",
-                                    transform: "translate(-50%, -50%)",
-                                }}
-                                onClick={() => setPwdVisibility(!pwdVisibility)}
-                            />
-                        )}
-                    <FormHelperText id="password-text" hidden={!passwordErr.status}>
-                            {passwordErr.msg}
-                        </FormHelperText>
+                        <VisibilityOutlined
+                            sx={{
+                                cursor: "pointer",
+                                position: "absolute",
+                                right: "15px",
+                                top: "30px",
+                                transform: "translate(-50%, -50%)",
+                            }}
+                            onClick={() => setPwdVisibility(!pwdVisibility)}
+                        />
+                    ) : (
+                        <VisibilityOffOutlined
+                            sx={{
+                                cursor: "pointer",
+                                position: "absolute",
+                                right: "15px",
+                                top: "30px",
+                                transform: "translate(-50%, -50%)",
+                            }}
+                            onClick={() => setPwdVisibility(!pwdVisibility)}
+                        />
+                    )}
+                    <FormHelperText
+                        id="password-text"
+                        hidden={!passwordErr.status}
+                    >
+                        {passwordErr.msg}
+                    </FormHelperText>
                 </FormControl>
                 <FormControl
                     variant="standard"
