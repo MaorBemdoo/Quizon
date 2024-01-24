@@ -3,6 +3,11 @@ import ProfileNav from "../components/ProfileNav";
 
 const ProfileNavStyle = styled(ProfileNav)`
     position: relative;
+    & .loading{
+        & *{
+            color: ${props => props.dark ? "white" : "black"};
+        }
+    }
     & > div:first-child {
         display: flex;
         align-items: center;

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import logo from '../../public/logo.png'
-import { Switch, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { MouseEventHandler} from 'react'
 import ProfileNavStyle from '../styles/ProfileNav.style'
+import { DarkMode, LightMode } from '@mui/icons-material'
 interface HeaderProps{
     className?: string
     dark: boolean
@@ -43,12 +44,7 @@ const Header = ({ className, dark, isDark }: HeaderProps) => {
                 <Link to="/#categories" id='a2'><Typography variant='subtitle1' color="initial">Discover</Typography></Link>
             </div>
             <div className='lastNav'>
-                <Switch
-                    aria-label="Switch-demo"
-                    color="success"
-                    checked={dark}
-                    onChange={() => isDark(!dark)}
-                />
+                {dark ? <DarkMode onClick={() => isDark(!dark)}/> : <LightMode onClick={() => isDark(!dark)}/>}
                 <ProfileNavStyle dark={dark} />
             </div>
         </header>

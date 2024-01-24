@@ -32,7 +32,7 @@ const ProfileNav = ({ className, dark }: Props) => {
     return (
         <div className={className}>
             {
-                loading ? <div>
+                loading ? <div className="loading">
                     <CircularProgress sx={{color: `${dark ? "black" : "white"}`}}/>
                 </div> : (
                 user ? (
