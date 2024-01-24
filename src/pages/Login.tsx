@@ -5,7 +5,7 @@ import background from "../assets/background1.jpg"
 import logo from "../../public/logo.png"
 import googleLogo from "../assets/googleLogo.jpg"
 import { Alert, FormControl, FormHelperText, Input, InputLabel, Typography } from '@mui/material'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { setCredentials } from "../features/auth/authSlice";
@@ -16,6 +16,8 @@ interface LoginProps{
 }
 
 const Login = ({ className }: LoginProps) => {
+
+    const navigate = useNavigate()
 
     const [user, setUser] = useState({
         email: '',
@@ -61,6 +63,7 @@ const Login = ({ className }: LoginProps) => {
                     status: false,
                     msg: ''
                 })
+                navigate("/")
             })
             .catch((error) => {
                 console.log(error.code)
@@ -98,6 +101,7 @@ const Login = ({ className }: LoginProps) => {
                     user: result.user,
                     accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
                 })
+                navigate("/")
             }).catch((error) => {
                 console.log(error)
                 console.log(GoogleAuthProvider.credentialFromError(error))

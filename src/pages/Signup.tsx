@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import background from "../assets/background1.jpg";
 import logo from "../../public/logo.png";
 import googleLogo from "../assets/googleLogo.jpg";
+import unknownPerson from "../assets/unknownPerson.jpg"
 import {
     Alert,
     FormControl,
@@ -10,7 +11,7 @@ import {
     InputLabel,
     Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { useState } from "react";
 import {
@@ -29,8 +30,10 @@ interface SignupProps {
 }
 
 const Signup = ({ className }: SignupProps) => {
+
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider()
+    const navigate = useNavigate()
 
     const [user, setUser] = useState({
         fullName: "",
@@ -93,6 +96,7 @@ const Signup = ({ className }: SignupProps) => {
                 console.log(userCredential);
                 updateProfile(userCredential.user, {
                     displayName: user.fullName,
+                    photoURL: unknownPerson
                 })
                     .then(() => {
                         userCredential.user.getIdToken()
@@ -101,6 +105,7 @@ const Signup = ({ className }: SignupProps) => {
                                     user: userCredential.user,
                                     accessToken: idTok
                                 })
+                                navigate("/")
                             })
                     })
                     .catch((err) => {
@@ -156,6 +161,7 @@ const Signup = ({ className }: SignupProps) => {
                 user: result.user,
                 accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
             })
+            navigate("/")
         }).catch((error) => {
             console.log(error)
             console.log(GoogleAuthProvider.credentialFromError(error))
