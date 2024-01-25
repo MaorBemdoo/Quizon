@@ -22,22 +22,27 @@ const ProfileNavStyle = styled(ProfileNav)`
     & > .dd {
         position: absolute;
         right: 0;
+        display: grid;
         /* width: 70px; */
         padding: 0.3em;
         border-radius: 4px;
         background-color: ${(props) => (props.dark ? "#f2f2f2" : "#121212")};
-        color: ${(props) => (props.dark ? "black" : "white")};
         & > *{
             padding: .5em;
+            margin: .2em 0;
             cursor: pointer;
-            &:first-child{
+            display: flex;
+            align-items: center;
+            color: ${(props) => (props.dark ? "black" : "white")};
+            gap: 5px;
+            &:not(:last-child){
                 border-bottom: .2px solid;
+                &:hover{
+                    background-color: gray;
+                }
             }
             &:last-child{
-                display: flex;
-                align-items: center;
                 border-radius: 4px;
-                gap: 5px;
                 &:hover{
                     background-color: #84B9A5;
                 }

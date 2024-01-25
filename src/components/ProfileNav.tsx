@@ -2,7 +2,7 @@ import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-import { ExpandMore, Logout } from "@mui/icons-material";
+import { ExpandMore, LogoutOutlined, PersonOutline, SettingsOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -55,9 +55,16 @@ const ProfileNav = ({ className, dark }: Props) => {
                         </div>
                         {
                             activeDD && <div className="dd">
-                                <p>Profile</p>
+                                <Link to="">
+                                    <PersonOutline/>
+                                    <p>Profile</p>
+                                </Link>
+                                <Link to="">
+                                    <SettingsOutlined/>
+                                    <p>Settings</p>
+                                </Link>
                                 <div onClick={logOut}>
-                                    <Logout />
+                                    <LogoutOutlined />
                                     <p>Logout</p>
                                 </div>
                             </div>

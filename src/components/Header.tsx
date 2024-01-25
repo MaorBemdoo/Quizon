@@ -3,7 +3,7 @@ import logo from '../../public/logo.png'
 import { Typography } from '@mui/material'
 import { MouseEventHandler} from 'react'
 import ProfileNavStyle from '../styles/ProfileNav.style'
-import { DarkMode, LightMode } from '@mui/icons-material'
+import { DarkMode, LightMode, Menu } from '@mui/icons-material'
 interface HeaderProps{
     className?: string
     dark: boolean
@@ -46,6 +46,7 @@ const Header = ({ className, dark, isDark }: HeaderProps) => {
             <div className='lastNav'>
                 {dark ? <DarkMode onClick={() => isDark(!dark)}/> : <LightMode onClick={() => isDark(!dark)}/>}
                 <ProfileNavStyle dark={dark} />
+                <Menu className='menu'/>
             </div>
         </header>
     )

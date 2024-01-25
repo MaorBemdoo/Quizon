@@ -58,6 +58,18 @@ const HeaderStyle = styled(Header)`
             }
         }
     }
+    & .menu{
+        display: none;
+    }
+
+    @media(max-width: 480px){
+        & .menu{
+            display: block;
+        }
+        & .lastNav > *:not(.menu){
+            display: none;
+        }
+    }
 `
 
 export default HeaderStyle
