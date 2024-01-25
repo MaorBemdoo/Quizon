@@ -44,6 +44,24 @@ const ProfileNavStyle = styled(ProfileNav)`
             }
         }
     }
+    & > .loginBtn{
+        padding: .5em;
+        border-radius: 4px;
+        background-color: transparent !important;
+        cursor: pointer;
+        border: .4px solid #84B9A5;
+        font-size: 1.2rem;
+        &:hover{
+            background-color: #84B9A5 !important;
+        }
+    }
+    & > .signupBtn{
+        padding: .5em;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        margin-left: 1em;
+    }
 `;
 
 export default ProfileNavStyle;

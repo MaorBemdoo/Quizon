@@ -1,4 +1,4 @@
-import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
@@ -17,6 +17,17 @@ const ProfileNav = ({ className, dark }: Props) => {
     // const [error, isError] = useState(false)
 
     const auth = getAuth(app);
+
+    const logOut = () => {
+        signOut(auth)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     useEffect(() => {
         onAuthStateChanged(auth, (userCred) => {
             if (userCred) {
@@ -44,7 +55,7 @@ const ProfileNav = ({ className, dark }: Props) => {
                         {
                             activeDD && <div className="dd">
                                 <p>Profile</p>
-                                <div>
+                                <div onClick={logOut}>
                                     <Logout />
                                     <p>Logout</p>
                                 </div>
@@ -53,12 +64,8 @@ const ProfileNav = ({ className, dark }: Props) => {
                     </>
                 ) : (
                     <>
-                        {/* <Switch
-                            aria-label="Switch-demo"
-                            color="success"
-                            checked={dark}
-                            onChange={() => isDark(!dark)}
-                        /> */}
+                        <button className="loginBtn">Login</button>
+                        <button className="signupBtn">Signup</button>
                     </>
                 )
             )}
