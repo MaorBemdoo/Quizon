@@ -105,7 +105,7 @@ const Login = ({ className }: LoginProps) => {
             }).catch((error) => {
                 console.log(error)
                 console.log(GoogleAuthProvider.credentialFromError(error))
-                if(error.code == "auth/internal-error"){
+                if(error.code == "auth/network-request-failed"){
                     setUniError({
                         status: true,
                         msg: "No internet connection"
