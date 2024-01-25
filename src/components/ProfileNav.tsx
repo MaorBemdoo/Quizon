@@ -3,6 +3,7 @@ import { app } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { ExpandMore, Logout } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 interface Props {
     className?: string
@@ -64,8 +65,8 @@ const ProfileNav = ({ className, dark }: Props) => {
                     </>
                 ) : (
                     <>
-                        <button className="loginBtn">Login</button>
-                        <button className="signupBtn">Signup</button>
+                        <Link to="/login"><button className="loginBtn">Login</button></Link>
+                        <Link to="/signup" style={{marginLeft: "1em"}}><button className="signupBtn">Signup</button></Link>
                     </>
                 )
             )}

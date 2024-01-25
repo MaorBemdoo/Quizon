@@ -44,7 +44,7 @@ const ProfileNavStyle = styled(ProfileNav)`
             }
         }
     }
-    & > .loginBtn{
+    & > a > .loginBtn{
         padding: .5em;
         border-radius: 4px;
         background-color: transparent !important;
@@ -55,12 +55,11 @@ const ProfileNavStyle = styled(ProfileNav)`
             background-color: #84B9A5 !important;
         }
     }
-    & > .signupBtn{
+    & > a > .signupBtn{
         padding: .5em;
         border-radius: 4px;
         cursor: pointer;
         font-size: 1.2rem;
-        margin-left: 1em;
     }
 `;
 
