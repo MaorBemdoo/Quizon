@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
@@ -34,6 +34,9 @@ const Signup = ({ className }: SignupProps) => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider()
     const navigate = useNavigate()
+
+    const signupRef = useRef(null)
+    const gSignupRef = useRef(null)
 
     const [user, setUser] = useState({
         fullName: "",
@@ -90,6 +93,11 @@ const Signup = ({ className }: SignupProps) => {
         if (Object.values(errors).some((error) => error)) {
             return;
         }
+
+        const signupBtn = signupRef.current as unknown as HTMLButtonElement
+        signupBtn.disabled = true
+        signupBtn.innerText = "Signing"
+        signupBtn.style.cursor = "not-allowed"
 
         createUserWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
@@ -149,10 +157,17 @@ const Signup = ({ className }: SignupProps) => {
                     password: "",
                     comPassword: "",
                 })
+                signupBtn.disabled = false
+                signupBtn.innerText = `<b style={{ color: "white !important" }}>SIGN UP</b>`
+                signupBtn.style.cursor = "pointer"
             })
     };
 
     const signWithGoogle = () => {
+        const gSignupBtn = gSignupRef.current as unknown as HTMLButtonElement
+        gSignupBtn.disabled = true
+        if(gSignupBtn.lastElementChild) gSignupBtn.lastElementChild.innerHTML = "Signing..."
+        gSignupBtn.style.cursor = "not-allowed"
         signInWithPopup(auth, provider)
         .then((result) => {
             console.log(result)
@@ -183,6 +198,9 @@ const Signup = ({ className }: SignupProps) => {
                 password: "",
                 comPassword: "",
             })
+            gSignupBtn.disabled = false
+            if(gSignupBtn.lastElementChild) gSignupBtn.lastElementChild.innerHTML = "Sign up with Google"
+            gSignupBtn.style.cursor = "pointer"
         })
     }
 
@@ -368,6 +386,7 @@ const Signup = ({ className }: SignupProps) => {
                     />
                 </FormControl>
                 <button
+                    ref={signupRef}
                     style={{
                         fontSize: "1.2rem",
                         fontWeight: "500",
@@ -386,6 +405,7 @@ const Signup = ({ className }: SignupProps) => {
                 </div>
                 <button
                     className="google-signup"
+                    ref={gSignupRef}
                     style={{ fontSize: "1.2rem" }}
                     onClick={signWithGoogle}
                 >
