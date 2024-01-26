@@ -1,5 +1,5 @@
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import background from "../assets/background1.jpg"
 import logo from "../../public/logo.png"
@@ -19,6 +19,8 @@ const Login = ({ className }: LoginProps) => {
 
     const navigate = useNavigate()
 
+    const loginRef = useRef(null)
+    const gLoginRef = useRef(null)
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -49,6 +51,10 @@ const Login = ({ className }: LoginProps) => {
 
         setEmailError(false)
         setPwdError(false)
+        const loginBtn = loginRef.current as unknown as HTMLButtonElement
+        loginBtn.disabled = true
+        loginBtn.innerText = "Logging..."
+        loginBtn.style.cursor = "not-allowed"
 
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
@@ -89,10 +95,17 @@ const Login = ({ className }: LoginProps) => {
                     email: '',
                     password: ''
                 })
+                loginBtn.disabled = false
+                loginBtn.innerHTML = `<b style={{color: "white !important"}}>LOGIN</b>`
+                loginBtn.style.cursor = "pointer"
             })
     }
 
     const signWithGoogle = () => {
+        const gLoginBtn = gLoginRef.current as unknown as HTMLButtonElement
+        gLoginBtn.disabled = true
+        if(gLoginBtn.lastElementChild) gLoginBtn.lastElementChild.innerHTML = "Logging..."
+        gLoginBtn.style.cursor = "not-allowed"
         signInWithPopup(auth, provider)
             .then((result) => {
                 console.log(result)
@@ -121,6 +134,9 @@ const Login = ({ className }: LoginProps) => {
                     email: '',
                     password: ''
                 })
+                gLoginBtn.disabled = false
+                if(gLoginBtn.lastElementChild) gLoginBtn.lastElementChild.innerHTML = "Log in with Google"
+                gLoginBtn.style.cursor = "pointer"
             })
     }
 
@@ -162,12 +178,12 @@ const Login = ({ className }: LoginProps) => {
                     <FormHelperText id="password-text" hidden={!pwdError}>Password field is required</FormHelperText>
                 </FormControl>
                 <Typography variant="body2" color="initial" className="forgot-pwd">Forgot password?</Typography>
-                <button style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}} onClick={submitHandler}><b style={{color: "white !important"}}>LOGIN</b></button>
+                <button ref={loginRef} style={{fontSize: "1.2rem", fontWeight: "500", color: "white !important"}} onClick={submitHandler}><b style={{color: "white !important"}}>LOGIN</b></button>
                 <div className="or">
                     <hr />
                     <Typography variant="body1" color="initial">OR</Typography>
                 </div>
-                <button className="google-login" style={{fontSize: "1.2rem"}} onClick={signWithGoogle}>
+                <button className="google-login" ref={gLoginRef} style={{fontSize: "1.2rem"}} onClick={signWithGoogle}>
                     <img src={googleLogo} alt="google Logo" width={25} height={25}/>
                     <b>Log in with Google</b>
                 </button>
