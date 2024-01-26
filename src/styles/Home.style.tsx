@@ -19,8 +19,7 @@ const HomeStyle = styled(Home)`
         & img{
             margin: auto;
             z-index: -5;
-            height: 600px;
-            width: 600px;
+            width: 50vw;
         }
     }
     #categories{
@@ -75,7 +74,7 @@ const HomeStyle = styled(Home)`
         padding: 1em;
     }
 
-    @media (max-width: 963px) {
+    @media (max-width: 790px) {
         & section:first-child{
             & div{
                 max-width: 100%;
