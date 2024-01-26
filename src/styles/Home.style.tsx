@@ -19,8 +19,7 @@ const HomeStyle = styled(Home)`
         & img{
             margin: auto;
             z-index: -5;
-            height: 600px;
-            width: 600px;
+            width: 50vw;
         }
     }
     #categories{
@@ -46,12 +45,23 @@ const HomeStyle = styled(Home)`
         gap: 2em;
         width: 100%;
         & > a > div{
+            position: relative;
+            overflow: hidden;
             height: 270px;
+            & > h5{
+                position: relative;
+                background-color: white;
+                z-index: 5;
+            }
         }
         & img{
             width: 100%;
             height: 200px;
             object-fit: cover;
+            &:hover{
+                transform: scale(1.2);
+                transition: transform 750ms ease;
+            }
         }
     }
     .loading{
@@ -63,7 +73,7 @@ const HomeStyle = styled(Home)`
         padding: 1em;
     }
 
-    @media (max-width: 963px) {
+    @media (max-width: 790px) {
         & section:first-child{
             & div{
                 max-width: 100%;
