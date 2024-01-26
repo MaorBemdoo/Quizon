@@ -46,13 +46,24 @@ const HomeStyle = styled(Home)`
         gap: 2em;
         width: 100%;
         & > a > div{
+            position: relative;
+            overflow: hidden;
             height: 270px;
+            & > h5{
+                position: relative;
+                background-color: white;
+                z-index: 5;
+            }
         }
         & img{
             width: 100%;
             height: 200px;
             background-position: center;
             background-size: cover;
+            &:hover{
+                transform: scale(1.2);
+                transition: transform 750ms ease;
+            }
         }
     }
     .loading{
