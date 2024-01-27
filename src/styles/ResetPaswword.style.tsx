@@ -35,6 +35,31 @@ const ResetPasswordStyle = styled(ResetPassword)`
             color: initial;
         }
     }
+    &.link-sent{
+        overflow: visible;
+        text-align: center;
+        & > svg{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            fill: #84B9A5 !important;
+        }
+        & > div{
+            padding-top: 1em;
+            display: inline-flex;
+            gap: 1em;
+            margin: auto;
+            & button:first-child{
+                border: .5px solid #84B9A5;
+                background-color: transparent !important;
+                &:hover{
+                    background-color: #84B9A5 !important;
+                }
+            }
+        }
+    }
 `
 
 export default ResetPasswordStyle
