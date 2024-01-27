@@ -29,8 +29,9 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g
 
     useEffect(() => {
-        localStorage.setItem("email", JSON.stringify(email))
-    }, [email])
+        localStorage.setItem("email", email)
+        localStorage.setItem("codeSent", JSON.stringify(codeSent))
+    }, [email, codeSent])
 
     const codeMail = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -79,7 +80,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
             <Helmet>
                 <title>Reset Password - Quizon | Login</title>
             </Helmet>
-            {codeSent ? (
+            {JSON.parse(localStorage.getItem("codeSent") as string) ? (
                 <Card
                     component="form"
                     className={`${className} update-pwd`}
