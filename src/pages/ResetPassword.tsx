@@ -57,10 +57,17 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
             })
             .catch((error) => {
                 console.log(error.code)
-                setUniError({
-                    status: true,
-                    msg: "An error occured"
-                })
+                if(error.code == "auth/network-request-failed"){
+                    setUniError({
+                        status: true,
+                        msg: "You lost connection"
+                    })
+                }else{
+                    setUniError({
+                        status: true,
+                        msg: "An error occured"
+                    })
+                }
             })
             .finally(() => {
                 isLoading(false)
@@ -85,7 +92,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                         <Link to="/login"><ArrowBack/></Link>
                         <Typography variant="h4">Password reset</Typography>
                     </div>
-                    <Alert severity="error" variant="filled" sx={{display: `${uniError.status ? "block" : "none"}`}}>{uniError.msg}</Alert>
+                    <Alert severity="error" variant="filled" sx={{display: `${uniError.status ? "flex" : "none"}`}}>{uniError.msg}</Alert>
                     <Typography variant="body2" sx={{opacity: ".8"}}>A link will be sent to your email to reset your password</Typography>
                     <input
                         type="email"
