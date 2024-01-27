@@ -84,7 +84,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
             <Helmet>
                 <title>Reset Password - Quizon | Login</title>
             </Helmet>
-            {JSON.parse(localStorage.getItem("codeSent") as string) && localStorage.getItem("email")?.trim() !== "" ? 
+            {codeSent && localStorage.getItem("email")?.trim() !== "" ? 
                 searchParams.get("oobCode") ? (
                     <Card
                     component="form"
@@ -97,8 +97,8 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                         <MailOutline/>
                         <Typography variant="body1">We've sent you an email with a link to {localStorage.getItem("email")} to reset your password</Typography>
                         <div>
-                            <Button variant="contained">Change Email</Button>
-                            <Button variant="contained">Resend Code</Button>
+                            <Button variant="contained" onClick={() => isCodeSent(false)}>Change Email</Button>
+                            <Button variant="contained" onClick={() => {isCodeSent(false); setEmail(localStorage.getItem("email") as string)}}>Resend Code</Button>
                         </div>
                     </Card>
                 )
