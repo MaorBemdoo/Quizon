@@ -99,6 +99,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        onFocus={() => {setEmailErr({status: false, msg: ""}); setUniError({status: false, msg: ""})}}
                         placeholder="E-mail Address"
                     />
                     <p style={{color: "red"}} hidden={!emailErr.status}>{emailErr.msg}</p>
