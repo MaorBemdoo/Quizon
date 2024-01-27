@@ -11,6 +11,7 @@ import QuestionStyle from "./styles/Question.style"
 import ProtectedQuestionRoute from "./pages/ProtectedRoutes/ProtectedQuestionRoute"
 import LoginStyle from "./styles/Login.style"
 import SignupStyle from "./styles/Signup.style"
+import ResetPasswordStyle from "./styles/ResetPaswword.style"
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginStyle dark={dark}/>} />
           <Route path="/signup" element={<SignupStyle dark={dark}/>} />
+          <Route path="/reset-password" element={<ResetPasswordStyle dark={dark}/>} />
           <Route path="/" element={<SharedLayout dark={dark} isDark={isDark}/>}>
             <Route index element={<HomeStyle dark={dark}/>}/>
             <Route path="category" element={<SharedCategoryLayout/>}>
