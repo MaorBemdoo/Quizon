@@ -3,7 +3,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { getAuth, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { app } from "../firebaseConfig";
-import { ArrowBack, MailOutline } from "@mui/icons-material";
+import { ArrowBack, MailOutline, VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { Link, useSearchParams } from "react-router-dom";
 
 interface ResetPasswordProps {
@@ -16,6 +16,13 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
     const [searchParams] = useSearchParams()
 
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+    const [comPassword, setComPassword] = useState("")
+    const [pwdVisibility, setPwdVisibility] = useState(false)
+    const [passwordErr, setPasswordErr] = useState({
+        status: false,
+        msg: ""
+    })
     const [emailErr, setEmailErr] = useState({
         status: false,
         msg: ""
@@ -90,7 +97,17 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                     component="form"
                     className={`${className} reset-pwd`}
                     >
-                        JHIBUKUHG
+                        <Typography variant="h4">Password reset</Typography>
+                        <div>
+                            <Alert variant="filled" severity="error" sx={{display: `${uniError.status ? "flex" : "none"}`}}>{uniError.msg}</Alert>
+                            <div style={{position: "relative"}}>
+                                <input type={pwdVisibility ? "text" : "password"} placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                {pwdVisibility ? <VisibilityOffOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/>}
+                                <p hidden={!passwordErr.status}>{passwordErr.msg}</p>
+                            </div>
+                            <input type="password" placeholder="Comfirm password" value={comPassword} onChange={(e) => setComPassword(e.target.value)}/>
+                        </div>
+                        <Button variant="contained"><b>Reset</b></Button>
                     </Card>
                 ) : (
                     <Card className={`${className} link-sent`}>

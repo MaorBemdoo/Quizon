@@ -60,6 +60,35 @@ const ResetPasswordStyle = styled(ResetPassword)`
             }
         }
     }
+    &.reset-pwd{
+        text-align: center;
+        & > *:not(:first-child){
+            margin-top: 1em;
+        }
+        & > div{
+            width: 85%;
+            margin: auto;
+            & input{
+                width: 100%;
+                height: 30px;
+                padding: .3em;
+                border-radius: 5px;
+                font-size: 1.2rem;
+                outline: none;
+                border: .5px solid;
+                color: initial;
+            }
+            & svg{
+                position: absolute;
+                right: 1.5em;
+                top: calc(15px + .3em);
+                transform: translateY(-50%);
+                font-size: 2rem;
+                fill: ${props => props.dark ? "white" : "black"} !important;
+                cursor: pointer;
+            }
+        }
+    }
 `
 
 export default ResetPasswordStyle
