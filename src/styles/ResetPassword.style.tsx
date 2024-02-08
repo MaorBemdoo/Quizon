@@ -51,6 +51,9 @@ const ResetPasswordStyle = styled(ResetPassword)`
             display: inline-flex;
             gap: 1em;
             margin: auto;
+            & button{
+                color: ${props => props.dark ? "black" : "white"};
+            }
             & button:first-child{
                 border: .5px solid #84B9A5;
                 background-color: transparent !important;
@@ -80,7 +83,7 @@ const ResetPasswordStyle = styled(ResetPassword)`
             }
             & svg{
                 position: absolute;
-                right: 1.5em;
+                right: 3px;
                 top: calc(15px + .3em);
                 transform: translateY(-50%);
                 font-size: 2rem;

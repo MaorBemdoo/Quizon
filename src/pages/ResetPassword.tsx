@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { getAuth, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { ArrowBack, MailOutline, VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 interface ResetPasswordProps {
     className?: string;
@@ -14,6 +14,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
 
     const auth = getAuth(app)
     const [searchParams] = useSearchParams()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
@@ -86,6 +87,54 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
             })
     };
 
+    const resetPwd = () => {
+        if(password.trim().length <= 8){
+            setPasswordErr({
+                status: true,
+                msg: "Password should be more than 8 characters"
+            })
+            return
+        }
+        if(password.trim() !== comPassword.trim()){
+            setUniError({
+                status: true,
+                msg: "Passwords do not match"
+            })
+            return 
+        }
+
+        isLoading(true)
+        confirmPasswordReset(auth, searchParams.get("oobCode") as string, password)
+            .then((res) => {
+                console.log(res);
+                localStorage.removeItem("codeSent")
+                localStorage.removeItem("email")
+                navigate("/login")
+            })
+            .catch((err) => {
+                console.log(err.code);
+                if(err.code == "auth/network-request-failed"){
+                    setUniError({
+                        status: true,
+                        msg: "You lost connection"
+                    })
+                }else if(err.code == "auth/expired-action-code"){
+                    setUniError({
+                        status: true,
+                        msg: "Sorry this service has expired. Try Again"
+                    })
+                }else{
+                    setUniError({
+                        status: true,
+                        msg: "An error occured"
+                    })
+                }
+            })
+            .finally(() => {
+                isLoading(false)
+            })
+    }
+
     return (
         <>
             <Helmet>
@@ -99,15 +148,15 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                     >
                         <Typography variant="h4">Password reset</Typography>
                         <div>
-                            <Alert variant="filled" severity="error" sx={{display: `${uniError.status ? "flex" : "none"}`}}>{uniError.msg}</Alert>
-                            <div style={{position: "relative"}}>
-                                <input type={pwdVisibility ? "text" : "password"} placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <Alert variant="filled" severity="error" sx={{display: `${uniError.status ? "flex" : "none"}`, width: "100%"}}>{uniError.msg}</Alert>
+                            <div style={{position: "relative", marginTop: "1em"}}>
+                                <input type={pwdVisibility ? "text" : "password"} placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)} onFocus={() => {setUniError({status: false, msg: ""}); setPasswordErr({status: false, msg: ""})}}/>
                                 {pwdVisibility ? <VisibilityOffOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/> : <VisibilityOutlined onClick={() => setPwdVisibility(!pwdVisibility)}/>}
-                                <p hidden={!passwordErr.status}>{passwordErr.msg}</p>
+                                <p hidden={!passwordErr.status} style={{color: "red", textAlign: "start"}}>{passwordErr.msg}</p>
                             </div>
-                            <input type="password" placeholder="Comfirm password" value={comPassword} onChange={(e) => setComPassword(e.target.value)}/>
+                            <input type="password" placeholder="Comfirm password" value={comPassword} onChange={(e) => setComPassword(e.target.value)} onFocus={() => {setUniError({status: false, msg: ""}); setPasswordErr({status: false, msg: ""})}} style={{marginTop: "1em"}}/>
                         </div>
-                        <Button variant="contained"><b>Reset</b></Button>
+                        <Button variant="contained" onClick ={resetPwd} disabled={loading}><b>{loading ? "Resetting..." : "Reset"}</b></Button>
                     </Card>
                 ) : (
                     <Card className={`${className} link-sent`}>
@@ -142,7 +191,7 @@ const ResetPassword = ({ className }: ResetPasswordProps) => {
                             onClick={codeMail}
                             disabled={loading}
                         >
-                            Send Link
+                            <b>{loading ? "Sending..." : "Send link"}</b>
                         </Button>
                     </Card>
                     )

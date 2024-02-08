@@ -11,7 +11,7 @@ import QuestionStyle from "./styles/Question.style"
 import ProtectedQuestionRoute from "./pages/ProtectedRoutes/ProtectedQuestionRoute"
 import LoginStyle from "./styles/Login.style"
 import SignupStyle from "./styles/Signup.style"
-import ResetPasswordStyle from "./styles/ResetPaswword.style"
+import ResetPasswordStyle from "./styles/ResetPassword.style"
 
 function App() {
 
