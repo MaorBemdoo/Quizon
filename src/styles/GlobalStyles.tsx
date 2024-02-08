@@ -10,6 +10,9 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         margin: 0;
         padding: 0;
     }
+    img{
+        user-select: none;
+    }
     html{
         color-scheme: ${props => props.dark ? "dark" : "light"};
         margin: 0;
@@ -26,6 +29,7 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         border: 0;
         margin: 0;
         padding: 0;
+        font-family: Roboto, sans-serif;
     }
     a{
         text-decoration: none;

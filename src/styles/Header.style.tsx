@@ -45,11 +45,29 @@ const HeaderStyle = styled(Header)`
             transition: 250ms all 250ms ease-in;
         }
     }
-    & div:last-child{
+    & .lastNav{
+        display: flex;
+        align-items: center;
+        gap: 1em;
         & > svg{
             cursor: pointer;
-            transform: rotateX(45deg);
-            transition: transform 10s ease-out;
+            border-radius: 50%;
+            padding: .3em;
+            &:hover{
+                background-color: gray;
+            }
+        }
+    }
+    & .menu{
+        display: none;
+    }
+
+    @media(max-width: 480px){
+        & .menu{
+            display: block;
+        }
+        & .lastNav > *:not(.menu){
+            display: none;
         }
     }
 `

@@ -1,0 +1,83 @@
+import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { app } from "../firebaseConfig";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
+import { ExpandMore, LogoutOutlined, PersonOutline, SettingsOutlined } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+
+interface Props {
+    className?: string
+    dark: boolean;
+}
+
+const ProfileNav = ({ className, dark }: Props) => {
+
+    const [activeDD, setActiveDD] = useState(false)
+    const [user, setUser] = useState<null | User>(null);
+    const [loading, isLoading] = useState(true)
+    // const [error, isError] = useState(false)
+
+    const auth = getAuth(app);
+
+    const logOut = () => {
+        signOut(auth)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (userCred) => {
+            if (userCred) {
+                setUser(userCred);
+                console.log(userCred);
+            } else {
+                setUser(null);
+            }
+            isLoading(false)
+        })
+    }, [auth]);
+
+    return (
+        <div className={className}>
+            {
+                loading ? <div className="loading">
+                    <CircularProgress sx={{color: `${dark ? "black" : "white"}`}}/>
+                </div> : (
+                user ? (
+                    <>
+                        <div onClick={() => setActiveDD(!activeDD)}>
+                            <img src={user.photoURL as string} alt="Profile picture" />
+                            <ExpandMore sx={{color: "initial", width: "20px", height: "20px"}}/>
+                        </div>
+                        {
+                            activeDD && <div className="dd">
+                                <Link to="">
+                                    <PersonOutline/>
+                                    <p>Profile</p>
+                                </Link>
+                                <Link to="">
+                                    <SettingsOutlined/>
+                                    <p>Settings</p>
+                                </Link>
+                                <div onClick={logOut}>
+                                    <LogoutOutlined />
+                                    <p>Logout</p>
+                                </div>
+                            </div>
+                        }
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login"><button className="loginBtn">Login</button></Link>
+                        <Link to="/signup" style={{marginLeft: "1em"}}><button className="signupBtn">Signup</button></Link>
+                    </>
+                )
+            )}
+        </div>
+    );
+};
+export default ProfileNav;
