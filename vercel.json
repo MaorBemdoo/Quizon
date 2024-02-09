@@ -6,7 +6,7 @@
         { "src": "/signup", "dest": "/" },
         { "src": "/reset-password", "dest": "/" },
         { "src": "/category", "dest": "/" },
-        { "src": "/category/:categoryId", "dest": "/" },
-        { "src": "/category/:categoryId/quiz", "dest": "/" }
+        { "src": "/category/(.*)", "dest": "/" },
+        { "src": "/category/(.*)/quiz", "dest": "/" }
     ]
 }
