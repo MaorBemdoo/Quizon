@@ -2,6 +2,9 @@
     "routes": [
         { "handle": "filesystem" },
         { "src": "/*", "dest": "/" },
+        { "src": "/login", "dest": "/" },
+        { "src": "/signup", "dest": "/" },
+        { "src": "/reset-password", "dest": "/" },
         { "src": "/category", "dest": "/" },
         { "src": "/category/:categoryId", "dest": "/" },
         { "src": "/category/:categoryId/quiz", "dest": "/" }
