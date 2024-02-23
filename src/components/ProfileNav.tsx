@@ -1,4 +1,4 @@
-import { d getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
