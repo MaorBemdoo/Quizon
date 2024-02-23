@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { setCredentials } from "../features/auth/authSlice";
+import { useAppDispatch } from "../store";
 
 interface LoginProps{
     className?: string
@@ -18,6 +19,7 @@ interface LoginProps{
 const Login = ({ className }: LoginProps) => {
 
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const loginRef = useRef(null)
     const gLoginRef = useRef(null)
@@ -60,10 +62,10 @@ const Login = ({ className }: LoginProps) => {
             .then((userCredential) => {
                 console.log(userCredential)
                 userCredential.user.getIdToken().then(idToken => {
-                    setCredentials({
+                    dispatch(setCredentials({
                         user: userCredential.user,
                         accessToken: idToken
-                    })
+                    }))
                 })
                 setUniError({
                     status: false,
@@ -110,10 +112,10 @@ const Login = ({ className }: LoginProps) => {
             .then((result) => {
                 console.log(result)
                 console.log(GoogleAuthProvider.credentialFromResult(result))
-                setCredentials({
+                dispatch(setCredentials({
                     user: result.user,
                     accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
-                })
+                }))
                 navigate("/")
             }).catch((error) => {
                 console.log(error)

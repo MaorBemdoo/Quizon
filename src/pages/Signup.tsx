@@ -23,6 +23,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { setCredentials } from "../features/auth/authSlice";
+import { useAppDispatch } from "../store";
 
 interface SignupProps {
     className?: string;
@@ -34,6 +35,7 @@ const Signup = ({ className }: SignupProps) => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider()
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const signupRef = useRef(null)
     const gSignupRef = useRef(null)
@@ -109,10 +111,10 @@ const Signup = ({ className }: SignupProps) => {
                     .then(() => {
                         userCredential.user.getIdToken()
                             .then(idTok => {
-                                setCredentials({
+                                dispatch(setCredentials({
                                     user: userCredential.user,
                                     accessToken: idTok
-                                })
+                                }))
                                 navigate("/")
                             })
                     })
@@ -172,10 +174,10 @@ const Signup = ({ className }: SignupProps) => {
         .then((result) => {
             console.log(result)
             console.log(GoogleAuthProvider.credentialFromResult(result))
-            setCredentials({
+            dispatch(setCredentials({
                 user: result.user,
                 accessToken: GoogleAuthProvider.credentialFromResult(result)?.idToken
-            })
+            }))
             navigate("/")
         }).catch((error) => {
             console.log(error)

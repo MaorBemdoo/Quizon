@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { ExpandMore, LogoutOutlined, PersonOutline, SettingsOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { setCredentials, logOut } from "../features/auth/authSlice";
+import { useAppDispatch } from "../store";
 
 interface Props {
     className?: string
@@ -12,6 +14,8 @@ interface Props {
 
 const ProfileNav = ({ className, dark }: Props) => {
 
+    const dispatch = useAppDispatch()
+
     const [activeDD, setActiveDD] = useState(false)
     const [user, setUser] = useState<null | User>(null);
     const [loading, isLoading] = useState(true)
@@ -19,10 +23,11 @@ const ProfileNav = ({ className, dark }: Props) => {
 
     const auth = getAuth(app);
 
-    const logOut = () => {
+    const aLogOut = () => {
         signOut(auth)
             .then((res) => {
                 console.log(res);
+                dispatch(logOut())
             })
             .catch(err => {
                 console.log(err);
@@ -33,13 +38,19 @@ const ProfileNav = ({ className, dark }: Props) => {
         onAuthStateChanged(auth, (userCred) => {
             if (userCred) {
                 setUser(userCred);
+                userCred.getIdToken().then(idToken => {
+                    dispatch(setCredentials({
+                        user: userCred,
+                        accessToken: idToken
+                    }))
+                })
                 console.log(userCred);
             } else {
                 setUser(null);
             }
             isLoading(false)
         })
-    }, [auth]);
+    }, [auth, dispatch]);
 
     return (
         <div className={className}>
@@ -63,7 +74,7 @@ const ProfileNav = ({ className, dark }: Props) => {
                                     <SettingsOutlined/>
                                     <p>Settings</p>
                                 </Link>
-                                <div onClick={logOut}>
+                                <div onClick={aLogOut}>
                                     <LogoutOutlined />
                                     <p>Logout</p>
                                 </div>
