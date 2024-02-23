@@ -1,11 +1,11 @@
-import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { d getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { ExpandMore, LogoutOutlined, PersonOutline, SettingsOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { setCredentials, logOut } from "../features/auth/authSlice";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 interface Props {
     className?: string
@@ -14,10 +14,10 @@ interface Props {
 
 const ProfileNav = ({ className, dark }: Props) => {
 
+    const { user, accessToken } = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
 
     const [activeDD, setActiveDD] = useState(false)
-    const [user, setUser] = useState<null | User>(null);
     const [loading, isLoading] = useState(true)
     // const [error, isError] = useState(false)
 
@@ -37,7 +37,7 @@ const ProfileNav = ({ className, dark }: Props) => {
     useEffect(() => {
         onAuthStateChanged(auth, (userCred) => {
             if (userCred) {
-                setUser(userCred);
+                // there is a logged in user
                 userCred.getIdToken().then(idToken => {
                     dispatch(setCredentials({
                         user: userCred,
@@ -46,7 +46,11 @@ const ProfileNav = ({ className, dark }: Props) => {
                 })
                 console.log(userCred);
             } else {
-                setUser(null);
+                // no logged in user
+                dispatch(setCredentials({
+                    user: null,
+                    accessToken: null
+                }))
             }
             isLoading(false)
         })
@@ -58,10 +62,10 @@ const ProfileNav = ({ className, dark }: Props) => {
                 loading ? <div className="loading">
                     <CircularProgress sx={{color: `${dark ? "black" : "white"}`}}/>
                 </div> : (
-                user ? (
+                accessToken ? (
                     <>
                         <div onClick={() => setActiveDD(!activeDD)}>
-                            <img src={user.photoURL as string} alt="Profile picture" />
+                            <img src={user?.photoURL as string} alt="Profile picture" />
                             <ExpandMore sx={{color: "initial", width: "20px", height: "20px"}}/>
                         </div>
                         {
