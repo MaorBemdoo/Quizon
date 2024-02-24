@@ -135,8 +135,8 @@ const Home = ({className, dark}: HomeProps) => {
                                                 <Card variant='elevation' elevation={1}>
                                                     {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
                                                     <div className="ls">
-                                                        <Button variant="contained">Login</Button>
-                                                        <Button variant="contained">Signup</Button>
+                                                        <Link to="/login"><Button variant="contained">Login</Button></Link>
+                                                        <Link to="/signup"><Button variant="contained">Signup</Button></Link>
                                                     </div>
                                                     <img src={categoryImages[id-9]} alt={name} />
                                                     <Typography variant="h5" textAlign={"center"}>{name}</Typography>
