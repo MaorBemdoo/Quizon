@@ -33,6 +33,7 @@ import homeIllustrationL from '../assets/QuizonIllustration.gif'
 import homeIllustrationD from '../assets/QuizonIllustrationDark.gif'
 import { SearchOutlined } from '@mui/icons-material'
 import { useEffect, useRef, useState } from 'react'
+import { Button } from '@mui/material'
 
 interface HomeProps{
     className?: string
@@ -48,6 +49,7 @@ const Home = ({className, dark}: HomeProps) => {
     const [numOfCols, setNumOfCols] = useState(3);
 
     const { categories, error, loading } = useAppSelector((state) => state.categories);
+    const { accessToken } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         const resizeObserver = new ResizeObserver(entries => {
@@ -68,6 +70,20 @@ const Home = ({className, dark}: HomeProps) => {
         }
         };
     }, [search]);
+
+    useEffect(() => {
+        if(error !== "error" && !accessToken){
+            const categoriesRef = gridRef?.current as unknown as HTMLDivElement
+            const linksRef = categoriesRef?.children as unknown as Array<HTMLLinkElement>
+            for (const linkRef of linksRef) {
+                linkRef.style.cursor = "default"
+                linkRef.addEventListener("click", (e: MouseEvent) => {
+                    e.preventDefault()
+                })
+            }
+        }
+    }, [error, accessToken])
+
 
     return (
         <main className={className}>
@@ -115,9 +131,13 @@ const Home = ({className, dark}: HomeProps) => {
                             <div className='categories' ref={gridRef} style={{gridTemplateColumns: `repeat(${numOfCols}, 1fr)`}}>
                                 {categories.filter(({ name }) => (name.toLowerCase().includes(search.toLowerCase()))).map(({ id, name}: {id: number, name: string}) => {
                                         return (
-                                            <Link to={"/category/" + id} key={id}>
+                                            <Link to={"/category/" + id} className={`${!accessToken ? "disabled" : ""}`} key={id}>
                                                 <Card variant='elevation' elevation={1}>
                                                     {/* <img src={"src/assets/category" + id + ".jpeg"} alt={name} /> */}
+                                                    <div className="ls">
+                                                        <Button variant="contained">Login</Button>
+                                                        <Button variant="contained">Signup</Button>
+                                                    </div>
                                                     <img src={categoryImages[id-9]} alt={name} />
                                                     <Typography variant="h5" textAlign={"center"}>{name}</Typography>
                                                 </Card>

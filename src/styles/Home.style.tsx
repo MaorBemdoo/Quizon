@@ -44,10 +44,42 @@ const HomeStyle = styled(Home)`
         /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
         gap: 2em;
         width: 100%;
+        & > a.disabled{
+            position: relative;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 0;
+                z-index: 9;
+                height: 100%;
+                width: 100%;
+                transform: rotate(180deg);
+            }
+            &:hover > div .ls{
+                visibility: visible;
+            }
+            &:hover::before{
+                background: radial-gradient(transparent, #7b7b7b) !important;
+                background-size: 100% 200% !important;
+            }
+        }
         & > a > div{
             position: relative;
             overflow: hidden;
             height: 270px;
+            & .ls{
+                z-index: 10;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                visibility: hidden;
+            }
             & > h5{
                 position: relative;
                 background-color: white;
